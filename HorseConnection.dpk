@@ -1,0 +1,43 @@
+package HorseConnection;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE RELEASE}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  DBConfigParameters in 'src\Uteis\DBConfigParameters.pas',
+  DBConfigTypes in 'src\Uteis\DBConfigTypes.pas',
+  Horse.Connection in 'src\Horse.Connection.pas',
+  DBConfigManagerPG in 'src\PG\DBConfigManagerPG.pas',
+  DBConnectionManagerPG in 'src\PG\DBConnectionManagerPG.pas',
+  DBConfigManagerADS in 'src\ADS\DBConfigManagerADS.pas',
+  DBConnectionManagerADS in 'src\ADS\DBConnectionManagerADS.pas';
+
+end.
+
