@@ -7,14 +7,15 @@ uses
 
   Data.DB,
 
+  FireDAC.Phys.ADS,
+  FireDAC.Phys.ADSDef,
+
   FireDAC.DatS,
   FireDAC.DApt,
   FireDAC.Phys,
   FireDAC.Comp.UI,
   FireDAC.UI.Intf,
-  FireDAC.Phys.PG,
   FireDAC.Stan.Def,
-  FireDAC.Phys.ADS,
   FireDAC.Stan.Intf,
   FireDAC.Phys.Intf,
   FireDAC.DApt.Intf,
@@ -22,15 +23,12 @@ uses
   FireDAC.Stan.Async,
   FireDAC.Stan.Param,
   FireDAC.Stan.Error,
-  FireDAC.Phys.PGDef,
-  FireDAC.Phys.ADSDef,
   FireDAC.Comp.Client,
-  FireDAC.Phys.SQLite,
   FireDAC.Stan.Option,
   FireDAC.Comp.DataSet,
   FireDAC.ConsoleUI.Wait,
   FireDAC.Stan.ExprFuncs,
-  FireDAC.Phys.SQLiteDef,
+
 
   System.SysUtils,
   System.StrUtils,
@@ -55,40 +53,49 @@ var
   FDGUIxWaitCursor: TFDGUIxWaitCursor;
   FDDriver: TFDPhysADSDriverLink;
 
-procedure FreeConnections;
-var
-  LConnection: TFDConnection;
+procedure SetupConnection(const AConfig: TDatabaseConfig;
+  const ADatabase: string; const APrefix: string; var AConnection: TFDConnection);
 begin
-  if not (FConnectionPool.Count > 0) then
-    Exit;
-  for LConnection in FConnectionPool.Values do
-  begin
-    LConnection.Connected := False;
-    LConnection.DisposeOf;
+  DBConfigManagerADS.Initialize(AConfig, ADatabase, APrefix);
+
+  AConnection.ConnectionDefName := DBConfigManagerADS.GetConnectionDef(APrefix);
+  AConnection.LoginPrompt := False;
+
+  FDGUIxWaitCursor := TFDGUIxWaitCursor.Create(AConnection);
+  FDGUIxWaitCursor.Provider := 'Console';
+
+
+  FDDriver := TFDPhysADSDriverLink.Create(AConnection);
+
+  case ADatabase.Trim.IsEmpty of
+    True  : FDDriver.DefaultPath := AConfig.Database;
+    False : FDDriver.DefaultPath := ADatabase;
   end;
+
+  FDDriver.ShowDeleted := AConfig.ShowDelete;
+
+  if not FileExists(AConfig.VendorLib) then
+    raise Exception.CreateFmt({$IFDEF PORTUGUES}
+                                'A DLL "%s" especificada em VendorLib não foi encontrada.'
+                              {$ELSEIF DEF ESPANHOL}
+                                'No se ha encontrado la DLL "%s" especificada en VendorLib.'
+                              {$ELSE}
+                                'The DLL "%s" specified in VendorLib was not found.'
+                              {$ENDIF}, [AConfig.VendorLib]);
+
+  FDDriver.VendorLib := AConfig.VendorLib;
+
+  AConnection.Connected := True;
 end;
+
 
 function DefaultConnection (const AConfig: TDatabaseConfig;
   const ADatabase: string; const APrefix : string): TFDConnection;
 begin
-  DBConfigManagerADS.Initialize(AConfig, ADatabase, APrefix);
-
-  if (not Assigned(FDConnection)) then
+  if not Assigned(FDConnection) then
   begin
     FDConnection := TFDConnection.Create(nil);
-    FDConnection.ConnectionDefName := DBConfigManagerADS.GetConnectionDef(APrefix);
-    FDConnection.LoginPrompt := False;
-
-    FDGUIxWaitCursor:= TFDGUIxWaitCursor.Create(FDConnection);
-    FDGUIxWaitCursor.Provider := 'Console';
-
-    FDDriver:= TFDPhysADSDriverLink.Create(FDConnection);
-    FDDriver.DefaultPath                        := AConfig.Database;
-    FDDriver.ShowDeleted                        := AConfig.ShowDelete;
-    FDDriver.VendorLib                          := AConfig.VendorLib;
-
-
-    FDConnection.Connected := True;
+    SetupConnection(AConfig, ADatabase, APrefix, FDConnection);
   end;
 
   Result := FDConnection;
@@ -100,35 +107,9 @@ begin
   if FConnectionPool.TryGetValue(APrefix, Result) then
     Exit;
 
-  // Cria e configura uma nova conexão se não estiver no dicionário
   Result := TFDConnection.Create(nil);
-  DBConfigManagerADS.Initialize(AConfig, ADatabase, APrefix);
-  Result.ConnectionDefName := DBConfigManagerADS.GetConnectionDef(APrefix);
-  Result.LoginPrompt := False;
+  SetupConnection(AConfig, ADatabase, APrefix, Result);
 
-  FDGUIxWaitCursor:= TFDGUIxWaitCursor.Create(Result);
-  FDGUIxWaitCursor.Provider := 'Console';
-
-  FDDriver := TFDPhysADSDriverLink.Create(Result);
-
-  case ADatabase.Trim.IsEmpty of
-    True  : FDDriver.DefaultPath := AConfig.Database;
-    False : FDDriver.DefaultPath := ADatabase;
-  end;
-
-  FDDriver.ShowDeleted := AConfig.ShowDelete;
-  if not FileExists(AConfig.VendorLib) then
-  {$IFDEF PORTUGUES}
-    raise Exception.CreateFmt('A DLL "%s" especificada em VendorLib não foi encontrada.', [AConfig.VendorLib]);
-  {$ELSE}
-    raise Exception.CreateFmt('The DLL "%s" specified in VendorLib was not found.', [AConfig.VendorLib]);
-  {$ENDIF}
-
-  FDDriver.VendorLib := AConfig.VendorLib;
-
-  Result.Connected := True;
-
-  // Armazena a nova conexão no dicionário
   FConnectionPool.Add(APrefix, Result);
   FConnectionPool.TrimExcess;
 end;
@@ -156,12 +137,10 @@ end;
 initialization
   FConnectionPool := TDictionary<string, TFDConnection>.Create;
 
-
 finalization
-
   if Assigned(FDConnection) then
     FDConnection.DisposeOf;
 
-  FreeConnections;
   FConnectionPool.DisposeOf;
+
 end.

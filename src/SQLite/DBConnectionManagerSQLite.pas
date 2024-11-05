@@ -1,4 +1,4 @@
-unit DBConnectionManagerPG;
+unit DBConnectionManagerSQLite;
 
 interface
 
@@ -7,8 +7,8 @@ uses
 
   Data.DB,
 
-  FireDAC.Phys.PG,
-  FireDAC.Phys.PGDef,
+  FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef,
 
   FireDAC.DatS,
   FireDAC.DApt,
@@ -44,27 +44,46 @@ function GetConnection(const AConfig: TDatabaseConfig): TFDConnection; overload;
 implementation
 
 uses
-  DBConfigManagerPG;
+  DBConfigManagerSQLite;
 
 var
   FConnectionPool: TDictionary<string, TFDConnection>;
   FDConnection: TFDConnection;
   FDGUIxWaitCursor: TFDGUIxWaitCursor;
-  FDDriver: TFDPhysPgDriverLink;
-
+  FDDriver: TFDPhysSQLiteDriverLink;
+  FDSQLiteSecurity : TFDSQLiteSecurity;
 
 procedure SetupConnection(const AConfig: TDatabaseConfig;
   const ADatabase: string; const APrefix: string; var AConnection: TFDConnection);
 begin
-  DBConfigManagerPG.Initialize(AConfig, ADatabase, APrefix);
+  DBConfigManagerSQLite.Initialize(AConfig, ADatabase, APrefix);
 
-  AConnection.ConnectionDefName := DBConfigManagerPG.GetConnectionDef(APrefix);
+  AConnection.ConnectionDefName := DBConfigManagerSQLite.GetConnectionDef(APrefix);
   AConnection.LoginPrompt := False;
 
   FDGUIxWaitCursor := TFDGUIxWaitCursor.Create(AConnection);
   FDGUIxWaitCursor.Provider := 'Console';
 
-  FDDriver := TFDPhysPgDriverLink.Create(AConnection);
+  FDDriver := TFDPhysSQLiteDriverLink.Create(AConnection);
+
+  if not (AConfig.Encrypt.ToLower = TSQLiteEncryptType.No.ToString.ToLower) then
+  begin
+    FDSQLiteSecurity := TFDSQLiteSecurity.Create(AConnection);
+    FDSQLiteSecurity.Database:= AConfig.Database;
+    FDSQLiteSecurity.Password:=  AConfig.Encrypt + ':' + AConfig.Password;
+    FDSQLiteSecurity.SetPassword;
+  end;
+
+  if not FileExists(IfThen(ADatabase.Trim.IsEmpty, AConfig.Database, ADatabase)) then
+    raise Exception.CreateFmt({$IFDEF PORTUGUES}
+                                'O banco de dados especificado "%s", não foi encontrada.'
+                              {$ELSEIF DEF ESPANHOL}
+                                'No se encontró la base de datos especificada "%s".'
+                              {$ELSE}
+                                'The specified database “%s”, was not found.'
+                              {$ENDIF}, [IfThen(ADatabase.Trim.IsEmpty, AConfig.Database, ADatabase)]);
+
+
   AConnection.Connected := True;
 end;
 

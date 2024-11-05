@@ -7,6 +7,7 @@ program SampleHorseConnectionPG;
 uses
   Horse,
   Horse.Jhonson,
+  Horse.HandleException,
   Horse.Compression,
 
   Horse.Connection,
@@ -32,7 +33,11 @@ begin
 
 
   // Configura o Horse e adiciona o middleware de conexão
-  THorse.Use(HorseConnectionPG);
+  THorse
+    .Use(Compression())
+    .Use(Jhonson)
+    .Use(HandleException)
+    .Use(HorseConnectionPG);
 
   // Exemplo de rota que utiliza a conexão FireDAC do middleware
   THorse.Get('/produtos',

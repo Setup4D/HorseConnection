@@ -1,4 +1,4 @@
-unit DBConfigManagerADS;
+unit DBConfigManagerSQLite;
 
 interface
 
@@ -27,7 +27,7 @@ var
   FDManager: TFDManager;
 
 Const
-  _CONNECTION_DEF_NAME = 'DBConnectionADS';
+  _CONNECTION_DEF_NAME = 'DBConnectionSQLite';
 
 function GetConnectionDef(const APrefix: string) : string;
 begin
@@ -48,18 +48,16 @@ begin
   with Result do
   begin
     Values['DriverID'] := AConfig.DriverID;
-    Values['CharacterSet'] := AConfig.CharacterSet;
+    Values['Database'] := IfThen(ADatabase.Trim.IsEmpty, AConfig.Database, ADatabase);
     Values['User_Name'] := AConfig.UserName;
     Values['Password'] := AConfig.Password;
-    Values['Database'] := IfThen(ADatabase.Trim.IsEmpty, AConfig.Database, ADatabase);
+    Values['LockingMode'] := AConfig.Locking;
+    Values['OpenMode'] := AConfig.OpenMode;
+    Values['Encrypt'] := AConfig.Encrypt;
     Values['Pooled'] := IfThen(AConfig.Pooled, 'True', 'False');
     Values['POOL_MaximumItems'] := AConfig.PoolMaxItems.ToString;
     Values['POOL_ExpireTimeout'] := AConfig.PoolExpireTimeout.ToString;
     Values['POOL_CleanupTimeout'] := AConfig.PoolCleanupTimeout.ToString;
-    Values['ServerTypes'] := AConfig.Server;
-    Values['Protocol'] := AConfig.Protocol;
-    Values['TableType'] := AConfig.TableType;
-    Values['Locking'] := AConfig.Locking;
   end;
 end;
 
@@ -95,11 +93,9 @@ begin
   end;
 
   FDManager.Active := True;
-
 end;
 
-procedure Initialize(const AConfig: TDatabaseConfig;
-  const APrefix: string);
+procedure Initialize(const AConfig: TDatabaseConfig; const APrefix: string);
 begin
   Initialize(AConfig, EmptyStr, APrefix);
 end;

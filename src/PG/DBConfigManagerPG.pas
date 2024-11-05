@@ -42,45 +42,57 @@ begin
   Result := GetConnectionDef(EmptyStr);
 end;
 
+function CreateConnectionParams(const AConfig: TDatabaseConfig; const ADatabase: string): TStrings;
+begin
+  Result := TStringList.Create;
+  with Result do
+  begin
+    Values['DriverID'] := AConfig.DriverID;
+    Values['Server'] := AConfig.Server;
+    Values['Port'] := AConfig.Port;
+    Values['Database'] := IfThen(ADatabase.Trim.IsEmpty, AConfig.Database, ADatabase);
+    Values['User_Name'] := AConfig.UserName;
+    Values['Password'] := AConfig.Password;
+    Values['CharacterSet'] := AConfig.CharacterSet;
+    Values['Pooled'] := IfThen(AConfig.Pooled, 'True', 'False');
+    Values['POOL_MaximumItems'] := AConfig.PoolMaxItems.ToString;
+    Values['POOL_ExpireTimeout'] := AConfig.PoolExpireTimeout.ToString;
+    Values['POOL_CleanupTimeout'] := AConfig.PoolCleanupTimeout.ToString;
+  end;
+end;
+
+procedure EnsureFDManagerInitialized;
+begin
+  if not Assigned(FDManager) then
+    FDManager := TFDManager.Create(nil);
+end;
+
+procedure ConfigureFDManager;
+begin
+  FDManager.Active := False;
+  FDManager.ResourceOptions.AutoReconnect := True;
+end;
+
 procedure Initialize(const AConfig: TDatabaseConfig;
   const ADatabase: string; const APrefix: string); overload;
 var
   LParams: TStrings;
 begin
-  if not Assigned(FDManager) then
-    FDManager := TFDManager.Create(nil);
+  EnsureFDManagerInitialized;
 
-  if not FDManager.IsConnectionDef(GetConnectionDef(APrefix)) then
-  begin
-    FDManager.Active := False;
-    FDManager.ResourceOptions.AutoReconnect := True;
+  if FDManager.IsConnectionDef(GetConnectionDef(APrefix)) then
+    Exit;
 
-    LParams := TStringList.Create;
-    try
-      LParams.Values['DriverID'] := TConnectionType.PG.ToString;
-      LParams.Values['Server'] := AConfig.Server;
-      LParams.Values['Port'] := AConfig.Port;
+  ConfigureFDManager;
 
-      case ADatabase.Trim.IsEmpty of
-        True  : LParams.Values['Database'] := AConfig.Database;
-        False : LParams.Values['Database'] := ADatabase;
-      end;
-
-      LParams.Values['User_Name'] := AConfig.UserName;
-      LParams.Values['Password'] := AConfig.Password;
-      LParams.Values['CharacterSet'] := AConfig.CharacterSet;
-      LParams.Values['Pooled'] := ifthen(AConfig.Pooled, 'True', 'False');
-      LParams.Values['POOL_MaximumItems'] := AConfig.PoolMaxItems.ToString;
-      LParams.Values['POOL_ExpireTimeout'] := AConfig.PoolExpireTimeout.ToString;
-      LParams.Values['POOL_CleanupTimeout'] := AConfig.PoolCleanupTimeout.ToString;
-
-      FDManager.AddConnectionDef(GetConnectionDef(APrefix), TConnectionType.PG.ToString, LParams);
-    finally
-      LParams.Free;
-    end;
-
-    FDManager.Active := True;
+  LParams := CreateConnectionParams(AConfig, ADatabase);
+  try
+    FDManager.AddConnectionDef(GetConnectionDef(APrefix), AConfig.DriverID, LParams);
+  finally
+    LParams.DisposeOf;
   end;
+
+  FDManager.Active := True;
 end;
 
 procedure Initialize(const AConfig: TDatabaseConfig; const APrefix: string);
@@ -96,6 +108,7 @@ end;
 initialization
 
 finalization
+  FDManager.Active := False;
   FDManager.DisposeOf;
 
 end.

@@ -3,6 +3,7 @@ unit Horse.Connection;
 interface
 
 uses
+  ProdFuncAnonymous,
   DBConfigParameters,
   DBConfigTypes,
 
@@ -14,16 +15,22 @@ uses
 
 var
 
-{$REGION 'ADS'}
+{$REGION 'Variável do ADS'}
   ConfigADS: TDatabaseConfig;
   DatabaseADS : string;
   ConnectionPrefixADS : string;
 {$ENDREGION}
 
-{$REGION 'PG'}
+{$REGION 'Variável do PG'}
   ConfigPG: TDatabaseConfig;
   DatabasePG : string;
   ConnectionPrefixPG : string;
+{$ENDREGION}
+
+{$REGION 'Variável do PG'}
+  ConfigSQLite: TDatabaseConfig;
+  DatabaseSQLite : string;
+  ConnectionPrefixSQLite : string;
 {$ENDREGION}
 
 type
@@ -36,7 +43,7 @@ type
 function GetConnection(AValue : TConnectionType): TFDConnection;
 
 
-{$REGION 'ADS'}
+{$REGION 'Procedimentos do ADS'}
 procedure ApplyDatabaseConfigADS(const AParam: TDatabaseConfigParam;
   const Value: string); overload;
 procedure ApplyDatabaseConfigADS(const AParam: TDatabaseConfigParam;
@@ -46,7 +53,7 @@ procedure ApplyDatabaseConfigADS(const AParam: TDatabaseConfigParam;
 procedure HorseConnectionADS(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 {$ENDREGION}
 
-{$REGION 'PG'}
+{$REGION 'Procedimentos do PG'}
 procedure ApplyDatabaseConfigPG(const AParam: TDatabaseConfigParam;
   const Value: string); overload;
 procedure ApplyDatabaseConfigPG(const AParam: TDatabaseConfigParam;
@@ -56,58 +63,46 @@ procedure ApplyDatabaseConfigPG(const AParam: TDatabaseConfigParam;
 procedure HorseConnectionPG(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 {$ENDREGION}
 
+{$REGION 'Procedimentos do SQLite'}
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: string); overload;
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: Integer); overload;
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: Boolean); overload;
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: TSQLiteLockingModeType); overload;
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: TSQLiteOpenModeType); overload;
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: TSQLiteEncryptType);  overload;
+
+procedure HorseConnectionSQLite(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+{$ENDREGION}
 
 implementation
 
 uses
+  System.Generics.Collections,
 
-{$REGION 'ADS'}
+{$REGION 'Uses do ADS'}
   DBConnectionManagerADS,
 {$ENDREGION}
 
-{$REGION 'PG'}
-  DBConnectionManagerPG;
+{$REGION 'Uses do PG'}
+  DBConnectionManagerPG,
 {$ENDREGION}
 
-{$REGION 'Comum'}
+{$REGION 'Uses do SQLite'}
+  DBConnectionManagerSQLite;
+{$ENDREGION}
 
-function GetConnection(AValue : TConnectionType): TFDConnection;
+{$REGION 'Implementação do ADS'}
+function ADSConnection: TFDConnection;
 begin
-  case AValue of
-    TConnectionType.ADS:
-      Result := DBConnectionManagerADS.GetConnection(ConfigADS, DatabaseADS, ConnectionPrefixADS);
-    TConnectionType.FB:
-      {$IFDEF PORTUGUES}
-      raise Exception.Create('Configurações para Firebird (FB) não definidas.');
-      {$ELSE}
-      raise Exception.Create('Configurations for Firebird (FB) are not defined.');
-      {$ENDIF}
-    TConnectionType.MySQL:
-      {$IFDEF PORTUGUES}
-      raise Exception.Create('Configurações para MySQL não definidas.');
-      {$ELSE}
-      raise Exception.Create('Configurations for MySQL are not defined.');
-      {$ENDIF}
-    TConnectionType.PG:
-      Result := DBConnectionManagerPG.GetConnection(ConfigPG, DatabasePG, ConnectionPrefixPG);
-    TConnectionType.SQLite:
-      {$IFDEF PORTUGUES}
-      raise Exception.Create('Configurações para SQLite não definidas.');
-      {$ELSE}
-      raise Exception.Create('Configurations for SQLite are not defined.');
-      {$ENDIF}
-  else
-    {$IFDEF PORTUGUES}
-    raise Exception.Create('Tipo de conexão não suportado ou não especificado.');
-    {$ELSE}
-    raise Exception.Create('Connection type not supported or not specified.');
-    {$ENDIF}
-  end;
+  Result := DBConnectionManagerADS.GetConnection(ConfigADS, DatabaseADS, ConnectionPrefixADS);
 end;
 
-{$ENDREGION}
-
-{$REGION 'ADS'}
 procedure ApplyDatabaseConfigADS(const AParam: TDatabaseConfigParam;
   const Value: string);
 begin
@@ -133,7 +128,13 @@ end;
 
 {$ENDREGION}
 
-{$REGION 'PG'}
+{$REGION 'Implementação do PG'}
+
+function PGConnection: TFDConnection;
+begin
+  Result := DBConnectionManagerPG.GetConnection(ConfigPG, DatabasePG, ConnectionPrefixPG);
+end;
+
 procedure ApplyDatabaseConfigPG(const AParam: TDatabaseConfigParam;
   const Value: string);
 begin
@@ -155,18 +156,134 @@ end;
 procedure HorseConnectionPG(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 begin
   Next;
+end;
+
+{$ENDREGION}
+
+{$REGION 'Implementação do SQLite'}
+
+function SQLiteConnection: TFDConnection;
+begin
+  Result := DBConnectionManagerSQLite.GetConnection(ConfigSQLite, DatabaseSQLite, ConnectionPrefixSQLite);
+end;
+
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: string);
+begin
+  DatabaseConfig(ConfigSQLite, AParam, Value);
+end;
+
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: Integer);
+begin
+  DatabaseConfig(ConfigSQLite, AParam, Value);
+end;
+
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: Boolean);
+begin
+  DatabaseConfig(ConfigSQLite, AParam, Value);
+end;
+
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: TSQLiteLockingModeType);
+begin
+  DatabaseConfig(ConfigSQLite, AParam, Value.ToString);
+end;
+
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: TSQLiteOpenModeType);
+begin
+  DatabaseConfig(ConfigSQLite, AParam, Value.ToString);
+end;
+
+procedure ApplyDatabaseConfigSQLite(const AParam: TDatabaseConfigParam;
+  const Value: TSQLiteEncryptType);
+begin
+  DatabaseConfig(ConfigSQLite, AParam, Value.ToString);
+end;
+
+
+procedure HorseConnectionSQLite(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+begin
+  Next;
+end;
+
+{$ENDREGION}
+
+{$REGION 'Implementação Comum'}
+
+procedure RaiseConnectionNotDefined(AValue: TConnectionType);
+var
+  ErrorMsg: string;
+begin
+  case AValue of
+    TConnectionType.FB:
+      ErrorMsg := {$IFDEF PORTUGUES}
+                    'Configurações para Firebird (FB) não definidas.'
+                  {$ELSEIF DEF ESPANHOL}
+                    'Configuración para Firebird (FB) no definida.'
+                  {$ELSE}
+                    'Configurations for Firebird (FB) are not defined.'
+                  {$ENDIF};
+    TConnectionType.MySQL:
+      ErrorMsg := {$IFDEF PORTUGUES}
+                    'Configurações para MySQL não definidas.'
+                  {$ELSEIF DEF ESPANHOL}
+                    'Configuración de MySQL no definida.'
+                  {$ELSE}
+                    'Configurations for MySQL are not defined.'
+                  {$ENDIF};
+  else
+    ErrorMsg := {$IFDEF PORTUGUES}
+                   'Tipo de conexão não suportado ou não especificado.'
+                 {$ELSEIF DEF ESPANHOL}
+                   'Tipo de conexión no admitido o no especificado.'
+                 {$ELSE}
+                   'Connection type not supported or not specified.'
+                 {$ENDIF};
+  end;
+
+  raise Exception.Create(ErrorMsg);
+end;
+
+function GetConnection(AValue : TConnectionType): TFDConnection;
+var
+  LDictionary: TDictionary<TConnectionType, TConnectionFunc>;
+  LAction :  TConnectionFunc;
+begin
+  LDictionary := TDictionary<TConnectionType, TConnectionFunc>.Create;
+  try
+    LDictionary.Add(TConnectionType.ADS, ADSConnection);
+    LDictionary.Add(TConnectionType.PG, PGConnection);
+    LDictionary.Add(TConnectionType.SQLite, SQLiteConnection);
+
+    LDictionary.TrimExcess;
+
+    if not LDictionary.TryGetValue(AValue, LAction) then
+      RaiseConnectionNotDefined(AValue);
+
+    Result := LAction;
+  finally
+
+    LDictionary.DisposeOf;
+  end;
 end;
 
 {$ENDREGION}
 
 initialization
 
-{$REGION 'ADS'}
+{$REGION 'Iniciar o ADS'}
   ConfigADS := TDatabaseConfig.DefaultADS;
 {$ENDREGION}
 
-{$REGION 'PG'}
+{$REGION 'Iniciar o PG'}
   ConfigPG := TDatabaseConfig.DefaultPG;
+{$ENDREGION}
+
+{$REGION 'Iniciar o SQLite'}
+  ConfigSQLite := TDatabaseConfig.DefaultSQLite;
 {$ENDREGION}
 
 finalization
