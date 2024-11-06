@@ -66,7 +66,6 @@ begin
   if not Assigned(FDManager) then
     FDManager := TFDManager.Create(nil);
 end;
-
 procedure ConfigureFDManager;
 begin
   FDManager.Active := False;
@@ -79,19 +78,15 @@ var
   LParams: TStrings;
 begin
   EnsureFDManagerInitialized;
-
   if FDManager.IsConnectionDef(GetConnectionDef(APrefix)) then
     Exit;
-
   ConfigureFDManager;
-
   LParams := CreateConnectionParams(AConfig, ADatabase);
   try
     FDManager.AddConnectionDef(GetConnectionDef(APrefix), AConfig.DriverID, LParams);
   finally
     LParams.DisposeOf;
   end;
-
   FDManager.Active := True;
 end;
 

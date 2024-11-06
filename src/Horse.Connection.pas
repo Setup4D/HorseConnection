@@ -221,26 +221,32 @@ begin
     TConnectionType.FB:
       ErrorMsg := {$IFDEF PORTUGUES}
                     'Configurações para Firebird (FB) não definidas.'
-                  {$ELSEIF DEF ESPANHOL}
-                    'Configuración para Firebird (FB) no definida.'
                   {$ELSE}
-                    'Configurations for Firebird (FB) are not defined.'
+                    {$IFDEF ESPANHOL}
+                      'Configuración para Firebird (FB) no definida.'
+                    {$ELSE}
+                      'Configurations for Firebird (FB) are not defined.'
+                    {$ENDIF}
                   {$ENDIF};
     TConnectionType.MySQL:
       ErrorMsg := {$IFDEF PORTUGUES}
                     'Configurações para MySQL não definidas.'
-                  {$ELSEIF DEF ESPANHOL}
-                    'Configuración de MySQL no definida.'
                   {$ELSE}
-                    'Configurations for MySQL are not defined.'
+                    {$IFDEF ESPANHOL}
+                      'Configuración de MySQL no definida.'
+                    {$ELSE}
+                      'Configurations for MySQL are not defined.'
+                    {$ENDIF}
                   {$ENDIF};
   else
     ErrorMsg := {$IFDEF PORTUGUES}
                    'Tipo de conexão não suportado ou não especificado.'
-                 {$ELSEIF DEF ESPANHOL}
-                   'Tipo de conexión no admitido o no especificado.'
                  {$ELSE}
-                   'Connection type not supported or not specified.'
+                   {$IFDEF ESPANHOL}
+                     'Tipo de conexión no admitido o no especificado.'
+                   {$ELSE}
+                     'Connection type not supported or not specified.'
+                   {$ENDIF}
                  {$ENDIF};
   end;
 
@@ -285,6 +291,10 @@ initialization
 {$REGION 'Iniciar o SQLite'}
   ConfigSQLite := TDatabaseConfig.DefaultSQLite;
 {$ENDREGION}
+
+{$IFDEF DEBUG}
+  ReportMemoryLeaksOnShutdown := True;
+{$ENDIF}
 
 finalization
 

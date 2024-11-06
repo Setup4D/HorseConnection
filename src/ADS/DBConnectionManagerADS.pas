@@ -77,11 +77,15 @@ begin
   if not FileExists(AConfig.VendorLib) then
     raise Exception.CreateFmt({$IFDEF PORTUGUES}
                                 'A DLL "%s" especificada em VendorLib não foi encontrada.'
-                              {$ELSEIF DEF ESPANHOL}
-                                'No se ha encontrado la DLL "%s" especificada en VendorLib.'
                               {$ELSE}
-                                'The DLL "%s" specified in VendorLib was not found.'
-                              {$ENDIF}, [AConfig.VendorLib]);
+                                {$IFDEF ESPANHOL}
+                                  'No se ha encontrado la DLL "%s" especificada en VendorLib.'
+                                {$ELSE}
+                                  'The DLL "%s" specified in VendorLib was not found.'
+                                {$ENDIF}
+                              {$ENDIF},
+                              [AConfig.VendorLib]);
+
 
   FDDriver.VendorLib := AConfig.VendorLib;
 

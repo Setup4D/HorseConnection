@@ -2,9 +2,10 @@ unit DBConfigTypes;
 
 interface
 
-{$SCOPEDENUMS ON}
+
 
 type
+{$SCOPEDENUMS ON}
   TSQLiteLockingModeType = (Normal, Exclusive);
   TSQLiteOpenModeType = (CreateUTF8, CreateUTF16, ReadWrite, ReadOnly);
   TSQLiteEncryptType = (No, aes_128, aes_192, aes_256, aes_ctr_128, aes_ctr_192,
@@ -16,6 +17,7 @@ type
                           CharacterSet, Pooled, PoolMaxItems, PoolExpireTimeout,
                           PoolCleanupTimeout, ShowDelete, VendorLib, Protocol,
                           TableType, Locking, OpenMode, Encrypt, PasswordAuxiliary);
+{$SCOPEDENUMS OFF}
 
   TDatabaseConfig = record
     DriverID: string;
@@ -37,38 +39,29 @@ type
     OpenMode : string;
     Encrypt : string;
     PasswordAuxiliary : string;
-
     class function DefaultADS: TDatabaseConfig; static;
     class function DefaultPG: TDatabaseConfig; static;
     class function DefaultSQLite: TDatabaseConfig; static;
   end;
-
   TSQLiteEncryptTypeHelper= record helper for TSQLiteEncryptType
     function ToString: string;
     function StrToEnum(const AValue: string): TSQLiteEncryptType;
   end;
-
   TSQLiteLockingModeTypeHelper= record helper for TSQLiteLockingModeType
     function ToString: string;
   end;
-
   TSQLiteOpenModeTypeHelper= record helper for TSQLiteOpenModeType
     function ToString: string;
   end;
 
-
   TConnectionTypeHelper= record helper for TConnectionType
     function ToString: string;
   end;
-
 implementation
-
 uses
   System.SysUtils,
   System.Generics.Collections;
-
 { TDatabaseConfig }
-
 class function TDatabaseConfig.DefaultADS: TDatabaseConfig;
 begin
   Result.DriverID := TConnectionType.ADS.ToString;
@@ -86,14 +79,12 @@ begin
   Result.PoolCleanupTimeout := 30000;
   Result.PoolExpireTimeout := 90000;
   Result.PoolMaxItems := 50;
-
   {$IFDEF WIN32}
   Result.VendorLib := ExtractFilePath(ParamStr(0)) + 'ace32.dll';
   {$ELSE}
   Result.VendorLib := ExtractFilePath(ParamStr(0)) + 'ace64.dll';
   {$ENDIF}
 end;
-
 class function TDatabaseConfig.DefaultPG: TDatabaseConfig;
 begin
   Result.DriverID := TConnectionType.PG.ToString;
@@ -108,7 +99,6 @@ begin
   Result.PoolExpireTimeout := 90000;
   Result.PoolMaxItems := 50;
 end;
-
 class function TDatabaseConfig.DefaultSQLite: TDatabaseConfig;
 begin
   Result.DriverID := TConnectionType.SQLite.ToString;
@@ -122,11 +112,9 @@ begin
   Result.PoolCleanupTimeout := 30000;
   Result.PoolExpireTimeout := 90000;
   Result.PoolMaxItems := 50;
-
 end;
 
 { TConnectionTypeHelper }
-
 function TConnectionTypeHelper.ToString: string;
 var
   LDictionary: TDictionary<TConnectionType, string>;
@@ -139,20 +127,21 @@ begin
     LDictionary.Add(TConnectionType.PG, 'PG');
     LDictionary.Add(TConnectionType.SQLite, 'SQLite');
     LDictionary.TrimExcess;
-
     if not LDictionary.TryGetValue(Self, Result) then
       raise Exception.Create({$IFDEF PORTUGUES}
-                                'Tipo de conexão inválido.'
-                              {$ELSEIFDEF ESPANHOL}
-                                'Tipo de conexión inválido.'
-                              {$ELSE}
-                                'Invalid connection type.'
-                              {$ENDIF});
+                               'Tipo de conexão inválido.'
+                             {$ELSE}
+                               {$IFDEF ESPANHOL}
+                                 'Tipo de conexión inválido.'
+                               {$ELSE}
+                                 'Invalid connection type.'
+                               {$ENDIF}
+                             {$ENDIF});
+
   finally
     LDictionary.DisposeOf;
   end;
 end;
-
 { TOpenModeTypeHelper }
 
 function TSQLiteOpenModeTypeHelper.ToString: string;
@@ -166,15 +155,17 @@ begin
     LDictionary.Add(TSQLiteOpenModeType.ReadWrite, 'ReadWrite');
     LDictionary.Add(TSQLiteOpenModeType.ReadOnly, 'ReadOnly');
     LDictionary.TrimExcess;
-
     if not LDictionary.TryGetValue(Self, Result) then
       raise Exception.Create({$IFDEF PORTUGUES}
-                                'Tipo de modo de abertura inválido.'
-                              {$ELSEIFDEF ESPANHOL}
-                                'Tipo de modo de apertura no válido.'
-                              {$ELSE}
-                                'Invalid open mode type.'
-                              {$ENDIF});
+                               'Tipo de modo de abertura inválido.'
+                             {$ELSE}
+                               {$IFDEF ESPANHOL}
+                                 'Tipo de modo de apertura no válido.'
+                               {$ELSE}
+                                 'Invalid open mode type.'
+                               {$ENDIF}
+                             {$ENDIF});
+
   finally
     LDictionary.DisposeOf;
   end;
@@ -191,15 +182,17 @@ begin
     LDictionary.Add(TSQLiteLockingModeType.Normal, 'Normal');
     LDictionary.Add(TSQLiteLockingModeType.Exclusive, 'Exclusive');
     LDictionary.TrimExcess;
-
     if not LDictionary.TryGetValue(Self, Result) then
       raise Exception.Create({$IFDEF PORTUGUES}
-                                'Tipo de modo de bloqueio inválido.'
-                              {$ELSEIFDEF ESPANHOL}
-                                'Tipo de modo de bloqueo no válido.'
-                              {$ELSE}
-                                'Invalid locking mode type.'
-                              {$ENDIF});
+                               'Tipo de modo de bloqueio inválido.'
+                             {$ELSE}
+                               {$IFDEF ESPANHOL}
+                                 'Tipo de modo de bloqueo no válido.'
+                               {$ELSE}
+                                 'Invalid locking mode type.'
+                               {$ENDIF}
+                             {$ENDIF});
+
   finally
     LDictionary.DisposeOf;
   end;
@@ -227,15 +220,17 @@ begin
     LDictionary.Add('aes_ecb_192', TSQLiteEncryptType.aes_ecb_192);
     LDictionary.Add('aes_ecb_256', TSQLiteEncryptType.aes_ecb_256);
     LDictionary.TrimExcess;
-
     if not LDictionary.TryGetValue(LNormalizedValue, Result) then
-      raise Exception.Create({$IFDEF PORTUGUES}
-                                'Tipo de criptografia inválido: ' + AValue
-                              {$ELSEIFDEF ESPANHOL}
-                                'Tipo de cifrado no válido: ' + AValue
-                              {$ELSE}
-                                'Invalid encryption type: ' + AValue
-                              {$ENDIF});
+      raise Exception.CreateFmt({$IFDEF PORTUGUES}
+                                  'Tipo de criptografia inválido: %s'
+                                {$ELSE}
+                                  {$IFDEF ESPANHOL}
+                                    'Tipo de cifrado no válido: %s'
+                                  {$ELSE}
+                                    'Invalid encryption type: %s'
+                                  {$ENDIF}
+                                {$ENDIF}, [AValue]);
+
   finally
     LDictionary.DisposeOf;
   end;
@@ -258,19 +253,20 @@ begin
     LDictionary.Add(TSQLiteEncryptType.aes_ecb_192, 'aes-ecb-192');
     LDictionary.Add(TSQLiteEncryptType.aes_ecb_256, 'aes-ecb-256');
     LDictionary.TrimExcess;
-
     if not LDictionary.TryGetValue(Self, Result) then
       raise Exception.Create({$IFDEF PORTUGUES}
-                                'Tipo de criptografia inválido.'
-                              {$ELSEIFDEF ESPANHOL}
-                                'Tipo de cifrado no válido.'
-                              {$ELSE}
-                                'Invalid encryption type.'
-                              {$ENDIF});
+                               'Tipo de criptografia inválido.'
+                             {$ELSE}
+                               {$IFDEF ESPANHOL}
+                                 'Tipo de cifrado no válido.'
+                               {$ELSE}
+                                 'Invalid encryption type.'
+                               {$ENDIF}
+                             {$ENDIF});
+
   finally
     LDictionary.DisposeOf;
   end;
 end;
 
 end.
-
