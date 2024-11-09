@@ -66,7 +66,7 @@
         <DCC_UsePackage>RESTComponents;FireDACIBDriver;FireDACCommon;RESTBackendComponents;soapserver;CloudService;FireDACCommonDriver;inet;FireDAC;FireDACSqliteDriver;soaprtl;soapmidas;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>SampleHorseConnectionSQLite</SanitizedProjectName>
-        <DCC_UnitSearchPath>..\src;..\src\Uteis;..\src\SQLite;..\src\ADS;..\src\PG;..\modules\horse\src;modules\.dcp;modules\.dcu;modules;modules\horse\src;modules\horse-compression\src;modules\jhonson\src;modules\handle-exception\src;..\src\FB;..\src\MySQL;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\src;..\src\Utils;..\src\Utils\ConfigurationParameter;..\src\Configuration\PG;..\src\Configuration\ADS;..\src\Configuration\SQLite;..\src\Configuration\FB;..\src\Configuration\MySQL;..\src\Connection\;..\modules\horse\src;modules\.dcp;modules\.dcu;modules;modules\horse\src;modules\horse-compression\src;modules\jhonson\src;modules\handle-exception\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>

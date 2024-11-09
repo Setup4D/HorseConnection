@@ -4,25 +4,25 @@
 {                                                                       }
 { Descrição:                                                            }
 {   Este exemplo faz parte do projeto HorseConnection e demonstra o uso }
-{   do framework Horse com uma conexão ao banco de dados PostgreSQL     }
+{   do framework Horse com uma conexão ao banco de dados MySQL          }
 {   utilizando o FireDAC. A conexão é configurada por meio de           }
 {   parâmetros definidos com a função ApplyDatabaseConfiguration, e o   }
-{   middleware HorseConnectionPG é usado para centralizar a             }
+{   middleware HorseConnectionMySQL é usado para centralizar a          }
 {   configuração da conexão. Este middleware permite uma integração     }
 {   com o Horse para cada requisição HTTP, garantindo que a conexão     }
-{   com o banco de dados PostgreSQL seja gerenciada automaticamente.    }
+{   com o banco de dados MySQL seja gerenciada automaticamente.         }
 {                                                                       }
 { Parâmetros de Configuração:                                           }
 {   A função ApplyDatabaseConfiguration permite configurar os           }
-{   seguintes parâmetros padrão para a conexão com o PostgreSQL:        }
+{   seguintes parâmetros padrão para a conexão com o MySQL:             }
 {                                                                       }
 {     - Server: String                                                  }
-{       Endereço do servidor onde o banco de dados PostgreSQL está      }
+{       Endereço do servidor onde o banco de dados MySQL está           }
 {       hospedado. Pode ser um endereço IP ou hostname.                 }
 {                                                                       }
 {     - Port: Integer                                                   }
-{       Porta de comunicação com o servidor PostgreSQL. O valor padrão  }
-{       costuma ser 5432.                                               }
+{       Porta de comunicação com o servidor MySQL. O valor padrão       }
+{       costuma ser 3306.                                               }
 {                                                                       }
 {     - Database: String                                                }
 {       Nome do banco de dados que será acessado.                       }
@@ -35,13 +35,8 @@
 {                                                                       }
 {     - VendorLib: String                                               }
 {       Caminho para a biblioteca do fornecedor (DLL) necessária para   }
-{       o FireDAC se comunicar com o PostgreSQL. A DLL padrão é         }
-{       "libpq.dll" e deve corresponder à arquitetura da aplicação      }
-{       (32 ou 64 bits).                                                }
-{                                                                       }
-{     - CharacterSet: String                                            }
-{       Define o conjunto de caracteres usado na conexão com o banco    }
-{       de dados. O padrão é "UTF8".                                    }
+{       o FireDAC se comunicar com o MySQL. A DLL padrão é "libmysql.dll" }
+{       e deve corresponder à arquitetura da aplicação (32 ou 64 bits). }
 {                                                                       }
 {     - Pooled: Boolean                                                 }
 {       Define se a conexão será gerida como um pool de conexões,       }
@@ -59,13 +54,13 @@
 {                                                                       }
 { Erros Comuns (Troubleshooting):                                       }
 {   Abaixo estão alguns erros comuns que podem ocorrer ao configurar    }
-{   e utilizar a conexão com o PostgreSQL e como resolvê-los:           }
+{   e utilizar a conexão com o MySQL e como resolvê-los:                }
 {                                                                       }
 {     - VendorLib não especificado ou incorreto:                        }
-{       Se o parâmetro 'VendorLib' estiver vazio ou se a DLL 'libpq.dll'}
-{       não corresponder à arquitetura correta (32 ou 64 bits), o       }
-{       FireDAC não conseguirá se conectar ao PostgreSQL.               }
-{       Solução: Defina o caminho correto para a DLL 'libpq.dll'        }
+{       Se o parâmetro 'VendorLib' estiver vazio ou se a DLL 'libmysql.dll' }
+{       não corresponder à arquitetura correta (32 ou 64 bits), o FireDAC }
+{       não conseguirá se conectar ao MySQL.                            }
+{       Solução: Defina o caminho correto para a DLL 'libmysql.dll'     }
 {       que corresponda à arquitetura do seu aplicativo. Para sistemas  }
 {       de 32 bits, utilize a versão de 32 bits da DLL, e para 64 bits, }
 {       utilize a versão de 64 bits.                                    }
@@ -77,24 +72,32 @@
 {       Solução: Defina o nome do banco de dados a ser acessado.        }
 {                                                                       }
 {     - Erro de Conexão com o Servidor:                                 }
-{       Se o servidor PostgreSQL estiver inacessível ou as credenciais  }
+{       Se o servidor MySQL estiver inacessível ou as credenciais       }
 {       estiverem incorretas, ocorrerá um erro de conexão.              }
 {       Solução: Verifique se o endereço do servidor, a porta, o        }
 {       nome de usuário e a senha estão corretos e que o servidor está  }
 {       acessível.                                                      }
 {                                                                       }
+{     - Tabela não encontrada no MySQL:                                 }
+{       Quando uma consulta tenta acessar uma tabela inexistente,       }
+{       o MySQL gera uma exceção informando que a tabela não foi        }
+{       encontrada. Esse erro ocorre com frequência quando o nome       }
+{       da tabela está incorreto ou o banco de dados é diferente.       }
+{       Solução: Verifique se a tabela existe no banco de dados e       }
+{       se o nome foi escrito corretamente.                             }
+{                                                                       }
 {     - Configuração de Time Zone:                                      }
-{       Alguns ambientes PostgreSQL requerem que o time zone seja       }
+{       Alguns ambientes MySQL requerem que o time zone seja            }
 {       configurado explicitamente. Caso contrário, podem ocorrer       }
 {       problemas em operações que dependem de data e hora.             }
-{       Solução: Verifique a configuração de time zone do PostgreSQL    }
+{       Solução: Verifique a configuração de time zone do MySQL         }
 {       e ajuste conforme necessário para o ambiente.                   }
 {                                                                       }
 {     - Limites de Conexão:                                             }
-{       O PostgreSQL impõe um limite no número de conexões simultâneas  }
+{       O MySQL impõe um limite no número de conexões simultâneas       }
 {       permitidas. Esse limite pode ser alcançado em ambientes de      }
 {       alta carga, causando falhas de conexão.                         }
-{       Solução: Considere ajustar o limite de conexões no PostgreSQL   }
+{       Solução: Considere ajustar o limite de conexões no MySQL        }
 {       (`max_connections`) ou otimize o uso de conexões no             }
 {       aplicativo para evitar alcançar o limite.                       }
 {                                                                       }
@@ -113,26 +116,25 @@
   { Descripción:                                                          }
   {   Este ejemplo forma parte del proyecto HorseConnection y demuestra   }
   {   el uso del framework Horse con una conexión a la base de datos      }
-  {   PostgreSQL utilizando FireDAC. La conexión se configura mediante    }
+  {   MySQL utilizando FireDAC. La conexión se configura mediante         }
   {   parámetros definidos con la función ApplyDatabaseConfiguration, y   }
-  {   el middleware HorseConnectionPG se utiliza para centralizar la      }
+  {   el middleware HorseConnectionMySQL se utiliza para centralizar la   }
   {   configuración de la conexión. Este middleware permite una           }
   {   integración con Horse para cada solicitud HTTP, asegurando que      }
-  {   la conexión a la base de datos PostgreSQL se gestione               }
+  {   la conexión a la base de datos MySQL se gestione                    }
   {   automáticamente.                                                    }
   {                                                                       }
   { Parámetros de Configuración:                                          }
   {   La función ApplyDatabaseConfiguration permite configurar los        }
-  {   siguientes parámetros predeterminados para la conexión con          }
-  {   PostgreSQL:                                                         }
+  {   siguientes parámetros predeterminados para la conexión con MySQL:   }
   {                                                                       }
   {     - Server: String                                                  }
-  {       Dirección del servidor donde se aloja la base de datos          }
-  {       PostgreSQL. Puede ser una dirección IP o un nombre de host.     }
+  {       Dirección del servidor donde se aloja la base de datos MySQL.   }
+  {       Puede ser una dirección IP o un nombre de host.                 }
   {                                                                       }
   {     - Port: Integer                                                   }
-  {       Puerto de comunicación con el servidor PostgreSQL. El valor     }
-  {       predeterminado suele ser 5432.                                  }
+  {       Puerto de comunicación con el servidor MySQL. El valor          }
+  {       predeterminado suele ser 3306.                                  }
   {                                                                       }
   {     - Database: String                                                }
   {       Nombre de la base de datos a la que se accederá.                }
@@ -145,13 +147,9 @@
   {                                                                       }
   {     - VendorLib: String                                               }
   {       Ruta de la biblioteca del proveedor (DLL) necesaria para que    }
-  {       FireDAC se comunique con PostgreSQL. La DLL predeterminada es   }
-  {       "libpq.dll" y debe coincidir con la arquitectura de la          }
+  {       FireDAC se comunique con MySQL. La DLL predeterminada es        }
+  {       "libmysql.dll" y debe coincidir con la arquitectura de la       }
   {       aplicación (32 o 64 bits).                                      }
-  {                                                                       }
-  {     - CharacterSet: String                                            }
-  {       Define el conjunto de caracteres utilizado en la conexión con   }
-  {       la base de datos. El valor predeterminado es "UTF8".            }
   {                                                                       }
   {     - Pooled: Boolean                                                 }
   {       Define si la conexión se gestionará como un pool de conexiones, }
@@ -169,14 +167,14 @@
   {                                                                       }
   { Errores Comunes (Troubleshooting):                                    }
   {   A continuación se describen algunos errores comunes que pueden      }
-  {   ocurrir al configurar y utilizar la conexión con PostgreSQL:        }
+  {   ocurrir al configurar y utilizar la conexión con MySQL:             }
   {                                                                       }
   {     - VendorLib no especificado o incorrecto:                         }
-  {       Si el parámetro 'VendorLib' está vacío o si la DLL 'libpq.dll'  }
+  {       Si el parámetro 'VendorLib' está vacío o si la DLL 'libmysql.dll' }
   {       no coincide con la arquitectura correcta (32 o 64 bits),        }
-  {       FireDAC no podrá conectarse a PostgreSQL.                       }
-  {       Solución: Establezca la ruta correcta para la DLL 'libpq.dll'   }
-  {       que coincida con la arquitectura de su aplicación. Para sistemas}
+  {       FireDAC no podrá conectarse a MySQL.                            }
+  {       Solución: Establezca la ruta correcta para la DLL 'libmysql.dll' }
+  {       que coincida con la arquitectura de su aplicación. Para sistemas }
   {       de 32 bits, utilice la versión de 32 bits de la DLL, y para 64  }
   {       bits, utilice la versión de 64 bits.                            }
   {                                                                       }
@@ -188,25 +186,34 @@
   {       accederá.                                                       }
   {                                                                       }
   {     - Error de conexión con el servidor:                              }
-  {       Si el servidor PostgreSQL está inaccesible o las credenciales   }
-  {       son incorrectas, ocurrirá un error de conexión.                 }
+  {       Si el servidor MySQL está inaccesible o las credenciales son    }
+  {       incorrectas, ocurrirá un error de conexión.                     }
   {       Solución: Verifique que la dirección del servidor, el puerto,   }
   {       el nombre de usuario y la contraseña sean correctos, y que el   }
   {       servidor esté accesible.                                        }
   {                                                                       }
+  {     - Tabla no encontrada en MySQL:                                   }
+  {       Cuando una consulta intenta acceder a una tabla inexistente,    }
+  {       MySQL genera una excepción indicando que la tabla no fue        }
+  {       encontrada. Este error ocurre con frecuencia cuando el nombre   }
+  {       de la tabla es incorrecto o la base de datos es diferente.      }
+  {       Solución: Verifique que la tabla exista en la base de datos     }
+  {       y que el nombre esté escrito correctamente.                     }
+  {                                                                       }
   {     - Configuración de Time Zone:                                     }
-  {       Algunos entornos PostgreSQL requieren que la zona horaria se    }
-  {       configure explícitamente.                                       }
+  {       Algunos entornos MySQL requieren que la zona horaria se         }
+  {       configure explícitamente, de lo contrario pueden surgir         }
+  {       problemas en operaciones basadas en fecha y hora.               }
   {       Solución: Verifique la configuración de la zona horaria         }
-  {       de PostgreSQL y ajústela según sea necesario.                   }
+  {       de MySQL y ajústela según sea necesario.                        }
   {                                                                       }
   {     - Límites de Conexión:                                            }
-  {       PostgreSQL impone un límite en el número de conexiones          }
-  {       simultáneas permitidas. Este límite puede alcanzarse en         }
-  {       entornos de alta carga, causando fallos en la conexión.         }
-  {       Solución: Considere ajustar el límite de conexiones en          }
-  {       PostgreSQL (`max_connections`) o optimice el uso de conexiones  }
-  {       en la aplicación para evitar alcanzar el límite.                }
+  {       MySQL impone un límite en el número de conexiones simultáneas   }
+  {       permitidas, lo que puede alcanzarse en entornos de alta carga,  }
+  {       causando fallos en la conexión.                                 }
+  {       Solución: Considere ajustar el límite de conexiones en MySQL    }
+  {       (`max_connections`) u optimice el uso de conexiones en la       }
+  {       aplicación para evitar alcanzar el límite.                      }
   {                                                                       }
   { Autor: Ricardo R. Pereira                                             }
   { Fecha: 9 de noviembre de 2024                                         }
@@ -222,25 +229,24 @@
   { Description:                                                          }
   {   This example is part of the HorseConnection project and             }
   {   demonstrates the use of the Horse framework with a connection to    }
-  {   the PostgreSQL database using FireDAC. The connection is            }
-  {   configured through parameters defined with the                      }
-  {   ApplyDatabaseConfiguration function, and the HorseConnectionPG      }
-  {   middleware is used to centralize the connection configuration.      }
-  {   This middleware enables integration with Horse for each HTTP        }
-  {   request, ensuring that the PostgreSQL database connection is        }
-  {   automatically managed.                                              }
+  {   the MySQL database using FireDAC. The connection is configured      }
+  {   through parameters defined with the ApplyDatabaseConfiguration      }
+  {   function, and the HorseConnectionMySQL middleware is used to        }
+  {   centralize the connection configuration. This middleware enables    }
+  {   integration with Horse for each HTTP request, ensuring that the     }
+  {   MySQL database connection is automatically managed.                 }
   {                                                                       }
   { Configuration Parameters:                                             }
   {   The ApplyDatabaseConfiguration function allows configuring the      }
-  {   following default parameters for the PostgreSQL connection:         }
+  {   following default parameters for the MySQL connection:              }
   {                                                                       }
   {     - Server: String                                                  }
-  {       Server address where the PostgreSQL database is hosted.         }
+  {       Server address where the MySQL database is hosted.              }
   {       It can be an IP address or a hostname.                          }
   {                                                                       }
   {     - Port: Integer                                                   }
-  {       Communication port with the PostgreSQL server. The default      }
-  {       value is usually 5432.                                          }
+  {       Communication port with the MySQL server. The default           }
+  {       value is usually 3306.                                          }
   {                                                                       }
   {     - Database: String                                                }
   {       Name of the database to be accessed.                            }
@@ -253,12 +259,8 @@
   {                                                                       }
   {     - VendorLib: String                                               }
   {       Path to the vendor library (DLL) required for FireDAC to        }
-  {       communicate with PostgreSQL. The default DLL is "libpq.dll" and }
+  {       communicate with MySQL. The default DLL is "libmysql.dll" and   }
   {       it must match the application architecture (32 or 64-bit).      }
-  {                                                                       }
-  {     - CharacterSet: String                                            }
-  {       Specifies the character set used in the database connection.    }
-  {       The default value is "UTF8".                                    }
   {                                                                       }
   {     - Pooled: Boolean                                                 }
   {       Specifies whether the connection will be managed as a pool,     }
@@ -276,13 +278,13 @@
   {                                                                       }
   { Troubleshooting:                                                      }
   {   Below are some common errors that may occur when setting up and     }
-  {   using the PostgreSQL connection and how to resolve them:            }
+  {   using the MySQL connection and how to resolve them:                 }
   {                                                                       }
   {     - VendorLib not specified or incorrect:                           }
-  {       If the 'VendorLib' parameter is empty or if the 'libpq.dll'     }
+  {       If the 'VendorLib' parameter is empty or if the 'libmysql.dll'  }
   {       does not match the correct architecture (32 or 64-bit), FireDAC }
-  {       will be unable to connect to PostgreSQL.                        }
-  {       Solution: Set the correct path for 'libpq.dll' that matches     }
+  {       will be unable to connect to MySQL.                             }
+  {       Solution: Set the correct path for 'libmysql.dll' that matches  }
   {       your application architecture. For 32-bit systems, use the 32-  }
   {       bit DLL version, and for 64-bit systems, use the 64-bit version.}
   {                                                                       }
@@ -293,23 +295,31 @@
   {       Solution: Define the name of the database to be accessed.       }
   {                                                                       }
   {     - Connection error with the server:                               }
-  {       If the PostgreSQL server is inaccessible or the credentials     }
-  {       are incorrect, a connection error will occur.                   }
+  {       If the MySQL server is inaccessible or the credentials are      }
+  {       incorrect, a connection error will occur.                       }
   {       Solution: Verify the server address, port, username, and        }
   {       password are correct and that the server is accessible.         }
   {                                                                       }
+  {     - Table not found in MySQL:                                       }
+  {       When a query attempts to access a non-existent table, MySQL     }
+  {       will raise an exception indicating that the table was not       }
+  {       found. This error often occurs when the table name is           }
+  {       misspelled or the database is different.                        }
+  {       Solution: Verify that the table exists in the database and      }
+  {       that the name is spelled correctly.                             }
+  {                                                                       }
   {     - Time Zone configuration:                                        }
-  {       Some PostgreSQL environments require explicit configuration of  }
-  {       the time zone to avoid issues in date and time-dependent        }
-  {       operations. Solution: Check the PostgreSQL time zone settings   }
-  {       and adjust accordingly for your environment.                    }
+  {       Some MySQL environments require explicit configuration of the   }
+  {       time zone to avoid issues in date and time-dependent operations.}
+  {       Solution: Check the MySQL time zone settings and adjust         }
+  {       accordingly for your environment.                               }
   {                                                                       }
   {     - Connection Limits:                                              }
-  {       PostgreSQL imposes a limit on the number of simultaneous        }
-  {       connections allowed, which can be reached in high-load          }
-  {       environments, causing connection failures.                      }
-  {       Solution: Consider adjusting the PostgreSQL `max_connections`   }
-  {       limit or optimize connection usage in the application to avoid  }
+  {       MySQL imposes a limit on the number of simultaneous connections }
+  {       allowed, which can be reached in high-load environments,        }
+  {       causing connection failures.                                    }
+  {       Solution: Consider adjusting the MySQL `max_connections` limit  }
+  {       or optimize connection usage in the application to avoid        }
   {       hitting the limit.                                              }
   {                                                                       }
   { Author: Ricardo R. Pereira                                            }
@@ -322,7 +332,8 @@
   {$ENDIF}
 {$ENDIF}
 
-program SampleHorseConnectionPG;
+
+program SampleHorseConnectionMySQL;
 
 {$APPTYPE CONSOLE}
 
@@ -335,7 +346,7 @@ uses
   Horse.Compression,
 
   Horse.Connection,
-  Horse.Connection.PG, // Middleware específico para PostgreSQL
+  Horse.Connection.MySQL, // Middleware específico para MySQL
 
   FireDAC.Comp.Client,
 
@@ -347,19 +358,19 @@ begin
 
   {$IFDEF PORTUGUES}
   /// <summary>
-  ///   Configura os parâmetros de conexão para o banco de dados PostgreSQL.
+  ///   Configura os parâmetros de conexão para o banco de dados MySQL.
   /// </summary>
   /// <remarks>
   ///   A função <c>ApplyDatabaseConfiguration</c> permite definir configurações específicas
-  ///   para a conexão com o banco de dados PostgreSQL, utilizando o FireDAC como camada de acesso.
+  ///   para a conexão com o banco de dados MySQL, utilizando o FireDAC como camada de acesso.
   ///   Abaixo estão descritos os parâmetros:
   /// </remarks>
   /// <param name="Server">
-  ///   Endereço do servidor onde o banco de dados PostgreSQL está hospedado. Pode ser um endereço
+  ///   Endereço do servidor onde o banco de dados MySQL está hospedado. Pode ser um endereço
   ///   IP ou um hostname. O padrão costuma ser "localhost" para desenvolvimento local.
   /// </param>
   /// <param name="Port">
-  ///   Porta de conexão para o servidor PostgreSQL. O valor padrão para PostgreSQL é 5432, mas
+  ///   Porta de conexão para o servidor MySQL. O valor padrão para MySQL é 3306, mas
   ///   pode ser alterado conforme a configuração do servidor.
   /// </param>
   /// <param name="Database">
@@ -367,14 +378,16 @@ begin
   ///   onde as consultas serão realizadas.
   /// </param>
   /// <param name="UserName">
-  ///   Nome de usuário para autenticação no banco de dados PostgreSQL.
+  ///   Nome de usuário para autenticação no banco de dados MySQL.
   /// </param>
   /// <param name="Password">
-  ///   Senha de acesso ao banco de dados PostgreSQL, usada em conjunto com o <c>UserName</c> para
+  ///   Senha de acesso ao banco de dados MySQL, usada em conjunto com o <c>UserName</c> para
   ///   autenticação segura.
   /// </param>
-  /// <param name="CharacterSet">
-  ///   Define o conjunto de caracteres usado na conexão com o banco de dados. O padrão é "UTF8".
+  /// <param name="VendorLib">
+  ///   Caminho para a biblioteca do fornecedor (DLL) necessária para o FireDAC se comunicar
+  ///   com o MySQL. A biblioteca padrão é "libmysql.dll" e deve corresponder à arquitetura da
+  ///   aplicação (32 ou 64 bits).
   /// </param>
   /// <param name="Pooled">
   ///   Define se a conexão será gerida como um pool de conexões. O pooling de conexões
@@ -396,19 +409,19 @@ begin
   {$ELSE}
     {$IFDEF ESPANHOL}
     /// <summary>
-    ///   Configura los parámetros de conexión para la base de datos PostgreSQL.
+    ///   Configura los parámetros de conexión para la base de datos MySQL.
     /// </summary>
     /// <remarks>
     ///   La función <c>ApplyDatabaseConfiguration</c> permite definir configuraciones específicas
-    ///   para la conexión a la base de datos PostgreSQL, utilizando FireDAC como capa de acceso.
+    ///   para la conexión a la base de datos MySQL, utilizando FireDAC como capa de acceso.
     ///   A continuación se describen los parámetros:
     /// </remarks>
     /// <param name="Server">
-    ///   Dirección del servidor donde está alojada la base de datos PostgreSQL. Puede ser una dirección
+    ///   Dirección del servidor donde está alojada la base de datos MySQL. Puede ser una dirección
     ///   IP o un nombre de host. El valor predeterminado suele ser "localhost" para desarrollo local.
     /// </param>
     /// <param name="Port">
-    ///   Puerto de conexión para el servidor PostgreSQL. El valor predeterminado para PostgreSQL es 5432,
+    ///   Puerto de conexión para el servidor MySQL. El valor predeterminado para MySQL es 3306,
     ///   pero se puede cambiar según la configuración del servidor.
     /// </param>
     /// <param name="Database">
@@ -416,14 +429,16 @@ begin
     ///   en la que se realizarán las consultas.
     /// </param>
     /// <param name="UserName">
-    ///   Nombre de usuario para autenticación en la base de datos PostgreSQL.
+    ///   Nombre de usuario para autenticación en la base de datos MySQL.
     /// </param>
     /// <param name="Password">
-    ///   Contraseña de acceso a la base de datos PostgreSQL, utilizada junto con <c>UserName</c> para
+    ///   Contraseña de acceso a la base de datos MySQL, utilizada junto con <c>UserName</c> para
     ///   la autenticación segura.
     /// </param>
-    /// <param name="CharacterSet">
-    ///   Define el conjunto de caracteres utilizado en la conexión con la base de datos. El valor predeterminado es "UTF8".
+    /// <param name="VendorLib">
+    ///   Ruta a la biblioteca del proveedor (DLL) necesaria para que FireDAC se comunique con MySQL.
+    ///   La biblioteca predeterminada es "libmysql.dll" y debe coincidir con la arquitectura de
+    ///   la aplicación (32 o 64 bits).
     /// </param>
     /// <param name="Pooled">
     ///   Define si la conexión se gestionará como un pool de conexiones. El uso de pool de conexiones
@@ -444,19 +459,19 @@ begin
     /// </param>
     {$ELSE}
     /// <summary>
-    ///   Configures connection parameters for the PostgreSQL database.
+    ///   Configures connection parameters for the MySQL database.
     /// </summary>
     /// <remarks>
     ///   The <c>ApplyDatabaseConfiguration</c> function allows specific configurations
-    ///   for the PostgreSQL database connection, using FireDAC as the access layer.
+    ///   for the MySQL database connection, using FireDAC as the access layer.
     ///   The parameters are described below:
     /// </remarks>
     /// <param name="Server">
-    ///   Server address where the PostgreSQL database is hosted. It can be an IP address
+    ///   Server address where the MySQL database is hosted. It can be an IP address
     ///   or a hostname. The default is usually "localhost" for local development.
     /// </param>
     /// <param name="Port">
-    ///   Connection port for the PostgreSQL server. The default port for PostgreSQL is 5432,
+    ///   Connection port for the MySQL server. The default port for MySQL is 3306,
     ///   but it can be changed according to the server configuration.
     /// </param>
     /// <param name="Database">
@@ -464,14 +479,16 @@ begin
     ///   where queries will be executed.
     /// </param>
     /// <param name="UserName">
-    ///   Username for authentication on the PostgreSQL database.
+    ///   Username for authentication on the MySQL database.
     /// </param>
     /// <param name="Password">
-    ///   Password for PostgreSQL database access, used together with <c>UserName</c> for
+    ///   Password for MySQL database access, used together with <c>UserName</c> for
     ///   secure authentication.
     /// </param>
-    /// <param name="CharacterSet">
-    ///   Specifies the character set used in the database connection. The default value is "UTF8".
+    /// <param name="VendorLib">
+    ///   Path to the vendor library (DLL) required for FireDAC to communicate with
+    ///   MySQL. The default library is "libmysql.dll" and it must match the application
+    ///   architecture (32 or 64 bits).
     /// </param>
     /// <param name="Pooled">
     ///   Specifies whether the connection will be managed as a pool. Connection pooling
@@ -495,56 +512,57 @@ begin
   {$ENDIF}
 
   (*
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.Server, 'localhost');                                          {$IFDEF PORTUGUES} // Endereço do servidor onde o PostgreSQL está hospedado
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Dirección del servidor donde se aloja PostgreSQL
-                                                                                                                       {$ELSE}// Server address where PostgreSQL is hosted
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.Server, 'localhost');                                           {$IFDEF PORTUGUES} // Endereço do servidor onde o MySQL está hospedado
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Dirección del servidor donde se aloja MySQL
+                                                                                                                          {$ELSE}// Server address where MySQL is hosted
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.Port, 5432);                                                    {$IFDEF PORTUGUES} // Porta de conexão com o servidor PostgreSQL
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Puerto de conexión con el servidor PostgreSQL
-                                                                                                                       {$ELSE}// Connection port for the PostgreSQL server
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.Port, 3306);                                                    {$IFDEF PORTUGUES} // Porta de conexão com o servidor MySQL
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Puerto de conexión con el servidor MySQL
+                                                                                                                          {$ELSE}// Connection port for the MySQL server
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.Database, 'postgres');                                          {$IFDEF PORTUGUES} // Nome do banco de dados a ser acessado
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Nombre de la base de datos a acceder
-                                                                                                                       {$ELSE}// Name of the database to access
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.Database, 'db');                                                {$IFDEF PORTUGUES} // Nome do banco de dados a ser acessado
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Nombre de la base de datos a acceder
+                                                                                                                          {$ELSE}// Name of the database to access
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.UserName, 'postgres');                                          {$IFDEF PORTUGUES} // Nome de usuário para autenticação no PostgreSQL
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Nombre de usuario para autenticación en PostgreSQL
-                                                                                                                       {$ELSE}// Username for PostgreSQL authentication
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.UserName, 'root');                                              {$IFDEF PORTUGUES} // Nome de usuário para autenticação no MySQL
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Nombre de usuario para autenticación en MySQL
+                                                                                                                          {$ELSE}// Username for MySQL authentication
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.Password, 'password');                                          {$IFDEF PORTUGUES} // Senha de acesso ao banco de dados
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Contraseña para acceder a la base de datos
-                                                                                                                       {$ELSE}// Password for database access
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.Password, 'password');                                          {$IFDEF PORTUGUES} // Senha de acesso ao banco de dados
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Contraseña para acceder a la base de datos
+                                                                                                                          {$ELSE}// Password for database access
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.CharacterSet, 'UTF8');                                          {$IFDEF PORTUGUES} // Define o conjunto de caracteres, padrão é "UTF8"
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Define el conjunto de caracteres, por defecto "UTF8"
-                                                                                                                       {$ELSE}// Defines character set, default is "UTF8"
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.VendorLib, 'path/libmysql.dll');                                     {$IFDEF PORTUGUES} // Caminho para a biblioteca do MySQL (DLL). Deve ser compatível com a arquitetura (32/64 bits)
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Ruta de la biblioteca de MySQL (DLL). Debe ser compatible con la arquitectura (32/64 bits)
+                                                                                                                          {$ELSE}// Path to the MySQL library (DLL). Must match architecture (32/64 bits)
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.Pooled, True);                                                  {$IFDEF PORTUGUES} // Ativa o uso de pool de conexões
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Activa el uso de pool de conexiones
-                                                                                                                       {$ELSE}// Enables connection pooling
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.Pooled, True);                                                  {$IFDEF PORTUGUES} // Ativa o uso de pool de conexões
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Activa el uso de pool de conexiones
+                                                                                                                          {$ELSE}// Enables connection pooling
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.PoolMaxItems, 50);                                              {$IFDEF PORTUGUES} // Número máximo de conexões no pool
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Número máximo de conexiones en el pool
-                                                                                                                       {$ELSE}// Maximum number of connections in the pool
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.PoolMaxItems, 50);                                              {$IFDEF PORTUGUES} // Número máximo de conexões no pool
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Número máximo de conexiones en el pool
+                                                                                                                          {$ELSE}// Maximum number of connections in the pool
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.PoolExpireTimeout, 90000);                                      {$IFDEF PORTUGUES} // Tempo de expiração para uma conexão inativa (ms)
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Tiempo de expiración para una conexión inactiva (ms)
-                                                                                                                       {$ELSE}// Expiration time for an idle connection (ms)
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.PoolExpireTimeout, 90000);                                      {$IFDEF PORTUGUES} // Tempo de expiração para uma conexão inativa (ms)
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Tiempo de expiración para una conexión inactiva (ms)
+                                                                                                                          {$ELSE}// Expiration time for an idle connection (ms)
+                                                                                                                          {$ENDIF}{$ENDIF}
 
-  ApplyDatabaseConfiguration(TPGConfigurationParameter.PoolCleanupTimeout, 30000);                                     {$IFDEF PORTUGUES} // Tempo de limpeza periódica do pool (ms)
-                                                                                                                       {$ELSE}{$IFDEF ESPANHOL} // Tiempo de limpieza periódica del pool (ms)
-                                                                                                                       {$ELSE}// Periodic cleanup time for the pool (ms)
-                                                                                                                       {$ENDIF}{$ENDIF}
+  ApplyDatabaseConfiguration(TMySQLConfigurationParameter.PoolCleanupTimeout, 30000);                                     {$IFDEF PORTUGUES} // Tempo de limpeza periódica do pool (ms)
+                                                                                                                          {$ELSE}{$IFDEF ESPANHOL} // Tiempo de limpieza periódica del pool (ms)
+                                                                                                                          {$ELSE}// Periodic cleanup time for the pool (ms)
+                                                                                                                          {$ENDIF}{$ENDIF}
   *)
+
 
   {$IFDEF PORTUGUES}
   /// <summary>
@@ -552,7 +570,7 @@ begin
   /// </summary>
   /// <remarks>
   ///   Este trecho configura o middleware do Horse, incluindo compressão de resposta,
-  ///   manipulação de JSON, tratamento de exceções e conexão com o banco de dados PostgreSQL.
+  ///   manipulação de JSON, tratamento de exceções e conexão com o banco de dados MySQL.
   /// </remarks>
   {$ELSE}
     {$IFDEF ESPANHOL}
@@ -561,7 +579,7 @@ begin
     /// </summary>
     /// <remarks>
     ///   Este fragmento configura el middleware de Horse, incluyendo compresión de respuesta,
-    ///   manejo de JSON, manejo de excepciones y conexión con la base de datos PostgreSQL.
+    ///   manejo de JSON, manejo de excepciones y conexión con la base de datos MySQL.
     /// </remarks>
     {$ELSE}
     /// <summary>
@@ -569,7 +587,7 @@ begin
     /// </summary>
     /// <remarks>
     ///   This snippet configures Horse middleware, including response compression,
-    ///   JSON handling, exception management, and connection to the PostgreSQL database.
+    ///   JSON handling, exception management, and connection to the MySQL database.
     /// </remarks>
     {$ENDIF}
   {$ENDIF}
@@ -589,9 +607,9 @@ begin
                               {$ELSE} // Middleware for exception handling
                               {$ENDIF}{$ENDIF}
 
-    .Use(HorseConnectionPG);  {$IFDEF PORTUGUES}// Middleware para gerenciar a conexão com o PostgreSQL
-                              {$ELSE}{$IFDEF ESPANHOL}// Middleware para gestionar la conexión con PostgreSQL
-                              {$ELSE} // Middleware to manage the PostgreSQL connection
+    .Use(HorseConnectionMySQL);  {$IFDEF PORTUGUES}// Middleware para gerenciar a conexão com o MySQL
+                              {$ELSE}{$IFDEF ESPANHOL}// Middleware para gestionar la conexión con MySQL
+                              {$ELSE} // Middleware to manage the MySQL connection
                               {$ENDIF}{$ENDIF}
 
 
@@ -600,7 +618,7 @@ begin
   ///   Define a rota "/produtos" que consulta e retorna dados no formato JSON.
   /// </summary>
   /// <remarks>
-  ///   Esta rota consulta a tabela "produtos" no banco de dados PostgreSQL e retorna os
+  ///   Esta rota consulta a tabela "produtos" no banco de dados MySQL e retorna os
   ///   dados no formato JSON, utilizando a conexão configurada pelo middleware.
   /// </remarks>
   {$ELSE}
@@ -609,7 +627,7 @@ begin
     ///   Define la ruta "/productos" que consulta y devuelve datos en formato JSON.
     /// </summary>
     /// <remarks>
-    ///   Esta ruta consulta la tabla "productos" en la base de datos PostgreSQL y devuelve los
+    ///   Esta ruta consulta la tabla "productos" en la base de datos MySQL y devuelve los
     ///   datos en formato JSON, utilizando la conexión configurada por el middleware.
     /// </remarks>
     {$ELSE}
@@ -617,7 +635,7 @@ begin
     ///   Defines the "/produtos" route that queries and returns data in JSON format.
     /// </summary>
     /// <remarks>
-    ///   This route queries the "produtos" table in the PostgreSQL database and returns the
+    ///   This route queries the "produtos" table in the MySQL database and returns the
     ///   data in JSON format, using the connection configured by the middleware.
     /// </remarks>
     {$ENDIF}
@@ -635,10 +653,10 @@ begin
         {$ELSE}{$IFDEF ESPANHOL}{ Configura la consulta SQL }
         {$ELSE}{ Configures the SQL query }
         {$ENDIF}{$ENDIF}
-        FDQuery.Connection := GetConnection(TConnectionType.PG);   {$IFDEF PORTUGUES}// Obtém a conexão do middleware
-                                                                    {$ELSE}{$IFDEF ESPANHOL}// Obtiene la conexión del middleware
-                                                                    {$ELSE} // Gets the connection from the middleware
-                                                                    {$ENDIF}{$ENDIF}
+        FDQuery.Connection := GetConnection(TConnectionType.MySQL);   {$IFDEF PORTUGUES}// Obtém a conexão do middleware
+                                                                      {$ELSE}{$IFDEF ESPANHOL}// Obtiene la conexión del middleware
+                                                                      {$ELSE} // Gets the connection from the middleware
+                                                                      {$ENDIF}{$ENDIF}
         FDQuery.SQL.Text := 'SELECT * FROM produtos';
         FDQuery.Open;
 
@@ -675,7 +693,7 @@ begin
   ///   Define a rota "/produto" que consulta e retorna dados no formato JSON.
   /// </summary>
   /// <remarks>
-  ///   Esta rota consulta a tabela "produtos" no banco de dados PostgreSQL e retorna os
+  ///   Esta rota consulta a tabela "produtos" no banco de dados MySQL e retorna os
   ///   dados no formato JSON, utilizando a conexão configurada pelo middleware.
   ///   A conexão é obtida diretamente com a função <c>GetQuery</c>, que simplifica
   ///   a criação e gerenciamento da consulta no FireDAC.
@@ -686,7 +704,7 @@ begin
     ///   Define la ruta "/producto" que consulta y devuelve datos en formato JSON.
     /// </summary>
     /// <remarks>
-    ///   Esta ruta consulta la tabla "productos" en la base de datos PostgreSQL y devuelve los
+    ///   Esta ruta consulta la tabla "productos" en la base de datos MySQL y devuelve los
     ///   datos en formato JSON, utilizando la conexión configurada por el middleware.
     ///   La conexión se obtiene directamente con la función <c>GetQuery</c>, que simplifica
     ///   la creación y gestión de la consulta en FireDAC.
@@ -696,7 +714,7 @@ begin
     ///   Defines the "/produto" route that queries and returns data in JSON format.
     /// </summary>
     /// <remarks>
-    ///   This route queries the "produtos" table in the PostgreSQL database and returns the
+    ///   This route queries the "produtos" table in the MySQL database and returns the
     ///   data in JSON format, using the connection configured by the middleware.
     ///   The connection is obtained directly with the <c>GetQuery</c> function, which
     ///   simplifies the creation and management of the FireDAC query.
@@ -720,10 +738,10 @@ begin
                                       {$ELSE} // Database name, if specified
                                       {$ENDIF}{$ENDIF}
 
-      FDQuery := GetQuery(TConnectionType.PG);   {$IFDEF PORTUGUES}// Obtém a conexão do middleware com a função GetQuery
-                                                {$ELSE}{$IFDEF ESPANHOL}// Obtiene la conexión del middleware con la función GetQuery
-                                                {$ELSE} // Gets the connection from the middleware with GetQuery function
-                                                {$ENDIF}{$ENDIF}
+      FDQuery := GetQuery(TConnectionType.MySQL);   {$IFDEF PORTUGUES}// Obtém a conexão do middleware com a função GetQuery
+                                                   {$ELSE}{$IFDEF ESPANHOL}// Obtiene la conexión del middleware con la función GetQuery
+                                                   {$ELSE} // Gets the connection from the middleware with GetQuery function
+                                                   {$ENDIF}{$ENDIF}
       try
         {$IFDEF PORTUGUES}{ Configura a consulta SQL }
         {$ELSE}{$IFDEF ESPANHOL}{ Configura la consulta SQL }
@@ -787,4 +805,3 @@ begin
   THorse.Listen(9000);
 
 end.
-

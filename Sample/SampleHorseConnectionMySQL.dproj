@@ -3,7 +3,7 @@
         <ProjectGuid>{67C44171-9FFD-47F3-A590-B5E9D785398A}</ProjectGuid>
         <ProjectVersion>19.5</ProjectVersion>
         <FrameworkType>None</FrameworkType>
-        <MainSource>SampleHorseConnectionPG.dpr</MainSource>
+        <MainSource>SampleHorseConnectionMySQL.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
@@ -71,7 +71,7 @@
         <DCC_K>false</DCC_K>
         <DCC_UsePackage>RESTComponents;FireDACIBDriver;FireDACCommon;RESTBackendComponents;soapserver;CloudService;FireDACCommonDriver;inet;FireDAC;FireDACSqliteDriver;soaprtl;soapmidas;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <SanitizedProjectName>SampleHorseConnectionPG</SanitizedProjectName>
+        <SanitizedProjectName>SampleHorseConnectionMySQL</SanitizedProjectName>
         <DCC_UnitSearchPath>..\src;..\src\Utils;..\src\Utils\ConfigurationParameter;..\src\Configuration\PG;..\src\Configuration\ADS;..\src\Configuration\SQLite;..\src\Configuration\FB;..\src\Configuration\MySQL;..\src\Connection\;..\modules\horse\src;modules\.dcp;modules\.dcu;modules;modules\horse\src;modules\horse-compression\src;modules\jhonson\src;modules\handle-exception\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -179,7 +179,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">SampleHorseConnectionPG.dpr</Source>
+                    <Source Name="MainSource">SampleHorseConnectionMySQL.dpr</Source>
                 </Source>
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
@@ -208,7 +208,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\SampleHorseConnectionPG.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="Win32\Debug\SampleHorseConnectionMySQL.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="Win64\Debug\SampleHorseConnectionMySQL.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="Win64\Debug\SampleHorseConnectionMySQL.rsm" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>

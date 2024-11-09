@@ -114,15 +114,30 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="src\Horse.Connection.pas"/>
-        <DCCReference Include="src\Uteis\DBConfigParameters.pas"/>
-        <DCCReference Include="src\Uteis\ProdFuncAnonymous.pas"/>
-        <DCCReference Include="src\SQLite\DBConfigManagerSQLite.pas"/>
-        <DCCReference Include="src\SQLite\DBConnectionManagerSQLite.pas"/>
-        <DCCReference Include="src\PG\DBConfigManagerPG.pas"/>
-        <DCCReference Include="src\PG\DBConnectionManagerPG.pas"/>
-        <DCCReference Include="src\ADS\DBConfigManagerADS.pas"/>
-        <DCCReference Include="src\ADS\DBConnectionManagerADS.pas"/>
-        <DCCReference Include="src\Uteis\DBConfigTypes.pas"/>
+        <DCCReference Include="src\Utils\EnumsHelpersUtils.pas"/>
+        <DCCReference Include="src\Utils\MethodReferencesUtils.pas"/>
+        <DCCReference Include="src\Utils\SystemUtils.pas"/>
+        <DCCReference Include="src\Utils\ConfigurationParameter\ADSDataBaseConfigurationParameter.pas"/>
+        <DCCReference Include="src\Utils\ConfigurationParameter\FBDataBaseConfigurationParameter.pas"/>
+        <DCCReference Include="src\Utils\ConfigurationParameter\MySQLDataBaseConfigurationParameter.pas"/>
+        <DCCReference Include="src\Utils\ConfigurationParameter\PGDataBaseConfigurationParameter.pas"/>
+        <DCCReference Include="src\Utils\ConfigurationParameter\SQLiteDataBaseConfigurationParameter.pas"/>
+        <DCCReference Include="src\Connection\Horse.Connection.ADS.pas"/>
+        <DCCReference Include="src\Connection\Horse.Connection.FB.pas"/>
+        <DCCReference Include="src\Connection\Horse.Connection.MySQL.pas"/>
+        <DCCReference Include="src\Connection\Horse.Connection.PG.pas"/>
+        <DCCReference Include="src\Connection\Horse.Connection.SQLite.pas"/>
+        <DCCReference Include="src\Configuration\ADS\ADSDatabaseConfigurationManager.pas"/>
+        <DCCReference Include="src\Configuration\ADS\ADSDataBaseConnectionManager.pas"/>
+        <DCCReference Include="src\Configuration\FB\FBDatabaseConfigurationManager.pas"/>
+        <DCCReference Include="src\Configuration\FB\FBDataBaseConnectionManager.pas"/>
+        <DCCReference Include="src\Configuration\MySQL\MySQLDatabaseConfigurationManager.pas"/>
+        <DCCReference Include="src\Configuration\MySQL\MySQLDataBaseConnectionManager.pas"/>
+        <DCCReference Include="src\Configuration\PG\PGDatabaseConfigurationManager.pas"/>
+        <DCCReference Include="src\Configuration\PG\PGDataBaseConnectionManager.pas"/>
+        <DCCReference Include="src\Configuration\SQLite\SQLiteDatabaseConfigurationManager.pas"/>
+        <DCCReference Include="src\Configuration\SQLite\SQLiteDataBaseConnectionManager.pas"/>
+        <DCCReference Include="src\Utils\CharacterSetUtils.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -149,6 +164,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule"/>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
@@ -159,17 +175,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule"/>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\HorseConnection.dll" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>HorseConnection.dll</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
+                <DeployFile LocalName="Win32\Debug\HorseConnection.dll" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
@@ -986,6 +998,7 @@
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimARM64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Linux64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
