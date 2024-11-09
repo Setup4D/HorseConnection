@@ -1,14 +1,14 @@
-unit DBConnectionManagerPG;
+unit FBDatabaseConfigurationManager;
 
 interface
 
 uses
-  DBConfigTypes,
+  EnumsHelpersUtils,
 
   Data.DB,
 
-  FireDAC.Phys.PG,
-  FireDAC.Phys.PGDef,
+  FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef,
 
   FireDAC.DatS,
   FireDAC.DApt,
@@ -33,86 +33,86 @@ uses
   System.StrUtils,
   System.Generics.Collections;
 
-function GetConnection(const AConfig: TDatabaseConfig;
+function GetConnection(const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix : string): TFDConnection; overload;
 
-function GetConnection(const AConfig: TDatabaseConfig;
+function GetConnection(const AConfiguration: TFBConfiguration;
   const APrefix : string): TFDConnection; overload;
 
-function GetConnection(const AConfig: TDatabaseConfig): TFDConnection; overload;
+function GetConnection(const AConfiguration: TFBConfiguration): TFDConnection; overload;
 
 implementation
 
 uses
-  DBConfigManagerPG;
+  FBDataBaseConnectionManager;
 
 var
   FConnectionPool: TDictionary<string, TFDConnection>;
   FDConnection: TFDConnection;
   FDGUIxWaitCursor: TFDGUIxWaitCursor;
-  FDDriver: TFDPhysPgDriverLink;
+  FDDriver: TFDPhysFBDriverLink;
 
 
-procedure SetupConnection(const AConfig: TDatabaseConfig;
+procedure SetupConnection(const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix: string; var AConnection: TFDConnection);
 begin
-  DBConfigManagerPG.Initialize(AConfig, ADatabase, APrefix);
+  Initialize(AConfiguration, ADatabase, APrefix);
 
-  AConnection.ConnectionDefName := DBConfigManagerPG.GetConnectionDef(APrefix);
+  AConnection.ConnectionDefName := GetConnectionDef(APrefix);
   AConnection.LoginPrompt := False;
 
   FDGUIxWaitCursor := TFDGUIxWaitCursor.Create(AConnection);
   FDGUIxWaitCursor.Provider := 'Console';
 
-  FDDriver := TFDPhysPgDriverLink.Create(AConnection);
+  FDDriver := TFDPhysFBDriverLink.Create(AConnection);
   AConnection.Connected := True;
 end;
 
-function DefaultConnection (const AConfig: TDatabaseConfig;
+function DefaultConnection (const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix : string): TFDConnection;
 begin
   if not Assigned(FDConnection) then
   begin
     FDConnection := TFDConnection.Create(nil);
-    SetupConnection(AConfig, ADatabase, APrefix, FDConnection);
+    SetupConnection(AConfiguration, ADatabase, APrefix, FDConnection);
   end;
 
   Result := FDConnection;
 end;
 
-function CustomConnection  (const AConfig: TDatabaseConfig;
+function CustomConnection  (const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix : string): TFDConnection;
 begin
   if FConnectionPool.TryGetValue(APrefix, Result) then
     Exit;
 
   Result := TFDConnection.Create(nil);
-  SetupConnection(AConfig, ADatabase, APrefix, Result);
+  SetupConnection(AConfiguration, ADatabase, APrefix, Result);
 
   FConnectionPool.Add(APrefix, Result);
   FConnectionPool.TrimExcess;
 end;
 
 
-function GetConnection(const AConfig: TDatabaseConfig;
+function GetConnection(const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix : string): TFDConnection;
 
 begin
   case APrefix.Trim.IsEmpty of
-    True  : Result := DefaultConnection(AConfig, ADatabase, APrefix);
-    False : Result := CustomConnection(AConfig, ADatabase, APrefix);
+    True  : Result := DefaultConnection(AConfiguration, ADatabase, APrefix);
+    False : Result := CustomConnection(AConfiguration, ADatabase, APrefix);
   end;
 end;
 
-function GetConnection(const AConfig: TDatabaseConfig;
+function GetConnection(const AConfiguration: TFBConfiguration;
   const APrefix : string): TFDConnection;
 begin
-  Result := GetConnection(AConfig, EmptyStr, APrefix);
+  Result := GetConnection(AConfiguration, EmptyStr, APrefix);
 end;
 
-function GetConnection(const AConfig: TDatabaseConfig): TFDConnection;
+function GetConnection(const AConfiguration: TFBConfiguration): TFDConnection;
 begin
-  Result := GetConnection(AConfig, EmptyStr);
+  Result := GetConnection(AConfiguration, EmptyStr);
 end;
 
 initialization
@@ -125,3 +125,5 @@ finalization
   FConnectionPool.DisposeOf;
 
 end.
+
+
