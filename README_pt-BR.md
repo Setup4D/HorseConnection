@@ -1,75 +1,68 @@
-# HorseConnection
+# 🌐 HorseConnection
 
-Clique no idioma que deseja para ler este README: 🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md), 🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md), ou 🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md).
+**Clique no idioma que deseja para ler este README:**
+🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md) |
+🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md) |
+🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md)
 
-> **Nota:** Você pode escolher o idioma em que prefere ler este README utilizando as bandeiras acima. Clique no link correspondente ao idioma desejado.
+**HorseConnection** é um middleware desenvolvido para o framework **Horse**, com o objetivo de simplificar o gerenciamento de conexões com bancos de dados em aplicações **Delphi**. Ele utiliza o gerenciador de pacotes **Boss** para instalar e atualizar dependências automaticamente, proporcionando uma integração rápida e otimizada. Ao oferecer um middleware específico para cada tipo de banco de dados suportado, o **HorseConnection** elimina a necessidade de configurações manuais repetitivas, permitindo que cada endpoint do **Horse** se conecte ao banco de dados de forma automática e eficiente.
 
-**HorseConnection** é um middleware para o framework **Horse** que facilita a conexão com bancos de dados em aplicações desenvolvidas em Delphi. Utilizando o **Boss** como gerenciador de pacotes, este projeto permite uma integração rápida e eficiente, simplificando a configuração de conexão.
+## 🎯 Sobre o Projeto
 
-HorseConnection facilita o uso de diferentes bancos de dados, fornecendo um middleware específico para cada tipo de banco, evitando a necessidade de reconfigurações manuais. Abaixo estão explicações específicas sobre as conexões de bancos disponíveis.
+O **HorseConnection** foi criado para atuar como um middleware de integração com o **Horse** — um framework HTTP REST para Delphi — oferecendo suporte a múltiplos bancos de dados de maneira unificada e eficiente. Esse middleware permite que as conexões de banco de dados sejam configuradas uma única vez, eliminando a necessidade de ajustes manuais em cada endpoint.
 
-### Diferenças de Conexões
+## 🎯 Objetivo do Middleware
 
-As diferenças entre as conexões no código ficam claras na forma como obtemos as conexões ou as queries, com a função **GetConnection(TConnectionType)** ou **GetQuery(TConnectionType)**. Com essas funções, é possível especificar para qual banco de dados estamos configurando a conexão, seja **ADS**, **Firebird**, **MySQL**, **PostgreSQL** ou **SQLite**. Isso garante maior flexibilidade e simplicidade ao lidar com diferentes bancos de dados dentro do mesmo projeto, utilizando o **Horse.Connection**.
+O **HorseConnection** tem como objetivo encapsular toda a lógica de conexão com bancos de dados, proporcionando uma estrutura centralizada que:
 
-### Utilização de Diretivas para Idiomas
+🔹 Simplifica o uso de conexões com bancos de dados no **FireDAC**;
+🔹 Reduz a duplicação de código ao evitar configurações repetitivas em cada requisição;
+🔹 Previne vazamentos de conexão em aplicações de alta demanda, garantindo que as conexões sejam gerenciadas de forma eficiente e reutilizável.
 
-No **HorseConnection**, é possível modificar o idioma das mensagens de configuração e retorno utilizando diretivas de compilação. Por padrão, o idioma utilizado é o **Inglês**. No entanto, se preferir, você pode definir a diretiva `PORTUGUES` ou `ESPANHOL` para que as mensagens sejam exibidas nesses respectivos idiomas.
+## 🚀 Funcionalidades
 
-Para utilizar um idioma diferente do padrão, adicione a diretiva desejada ao seu projeto, conforme o exemplo abaixo:
-- Para Português:
-```sh
- {$DEFINE PORTUGUES}
-```
-- Para Espanhol:
-```sh
- {$DEFINE ESPANHOL}
-```
+- **Conexão centralizada e automatizada** com diversos bancos de dados, incluindo PostgreSQL, Firebird, MySQL, SQLite e Advantage Database Server, facilitando a integração com o **Horse**;
+- **Instalação e gerenciamento de dependências** simplificados via **Boss**, permitindo uma configuração de middleware rápida e descomplicada;
+- **Suporte a múltiplas configurações de conexão**, garantindo que cada banco de dados possa ser configurado conforme suas especificidades, sem a necessidade de ajustes manuais em cada endpoint.
 
-Caso nenhuma diretiva seja definida, o idioma padrão será o Inglês.
+## 🧩 Requisitos
 
-## Sobre o Projeto
+**🔹 Delphi** versão 10.2 ou superior.
+**🔹 Boss** como gerenciador de pacotes para Delphi. [Saiba mais sobre o Boss](https://github.com/HashLoad/boss).
+**🔹 Horse Framework** para criar aplicações REST em Delphi:
 
-Este middleware foi desenvolvido para ser utilizado junto ao **Horse**, um framework HTTP REST para Delphi, permitindo a criação de APIs REST de maneira simples e intuitiva. Com o **HorseConnection**, é possível gerenciar conexões com diferentes bancos de dados sem a necessidade de configurar manualmente cada um deles em cada endpoint.
-
-## Objetivo do Middleware
-
-O objetivo do **HorseConnection** é encapsular a lógica de conexão com bancos de dados, promovendo uma gestão centralizada e reutilizável das conexões **FireDAC**, reduzindo código repetitivo e prevenindo vazamentos de conexões em aplicações que fazem uso intensivo de bancos de dados.
-
-## Funcionalidades
-
-- Facilita a conexão com bancos de dados em projetos Delphi.
-- Integração simples com o framework Horse.
-- Utiliza o Boss para gerenciar dependências e facilitar a instalação.
-
-## Requisitos
-
-- **Delphi** 10.2 ou superior.
-- Boss como gerenciador de pacotes. Para obter mais informações sobre instalação e documentação do Boss, visite [este link](https://github.com/HashLoad/boss).
-- **Horse** framework. Para instalar o Horse, você pode utilizar o Boss:
   ```sh
   boss install horse
   ```
 
-## Instalação
+## 🛠️ Instalação
 
-Para instalar o **HorseConnection**, você pode utilizar o **Boss**, o gerenciador de pacotes para Delphi:
+Para instalar o **HorseConnection** e suas dependências, execute o seguinte comando com o **Boss**:
 
 ```sh
 boss install https://github.com/ricksolucoes/HorseConnection
 ```
 
-## Como Usar
+A## ⚙️ Como Usar
 
-### Configurando o Middleware
+### 🌐 Utilização de Diretivas de Idioma
 
-Para configurar o middleware específico para o banco de dados desejado, você deve importar as unidades necessárias e definir o middleware correspondente. Abaixo estão as configurações específicas para cada um dos bancos suportados:
+Para adaptar o idioma das mensagens de configuração e retorno, o **HorseConnection** utiliza diretivas de compilação, permitindo selecionar entre **Inglês** (padrão), **Português** ou **Espanhol**. Para definir o idioma desejado, adicione uma das diretivas ao projeto:
 
-- **PostgreSQL**: Utilizando o middleware `HorseConnectionPG`, permite gerenciar uma conexão com um banco de dados PostgreSQL.
-- **Advantage Database Server (ADS)**: Utilize `HorseConnectionADS` para integrar uma conexão ao banco de dados ADS.
-- **Firebird**: Com `HorseConnectionFB`, é possível conectar-se a bancos de dados Firebird.
-- **MySQL**: Para conectar com o banco de dados MySQL, use `HorseConnectionMySQL`.
-- **SQLite**: Utilize `HorseConnectionSQLite` para gerenciar conexões com um banco de dados SQLite.
+- Para **Português**:
+  ```delphi
+  {$DEFINE PORTUGUES}
+  ```
+- Para **Espanhol**:
+  ```delphi
+  {$DEFINE ESPANHOL}
+  ```
+
+---
+
+### 🔧 Configurando o Middleware
+
+Importe as unidades e defina o middleware para o banco de dados desejado:
 
 ```delphi
 THorse
@@ -84,13 +77,17 @@ THorse
 *)
 ```
 
-### Configurando o Banco de Dados
+---
+
+### 🏗️ Configuração do Banco de Dados
 
 Cada banco de dados possui parâmetros específicos que podem ser configurados para melhor atender às necessidades da sua aplicação. Abaixo estão os detalhes de configuração para cada banco de dados suportado.
 
-#### Configurando ADS
+---
 
-Aqui está um exemplo de configuração para o banco de dados ADS usando a função `ApplyDatabaseConfiguration`:
+#### ⚙️ Configuração do ADS
+
+Exemplo de configuração para o banco de dados **ADS** usando a função `ApplyDatabaseConfiguration`:
 
 ```delphi
 ApplyDatabaseConfiguration(TADSConfigurationParameter.UserName, 'admin');
@@ -109,24 +106,26 @@ ApplyDatabaseConfiguration(TADSConfigurationParameter.Locking, TADSLocking.Compa
 ApplyDatabaseConfiguration(TADSConfigurationParameter.VendorLib, 'path/to/vendor/lib/ace32.dll');
 ```
 
-- **UserName**: Nome de usuário para autenticação no banco de dados ADS.
-- **Password**: Senha de acesso ao banco de dados ADS.
-- **Database**: Caminho completo ou nome do banco de dados no servidor ADS.
-- **ShowDelete**: Habilita a visualização de registros excluídos.
-- **Pooled**: Define se a conexão será gerida como um pool de conexões.
-- **PoolMaxItems**: Número máximo de conexões permitidas no pool.
-- **PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
-- **PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
-- **CharacterSet**: Define o conjunto de caracteres para a conexão, como "utf8" ou "ANSI".
-- **ServerType**: Define o tipo de servidor onde o banco de dados ADS está hospedado.
-- **Protocol**: Especifica o protocolo de comunicação usado para se conectar ao servidor ADS.
-- **TableType**: Define o formato das tabelas usadas no banco de dados ADS.
-- **Locking**: Define o tipo de bloqueio de dados utilizado no ADS.
-- **VendorLib**: Caminho para a biblioteca (DLL) do fornecedor necessária para o FireDAC se comunicar com o ADS.
+- **👤 UserName**: Nome de usuário para autenticação no banco de dados ADS.
+- **🔑 Password**: Senha de acesso ao banco de dados ADS.
+- **📂 Database**: Caminho completo ou nome do banco de dados no servidor ADS.
+- **👀 ShowDelete**: Habilita a visualização de registros excluídos.
+- **♻️ Pooled**: Indica se a conexão será gerida como um pool de conexões.
+- **📊 PoolMaxItems**: Número máximo de conexões permitidas no pool.
+- **⏳ PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
+- **🧹 PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
+- **🔤 CharacterSet**: Define o conjunto de caracteres para a conexão, como "UTF-8" ou "ANSI".
+- **💻 ServerType**: Tipo de servidor onde o banco de dados ADS está hospedado.
+- **🔌 Protocol**: Protocolo de comunicação usado para conectar-se ao servidor ADS.
+- **📋 TableType**: Formato das tabelas usadas no banco de dados ADS.
+- **🔒 Locking**: Tipo de bloqueio de dados utilizado no ADS.
+- **📁 VendorLib**: Caminho para a biblioteca (DLL) do fornecedor necessária para que o FireDAC se comunique com o ADS.
 
-### Configurando Firebird
+---
 
-Aqui está um exemplo de configuração para o banco de dados Firebird usando a função `ApplyDatabaseConfiguration`:
+### 🔄 Configuração do Firebird
+
+Exemplo de configuração para o banco de dados **Firebird** usando a função `ApplyDatabaseConfiguration`:
 
 ```delphi
 ApplyDatabaseConfiguration(TFBConfigurationParameter.Database, './db.fdb');
@@ -143,22 +142,24 @@ ApplyDatabaseConfiguration(TFBConfigurationParameter.PoolExpireTimeout, 90000);
 ApplyDatabaseConfiguration(TFBConfigurationParameter.PoolCleanupTimeout, 30000);
 ```
 
-- **UserName**: Nome de usuário para autenticação no banco de dados Firebird.
-- **Password**: Senha de acesso ao banco de dados Firebird.
-- **Database**: Caminho completo ou nome do banco de dados Firebird.
-- **Protocol**: Protocolo de comunicação com o servidor Firebird.
-- **Server**: Endereço do servidor onde o banco de dados Firebird está hospedado.
-- **Port**: Porta de conexão para o servidor Firebird.
-- **CharacterSet**: Define o conjunto de caracteres para a conexão.
-- **OpenMode**: Define o modo de abertura do banco de dados.
-- **Pooled**: Define se a conexão será gerida como um pool de conexões.
-- **PoolMaxItems**: Número máximo de conexões permitidas no pool.
-- **PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
-- **PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
+- **👤 UserName**: Nome de usuário para autenticação no banco de dados Firebird.
+- **🔑 Password**: Senha de acesso ao banco de dados Firebird.
+- **📂 Database**: Caminho completo ou nome do banco de dados Firebird.
+- **🔌 Protocol**: Protocolo de comunicação com o servidor Firebird.
+- **🌐 Server**: Endereço do servidor onde o banco de dados Firebird está hospedado.
+- **🔌 Port**: Porta de conexão para o servidor Firebird.
+- **🔤 CharacterSet**: Define o conjunto de caracteres para a conexão.
+- **🗄 OpenMode**: Modo de abertura do banco de dados.
+- **♻️ Pooled**: Define se a conexão será gerida como um pool de conexões.
+- **📊 PoolMaxItems**: Número máximo de conexões permitidas no pool.
+- **⏳ PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
+- **🧹 PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
 
-### Configurando MySQL
+---
 
-Aqui está um exemplo de configuração para o banco de dados MySQL usando a função `ApplyDatabaseConfiguration`:
+### 🔄 Configuração do Banco de Dados MySQL
+
+Aqui está um exemplo de configuração para o banco de dados **MySQL** usando a função `ApplyDatabaseConfiguration`:
 
 ```delphi
 ApplyDatabaseConfiguration(TMySQLConfigurationParameter.UserName, 'root');
@@ -172,19 +173,21 @@ ApplyDatabaseConfiguration(TMySQLConfigurationParameter.PoolExpireTimeout, 90000
 ApplyDatabaseConfiguration(TMySQLConfigurationParameter.PoolCleanupTimeout, 30000);
 ```
 
-- **UserName**: Nome de usuário para autenticação no banco de dados MySQL.
-- **Password**: Senha de acesso ao banco de dados MySQL.
-- **Database**: Nome do banco de dados MySQL.
-- **Server**: Endereço do servidor MySQL.
-- **Port**: Porta de conexão do MySQL.
-- **Pooled**: Define se a conexão será gerida como um pool de conexões.
-- **PoolMaxItems**: Número máximo de conexões permitidas no pool.
-- **PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
-- **PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
+- **👤 UserName**: Nome de usuário para autenticação no banco de dados MySQL.
+- **🔑 Password**: Senha de acesso ao banco de dados MySQL.
+- **💾 Database**: Nome do banco de dados MySQL.
+- **🌐 Server**: Endereço do servidor MySQL.
+- **🔌 Port**: Porta de conexão do MySQL.
+- **♻️ Pooled**: Define se a conexão será gerida como um pool de conexões.
+- **📊 PoolMaxItems**: Número máximo de conexões permitidas no pool.
+- **⏳ PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
+- **🧹 PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
 
-### Configurando PostgreSQL
+---
 
-Aqui está um exemplo de configuração para o banco de dados PostgreSQL usando a função `ApplyDatabaseConfiguration`:
+### 🔄 Configuração do Banco de Dados PostgreSQL
+
+Aqui está um exemplo de configuração para o banco de dados **PostgreSQL** usando a função `ApplyDatabaseConfiguration`:
 
 ```delphi
 ApplyDatabaseConfiguration(TPGConfigurationParameter.UserName, 'postgres');
@@ -198,19 +201,21 @@ ApplyDatabaseConfiguration(TPGConfigurationParameter.PoolExpireTimeout, 90000);
 ApplyDatabaseConfiguration(TPGConfigurationParameter.PoolCleanupTimeout, 30000);
 ```
 
-- **UserName**: Nome de usuário para autenticação no banco de dados PostgreSQL.
-- **Password**: Senha de acesso ao banco de dados PostgreSQL.
-- **Database**: Nome do banco de dados PostgreSQL.
-- **Server**: Endereço do servidor PostgreSQL.
-- **Port**: Porta de conexão do PostgreSQL.
-- **Pooled**: Define se a conexão será gerida como um pool de conexões.
-- **PoolMaxItems**: Número máximo de conexões permitidas no pool.
-- **PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
-- **PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
+- **👤 UserName**: Nome de usuário para autenticação no banco de dados PostgreSQL.
+- **🔑 Password**: Senha de acesso ao banco de dados PostgreSQL.
+- **💾 Database**: Nome do banco de dados PostgreSQL.
+- **🌐 Server**: Endereço do servidor PostgreSQL.
+- **🔌 Port**: Porta de conexão do PostgreSQL.
+- **♻️ Pooled**: Define se a conexão será gerida como um pool de conexões.
+- **📊 PoolMaxItems**: Número máximo de conexões permitidas no pool.
+- **⏳ PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
+- **🧹 PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
 
-### Configurando SQLite
+---
 
-Aqui está um exemplo de configuração para o banco de dados SQLite usando a função `ApplyDatabaseConfiguration`:
+### 🔄 Configuração do Banco de Dados SQLite
+
+Aqui está um exemplo de configuração para o banco de dados **SQLite** usando a função `ApplyDatabaseConfiguration`:
 
 ```delphi
 ApplyDatabaseConfiguration(TSQLiteConfigurationParameter.Database, './my_database.sqlite');
@@ -220,29 +225,35 @@ ApplyDatabaseConfiguration(TSQLiteConfigurationParameter.PoolExpireTimeout, 9000
 ApplyDatabaseConfiguration(TSQLiteConfigurationParameter.PoolCleanupTimeout, 30000);
 ```
 
-- **Database**: Caminho do arquivo do banco de dados SQLite.
-- **Pooled**: Define se a conexão será gerida como um pool de conexões.
-- **PoolMaxItems**: Número máximo de conexões permitidas no pool.
-- **PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
-- **PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
+- **💾 Database**: Caminho do arquivo do banco de dados SQLite.
+- **♻️ Pooled**: Define se a conexão será gerida como um pool de conexões.
+- **📊 PoolMaxItems**: Número máximo de conexões permitidas no pool.
+- **⏳ PoolExpireTimeout**: Tempo em segundos para que uma conexão inativa expire.
+- **🧹 PoolCleanupTimeout**: Tempo em segundos para a limpeza periódica das conexões expiradas no pool.
 
-## Configurar o Banco de Dados
+---
 
-O método `SetConnectionPrefix` é utilizado para definir um prefixo específico para o pool de conexão, caso seja necessário. Isso é útil quando trabalhamos com múltiplos bancos de dados e queremos evitar conflitos entre conexões, garantindo que cada conjunto de conexões seja identificado de forma única.
+## ⚙️ Configuração do Banco de Dados
+
+O método `SetConnectionPrefix` é utilizado para definir um prefixo específico para o pool de conexão, caso necessário. Esse prefixo é especialmente útil ao trabalhar com múltiplos bancos de dados, evitando conflitos entre conexões e garantindo que cada conjunto de conexões seja identificado de forma única. 
 
 ```delphi
 SetConnectionPrefix(EmptyStr);
 ```
 
-O método `SetDatabase` é utilizado para definir o caminho ou nome do banco de dados, se necessário. Deve ser informado quando o banco de dados específico precisar ser configurado. Isso é útil quando trabalhamos com múltiplos bancos de dados e queremos evitar conflitos, garantindo acesso ao banco correto.
+- **🔖 Prefixo de Conexão**: Define um prefixo para distinguir as conexões no pool, essencial para projetos com múltiplas bases de dados.
+
+O método `SetDatabase` é empregado para especificar o caminho ou o nome do banco de dados, caso necessário. Esse ajuste é fundamental ao trabalhar com múltiplos bancos de dados, assegurando que cada conexão acesse o banco correto e evitando conflitos.
 
 ```delphi
 SetDatabase(EmptyStr);
 ```
 
-## Obtendo a Conexão
+- **📂 Caminho ou Nome do Banco**: Configura o banco de dados a ser acessado, garantindo a conexão correta em ambientes com várias bases de dados.
 
-Este exemplo demonstra como obter a conexão com o banco de dados configurado pelo middleware utilizando o enumerado `TConnectionType` para especificar qual tipo de conexão será utilizada. O enumerado `TConnectionType` permite definir o tipo de banco de dados, como **ADS**, **FB**, **MySQL**, **PG**, ou **SQLite**, garantindo que a conexão seja feita corretamente de acordo com o banco selecionado. O exemplo abaixo mostra como obter a conexão usando `GetConnection(TConnectionType.PG)`, onde `PG` representa a escolha do banco PostgreSQL. Essa abordagem facilita a integração e manutenção de diferentes tipos de bancos de dados no projeto.
+## 🛠️ Obtendo a Conexão
+
+Este exemplo demonstra como obter a conexão com o banco de dados configurado pelo middleware, utilizando o enumerado `TConnectionType` para especificar o tipo de conexão desejada. O enumerado `TConnectionType` permite definir o banco de dados, como **ADS**, **FB**, **MySQL**, **PG** ou **SQLite**, garantindo que a conexão seja estabelecida corretamente de acordo com o banco selecionado. No exemplo abaixo, a conexão é obtida com `GetConnection(TConnectionType.PG)`, onde `PG` representa o banco PostgreSQL, facilitando a integração e manutenção de diferentes tipos de bancos de dados no projeto.
 
 ```delphi
 THorse.Get('/produtos',
@@ -282,9 +293,9 @@ THorse.Get('/produtos',
 );
 ```
 
-## Obtendo a Query
+## 🔍 Obtendo a Query
 
-Este exemplo demonstra como obter a Query diretamente utilizando o middleware configurado. Utiliza-se o enumerado `TConnectionType` para especificar o banco de dados desejado, como **ADS**, **FB**, **MySQL**, **PG**, ou **SQLite**, facilitando a manutenção e integração de diferentes bancos no projeto. A função `GetQuery` é utilizada para obter a instância do `TFDQuery` já configurada com a conexão apropriada, de acordo com o banco de dados selecionado no `TConnectionType`. Isso garante que a query seja conectada corretamente ao banco especificado, simplificando a implementação e manutenção do projeto.
+Este exemplo mostra como obter a Query diretamente utilizando o middleware configurado. Utiliza-se o enumerado `TConnectionType` para especificar o banco de dados desejado, como **ADS**, **FB**, **MySQL**, **PG** ou **SQLite**, facilitando a manutenção e integração de diferentes bancos no projeto. A função `GetQuery` é utilizada para obter a instância do `TFDQuery` já configurada com a conexão apropriada de acordo com o banco de dados selecionado. Isso assegura que a query seja conectada corretamente ao banco especificado, simplificando a implementação e manutenção do projeto.
 
 ```delphi
 THorse.Get('/produto',
@@ -323,16 +334,20 @@ THorse.Get('/produto',
 );
 ```
 
-## Explicação do Código Fonte
+### 🔀 Diferenças entre Conexões
+
+As diferenças entre as conexões no código são evidentes ao usar as funções **GetConnection(TConnectionType)** ou **GetQuery(TConnectionType)**. Essas funções permitem especificar o banco de dados a ser configurado, seja **ADS**, **Firebird**, **MySQL**, **PostgreSQL** ou **SQLite**, garantindo maior flexibilidade e simplicidade ao lidar com diferentes bancos em um único projeto.
+
+## 🧩 Explicação do Código Fonte
 
 ### 🗂️ Unit Horse.Connection
 
-A **unit Horse.Connection** fornece funções para gerenciar conexões com bancos de dados utilizando **FireDAC** no middleware **Horse**. O **HorseConnection** permite a liberação de conexões FireDAC ou instâncias de TFDQuery, centralizando a lógica de conexão e facilitando o gerenciamento eficiente das conexões dentro das rotas do middleware.
+A **unit Horse.Connection** fornece funções para gerenciar conexões com bancos de dados utilizando **FireDAC** no middleware **Horse**. O **HorseConnection** permite a liberação de conexões `TFDConnection` ou instâncias de `TFDQuery`, centralizando a lógica de conexão e facilitando o gerenciamento eficiente das conexões dentro das rotas do middleware.
 
-#### Funções e Procedimentos
+#### 🔍 Funções e Procedimentos
 
 - **GetConnection(AValue: TConnectionType): TFDConnection;**
-  - **Descrição:** Obtém uma conexão FireDAC com base no tipo de conexão especificado.
+  - **Descrição:** Obtém uma conexão `TFDConnection` com base no tipo de conexão especificado.
   - **Parâmetros:**
     - `AValue`: O tipo de conexão desejado, definido pelo enumerado `TConnectionType`. As opções incluem:
       - `TConnectionType.ADS`: Conexão com banco de dados ADS.
@@ -344,30 +359,26 @@ A **unit Horse.Connection** fornece funções para gerenciar conexões com banco
   - **Exceção:** Lança uma exceção se o tipo de conexão não for suportado ou não especificado.
 
 - **GetQuery(AValue: TConnectionType): TFDQuery;**
-  - **Descrição:** Cria e retorna uma instância de TFDQuery associada ao tipo de conexão especificado.
+  - **Descrição:** Cria e retorna uma instância de `TFDQuery` associada ao tipo de conexão especificado.
   - **Parâmetros:**
-    - `AValue`: O tipo de conexão desejado, definido pelo enumerado `TConnectionType`. As opções incluem:
-      - `TConnectionType.ADS`: Conexão com banco de dados ADS.
-      - `TConnectionType.FB`: Conexão com banco de dados Firebird.
-      - `TConnectionType.MySQL`: Conexão com banco de dados MySQL.
-      - `TConnectionType.PG`: Conexão com banco de dados PostgreSQL.
-      - `TConnectionType.SQLite`: Conexão com banco de dados SQLite.
+    - `AValue`: O tipo de conexão desejado, definido pelo enumerado `TConnectionType`.
   - **Retorno:** Retorna uma instância de `TFDQuery` associada à conexão especificada.
   - **Exceção:** Lança uma exceção se o tipo de conexão não for suportado ou não especificado.
 
-#### Middleware 
+#### 🌐 Middleware 
 
-O middleware **HorseConnection** tem como objetivo encapsular a lógica de conexão com bancos de dados, promovendo uma gestão centralizada e reutilizável das conexões FireDAC, reduzindo código repetitivo e prevenindo vazamentos de conexões em aplicações que fazem uso intensivo de bancos de dados.
+O middleware **HorseConnection** encapsula a lógica de conexão com bancos de dados, promovendo uma gestão centralizada e reutilizável das conexões `TFDConnection` e `TFDQuery`. Essa abordagem reduz o código repetitivo, pois facilita a criação e liberação de instâncias `TFDConnection` ou `TFDQuery` com a conexão adequada, além de prevenir vazamentos de conexão em aplicações que fazem uso intensivo de bancos de dados.
 
+---
 
 ### 🗂️ Unit EnumsHelpersUtils
 
-A **unit EnumsHelpersUtils** define tipos enumerados e configurações de conexão para diferentes bancos de dados (PostgreSQL, ADS, SQLite, Firebird, MySQL) e fornece funções auxiliares para manipulação desses tipos. 
+A **unit EnumsHelpersUtils** define tipos enumerados e configurações de conexão para diferentes bancos de dados (PostgreSQL, ADS, SQLite, Firebird, MySQL) e fornece funções auxiliares para manipulação desses tipos.
 
-#### Tipos Enumerados e Estruturas de Configuração
+#### 🔍 Tipos Enumerados e Estruturas de Configuração
 
 - **TConnectionType**
-  - Define os tipos de conexão suportados pelo sistema:
+  - Define os tipos de conexão suportados:
     - `ADS`
     - `FB`
     - `MySQL`
@@ -375,32 +386,32 @@ A **unit EnumsHelpersUtils** define tipos enumerados e configurações de conex�
     - `SQLite`
 
 - **TPGConfiguration**
-  - Estrutura de configuração para o banco de dados PostgreSQL com valores como `Server`, `Port`, `Database`, `UserName`, entre outros.
+  - Estrutura de configuração para PostgreSQL.
   - **Função `Default`**: Retorna uma configuração padrão para PostgreSQL.
 
 - **TADSConfiguration**
-  - Estrutura de configuração para o banco de dados ADS com valores como `ServerType`, `Protocol`, `TableType`, `Locking`, entre outros.
+  - Estrutura de configuração para ADS.
   - **Função `Default`**: Retorna uma configuração padrão para ADS.
 
 - **TSQLiteConfiguration**
-  - Estrutura de configuração para o banco de dados SQLite com valores como `LockingMode`, `OpenMode`, `Encrypt`, entre outros.
+  - Estrutura de configuração para SQLite.
   - **Função `Default`**: Retorna uma configuração padrão para SQLite.
 
 - **TFBConfiguration**
-  - Estrutura de configuração para o banco de dados Firebird com valores como `Protocol`, `CharacterSet`, `OpenMode`, entre outros.
+  - Estrutura de configuração para Firebird.
   - **Função `Default`**: Retorna uma configuração padrão para Firebird.
 
 - **TMySQLConfiguration**
-  - Estrutura de configuração para o banco de dados MySQL com valores como `Server`, `VendorLib`, `Pooled`, entre outros.
+  - Estrutura de configuração para MySQL.
   - **Função `Default`**: Retorna uma configuração padrão para MySQL.
 
-#### Funções Auxiliares
+#### 🔧 Funções Auxiliares
 
 - **ToString**
   - Disponível para cada tipo enumerado, como `TConnectionType`, `TADSServerType`, `TADSCharacterSet`, `TADSProtocol`, entre outros.
   - **Descrição**: Converte o valor do tipo enumerado em uma string representativa.
-  
-#### Exemplo de Uso
+
+#### 📄 Exemplo de Uso
 
 ```delphi
 var
@@ -410,19 +421,20 @@ begin
 end;
 ```
 
+---
+
 ### 🗂️ Unit SystemUtils
 
 A **unit SystemUtils** fornece utilitários para operações de sistema, incluindo manipulação de caminhos e lançamento de exceções de tipo inválido.
 
-#### Funções e Procedimentos
+#### 🔍 Funções e Procedimentos
 
 - **RaiseInvalidTypeException**
   - **Descrição**: Lança uma exceção indicando que um campo possui um tipo incorreto.
   - **Parâmetros**:
-    - `AFieldName` (string): Nome do campo que possui o tipo incorreto.
+    - `AFieldName` (string): Nome do campo com tipo incorreto.
     - `AExpectedType` (string): Tipo esperado para o campo.
-  - **Exceção**: Lança uma exceção formatada que ajuda a identificar erros de tipo em tempo de execução.
-
+  - **Exceção:** Lança uma exceção formatada para identificar erros de tipo em tempo de execução.
   - **Exemplo de Uso**:
     ```delphi
     RaiseInvalidTypeException('NomeCampo', 'Integer');
@@ -431,10 +443,9 @@ A **unit SystemUtils** fornece utilitários para operações de sistema, incluin
 - **GetAbsolutePath**
   - **Descrição**: Obtém o caminho absoluto com base em um caminho relativo fornecido.
   - **Parâmetros**:
-    - `ARelativePath` (string): Caminho relativo a ser convertido para absoluto.
-  - **Retorno**: Retorna o caminho absoluto correspondente ao caminho relativo fornecido.
-  - **Observação**: Se o caminho relativo começar com ".\", ele será combinado com o diretório do aplicativo para obter o caminho absoluto; caso contrário, retorna o próprio caminho fornecido.
-
+    - `ARelativePath` (string): Caminho relativo a ser convertido.
+  - **Retorno:** Retorna o caminho absoluto correspondente.
+  - **Observação**: Se o caminho começar com ".\", será combinado com o diretório do aplicativo; caso contrário, retorna o próprio caminho fornecido.
   - **Exemplo de Uso**:
     ```delphi
     var
@@ -445,19 +456,19 @@ A **unit SystemUtils** fornece utilitários para operações de sistema, incluin
     ```
 
 ### ⚠️ Exceções
-- A unit utiliza exceções para sinalizar tipos de dados incorretos em `RaiseInvalidTypeException`, permitindo uma validação mais rigorosa dos tipos de campo durante a execução.
 
-Essa unit é útil para operações de manipulação de caminhos e validação de tipos de campo, centralizando utilidades comuns para operações de sistema.
+A **unit** utiliza exceções para sinalizar tipos de dados incorretos em `RaiseInvalidTypeException`, permitindo uma validação mais rigorosa dos tipos de campo durante a execução. Essa unit é útil para operações de manipulação de caminhos e validação de tipos, centralizando utilidades comuns para operações de sistema.
 
+## 🧩 Explicação do Código Fonte
 
 ### 🗂️ Unit MethodReferencesUtils
 
 A **unit MethodReferencesUtils** define tipos de referência a métodos (procedimentos e funções) para configurações e conexões de banco de dados.
 
-#### Tipos
+#### 🔍 Tipos
 
 - **TFunctionConnection**
-  - **Descrição**: Referência para uma função que retorna uma conexão FireDAC.
+  - **Descrição**: Referência para uma função que retorna uma conexão `TFDConnection`.
   - **Retorno**: Um objeto `TFDConnection` representando a conexão.
   - **Uso**: Facilita a criação de referências de função para obter uma conexão FireDAC, permitindo que outras unidades ou métodos executem a função de conexão de forma genérica e reutilizável.
 
@@ -478,7 +489,7 @@ A **unit MethodReferencesUtils** define tipos de referência a métodos (procedi
   - **Parâmetros**:
     - `AConfiguration` (var T): Configuração do banco de dados que será modificada.
     - `AValue` (TValue): Valor a ser aplicado na configuração.
-  - **Uso**: Permite modificar configurações específicas de bancos de dados através de procedimentos parametrizados, tornando possível a aplicação de diferentes valores a diversas configurações de maneira flexível e genérica.
+  - **Uso**: Permite modificar configurações específicas de bancos de dados através de procedimentos parametrizados, facilitando a aplicação de diferentes valores a diversas configurações de maneira flexível e genérica.
 
   - **Exemplo de Uso**:
     ```delphi
@@ -494,163 +505,150 @@ A **unit MethodReferencesUtils** define tipos de referência a métodos (procedi
 
 ### ⚙️ Finalidade
 
-Esta unit centraliza as referências de métodos para conexões e configurações, facilitando a utilização e aplicação de procedimentos de configuração em diferentes contextos de banco de dados. É especialmente útil em sistemas onde múltiplos tipos de banco de dados são utilizados e precisam de configurações específicas.
+Esta unit centraliza as referências de métodos para conexões e configurações, facilitando a aplicação de procedimentos de configuração em diferentes contextos de banco de dados. É especialmente útil em sistemas onde múltiplos tipos de banco de dados são utilizados e precisam de configurações específicas.
 
+---
+
+### 🗂️ Unit CharacterSetUtils
+
+A **unit CharacterSetUtils** fornece funções auxiliares para adicionar diferentes conjuntos de caracteres ao dicionário **TDictionary**, permitindo a conversão de tipos de conjunto de caracteres do **Firebird**.
+
+#### 🔍 Funções e Procedimentos
+
+- **AddBasicCharacterSets(Dictionary: TDictionary<TFBCharacterSetType, string>);**
+  - **Descrição:** Adiciona conjuntos de caracteres básicos ao dicionário.
+  - **Parâmetro:** 
+    - `Dictionary`: Dicionário onde os conjuntos de caracteres serão adicionados.
+
+- **AddDOSCharacterSets(Dictionary: TDictionary<TFBCharacterSetType, string>);**
+  - **Descrição:** Adiciona conjuntos de caracteres **DOS** ao dicionário.
+  - **Parâmetro:** 
+    - `Dictionary`: Dicionário onde os conjuntos de caracteres serão adicionados.
+
+- **AddISOCharacterSets(Dictionary: TDictionary<TFBCharacterSetType, string>);**
+  - **Descrição:** Adiciona conjuntos de caracteres **ISO** ao dicionário.
+  - **Parâmetro:** 
+    - `Dictionary`: Dicionário onde os conjuntos de caracteres serão adicionados.
+
+- **AddWinCharacterSets(Dictionary: TDictionary<TFBCharacterSetType, string>);**
+  - **Descrição:** Adiciona conjuntos de caracteres **Windows** ao dicionário.
+  - **Parâmetro:** 
+    - `Dictionary`: Dicionário onde os conjuntos de caracteres serão adicionados.
+
+- **AddMiscellaneousCharacterSets(Dictionary: TDictionary<TFBCharacterSetType, string>);**
+  - **Descrição:** Adiciona outros conjuntos de caracteres ao dicionário.
+  - **Parâmetro:** 
+    - `Dictionary`: Dicionário onde os conjuntos de caracteres serão adicionados.
+
+### ⚙️ Finalidade
+
+Esta unit facilita a configuração e adição de conjuntos de caracteres variados ao dicionário **TDictionary** para manipulação de conjuntos de caracteres no **Firebird**, garantindo suporte a diferentes padrões de codificação.
+
+---
+
+---
 
 ### 🗂️ Unit ADSDataBaseConfigurationParameter
 
-A **unit ADSDataBaseConfigurationParameter** oferece métodos para configurar parâmetros específicos de uma instância de `TADSConfiguration`, utilizada para preparar o FireDAC (`FDConnection`) com o driver ADS (Advantage Database Server). Esta configuração permite definir valores como tipo de servidor, conjunto de caracteres, protocolo, e outras opções de conexão.
+A **unit ADSDataBaseConfigurationParameter** fornece métodos para configurar parâmetros específicos de uma instância de `TADSConfiguration`, utilizada para preparar o **FireDAC** (`TFDConnection`) com o driver **ADS** (Advantage Database Server). Essa configuração permite definir valores como tipo de servidor, conjunto de caracteres, protocolo e outras opções de conexão.
 
-#### Funções e Procedimentos
+#### 🔍 Funções e Procedimentos
 
 - **DatabaseConfig**
   - **Descrição**: Configura parâmetros específicos em uma instância de `TADSConfiguration` com base nos valores fornecidos.
   - **Parâmetros**:
-    - `AConfiguration` (var TADSConfiguration): A configuração de banco de dados ADS a ser modificada.
-    - `AParameter` (TADSConfigurationParameter): O parâmetro de configuração a ser ajustado.
-    - `AValue` (TValue, TADSServerType, TADSCharacterSet, TADSProtocol, TADSTableType, TADSLocking): O valor a ser aplicado no parâmetro.
+    - `AConfiguration` (var `TADSConfiguration`): Configuração de banco de dados ADS a ser ajustada.
+    - `AParameter` (`TADSConfigurationParameter`): Parâmetro de configuração a ser modificado.
+    - `AValue` (`TValue`, `TADSServerType`, `TADSCharacterSet`, `TADSProtocol`, `TADSTableType`, `TADSLocking`): Valor a ser aplicado ao parâmetro.
   - **Sobrecargas**:
-    - `DatabaseConfig(var AConfiguration: TADSConfiguration; AParameter: TADSConfigurationParameter; const AValue: TValue)`: Configura com um valor genérico `TValue`.
-    - `DatabaseConfig(var AConfiguration: TADSConfiguration; AParameter: TADSConfigurationParameter; const AValue: TADSServerType)`: Configura com o tipo de servidor.
-    - `DatabaseConfig(var AConfiguration: TADSConfiguration; AParameter: TADSConfigurationParameter; const AValue: TADSCharacterSet)`: Configura o conjunto de caracteres.
-    - `DatabaseConfig(var AConfiguration: TADSConfiguration; AParameter: TADSConfigurationParameter; const AValue: TADSProtocol)`: Configura o protocolo de conexão.
-    - `DatabaseConfig(var AConfiguration: TADSConfiguration; AParameter: TADSConfigurationParameter; const AValue: TADSTableType)`: Configura o tipo de tabela.
-    - `DatabaseConfig(var AConfiguration: TADSConfiguration; AParameter: TADSConfigurationParameter; const AValue: TADSLocking)`: Configura o tipo de bloqueio.
+    - `DatabaseConfig(var AConfiguration: TADSConfiguration; AParameter: TADSConfigurationParameter; const AValue: TValue)`: Configura com valor genérico `TValue`.
+    - Configurações específicas para tipo de servidor (`TADSServerType`), conjunto de caracteres (`TADSCharacterSet`), protocolo (`TADSProtocol`), tipo de tabela (`TADSTableType`) e bloqueio (`TADSLocking`).
 
 - **SetDatabase**
   - **Descrição**: Define o caminho do banco de dados na configuração `TADSConfiguration`.
-  - **Parâmetros**:
-    - `AConfiguration` (var TADSConfiguration): A configuração a ser alterada.
-    - `AValue` (TValue): Caminho do banco de dados em formato `string`.
   - **Exemplo**:
     ```delphi
     SetDatabase(MyConfig, 'C:\databases\example.db');
     ```
 
-- **SetUserName**
-  - **Descrição**: Define o nome do usuário na configuração.
-  - **Parâmetros**:
-    - `AConfiguration` (var TADSConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Nome do usuário.
-
-- **SetPassword**
-  - **Descrição**: Define a senha na configuração.
-  - **Parâmetros**:
-    - `AConfiguration` (var TADSConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Senha do usuário.
+- **SetUserName** / **SetPassword**
+  - Define o nome de usuário e a senha na configuração.
 
 - **SetCharacterSet**
-  - **Descrição**: Define o conjunto de caracteres na configuração.
-  - **Parâmetros**:
-    - `AConfiguration` (var TADSConfiguration): Configuração a ser alterada.
-    - `AValue` (TADSCharacterSet): Valor do conjunto de caracteres.
+  - Define o conjunto de caracteres (`TADSCharacterSet`).
 
 - **SetPooled**
-  - **Descrição**: Define se o pool de conexões está habilitado.
-  - **Parâmetros**:
-    - `AConfiguration` (var TADSConfiguration): Configuração a ser alterada.
-    - `AValue` (boolean): Indica se o pool está habilitado.
-
-#### Inicialização e Finalização
-
-- **InitializeConfigurators**
-  - **Descrição**: Inicializa o dicionário `FDictionary` com os configuradores específicos para cada parâmetro de `TADSConfigurationParameter`.
-  - **Chamado em**: Inicialização da unit.
-
-- **Finalization**
-  - **Descrição**: Libera o dicionário `FDictionary` ao final da execução para garantir a liberação da memória alocada.
+  - Habilita ou desabilita o pool de conexões.
 
 ### ⚠️ Exceções
-- `RaiseInvalidTypeException`: Lança exceção quando o tipo do valor fornecido não corresponde ao esperado pelo parâmetro de configuração, ajudando na identificação de problemas de tipagem em tempo de execução.
+- **RaiseInvalidTypeException**: Lança exceção ao detectar tipo incorreto, facilitando a depuração.
 
 ### ⚙️ Finalidade
 
-Esta unit é essencial para configurar parâmetros de conexão do FireDAC com o ADS, centralizando procedimentos que permitem ao desenvolvedor ajustar opções de conexão de maneira modular e consistente, incluindo características de tipo de servidor, conjunto de caracteres, e outros parâmetros técnicos de conexão de banco de dados.
+Esta unit é essencial para configurar parâmetros de conexão do **FireDAC** com o **ADS**, centralizando procedimentos que permitem ao desenvolvedor ajustar a conexão de maneira modular e consistente.
+
+---
 
 ### 🗂️ Unit FBDataBaseConfigurationParameter
 
-A **unit FBDataBaseConfigurationParameter** fornece procedimentos para configurar parâmetros específicos de uma instância de `TFBConfiguration`, usada para configurar o FireDAC (`FDConnection`) com o driver Firebird. Esta configuração permite definir valores como protocolo, modo de abertura, conjunto de caracteres, e outras opções de conexão para o banco de dados Firebird.
+A **unit FBDataBaseConfigurationParameter** fornece procedimentos para configurar parâmetros específicos de uma instância de `TFBConfiguration`, usada para preparar o **FireDAC** (`TFDConnection`) com o driver **Firebird**. Essa configuração permite definir valores como protocolo, modo de abertura, conjunto de caracteres e outras opções de conexão para o banco Firebird.
 
-#### Funções e Procedimentos
+#### 🔍 Funções e Procedimentos
 
 - **DatabaseConfig**
   - **Descrição**: Configura parâmetros específicos em uma instância de `TFBConfiguration` com base nos valores fornecidos.
   - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): A configuração de banco de dados Firebird a ser modificada.
-    - `AParameter` (TFBConfigurationParameter): O parâmetro de configuração a ser ajustado.
-    - `AValue` (TValue, TFBProtocolType, TFBOpenModeType, TFBCharacterSetType): O valor a ser aplicado ao parâmetro.
+    - `AConfiguration` (var `TFBConfiguration`): Configuração de banco de dados Firebird a ser ajustada.
+    - `AParameter` (`TFBConfigurationParameter`): Parâmetro de configuração a ser modificado.
+    - `AValue` (`TValue`, `TFBProtocolType`, `TFBOpenModeType`, `TFBCharacterSetType`): Valor a ser aplicado ao parâmetro.
   - **Sobrecargas**:
-    - `DatabaseConfig(var AConfiguration: TFBConfiguration; AParameter: TFBConfigurationParameter; const AValue: TValue)`: Configura com um valor genérico `TValue`.
-    - `DatabaseConfig(var AConfiguration: TFBConfiguration; AParameter: TFBConfigurationParameter; const AValue: TFBProtocolType)`: Configura o tipo de protocolo.
-    - `DatabaseConfig(var AConfiguration: TFBConfiguration; AParameter: TFBConfigurationParameter; const AValue: TFBOpenModeType)`: Configura o modo de abertura.
-    - `DatabaseConfig(var AConfiguration: TFBConfiguration; AParameter: TFBConfigurationParameter; const AValue: TFBCharacterSetType)`: Configura o conjunto de caracteres.
+    - `DatabaseConfig(var AConfiguration: TFBConfiguration; AParameter: TFBConfigurationParameter; const AValue: TValue)`: Configura com valor genérico `TValue`.
+    - Configurações específicas para tipo de protocolo (`TFBProtocolType`), modo de abertura (`TFBOpenModeType`) e conjunto de caracteres (`TFBCharacterSetType`).
 
 - **SetDatabase**
   - **Descrição**: Define o caminho do banco de dados na configuração `TFBConfiguration`.
-  - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Caminho do banco de dados em formato `string`.
   - **Exemplo**:
     ```delphi
     SetDatabase(MyConfig, 'C:\databases\example.fdb');
     ```
 
-- **SetUserName**
-  - **Descrição**: Define o nome do usuário na configuração Firebird.
-  - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Nome do usuário.
-
-- **SetPassword**
-  - **Descrição**: Define a senha na configuração Firebird.
-  - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Senha do usuário.
+- **SetUserName** / **SetPassword**
+  - Define o nome de usuário e a senha na configuração.
 
 - **SetProtocol**
-  - **Descrição**: Define o protocolo de conexão na configuração.
-  - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): Configuração a ser alterada.
-    - `AValue` (TFBProtocolType): Valor do protocolo de conexão.
+  - Define o protocolo de conexão (`TFBProtocolType`).
 
 - **SetOpenMode**
-  - **Descrição**: Define o modo de abertura do banco de dados.
-  - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): Configuração a ser alterada.
-    - `AValue` (TFBOpenModeType): Valor do modo de abertura.
+  - Define o modo de abertura (`TFBOpenModeType`).
 
 - **SetCharacterSet**
-  - **Descrição**: Define o conjunto de caracteres na configuração.
-  - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): Configuração a ser alterada.
-    - `AValue` (TFBCharacterSetType): Valor do conjunto de caracteres.
+  - Define o conjunto de caracteres (`TFBCharacterSetType`).
 
 - **SetPooled**
-  - **Descrição**: Define se o pool de conexões está habilitado.
-  - **Parâmetros**:
-    - `AConfiguration` (var TFBConfiguration): Configuração a ser alterada.
-    - `AValue` (boolean): Indica se o pool está habilitado.
+  - Habilita ou desabilita o pool de conexões.
 
 ### ⚠️ Exceções
-- `RaiseInvalidTypeException`: Lança exceção quando o tipo do valor fornecido não corresponde ao esperado pelo parâmetro de configuração, ajudando na identificação de problemas de tipagem em tempo de execução.
+- **RaiseInvalidTypeException**: Lança exceção ao detectar tipo incorreto, facilitando a depuração.
 
 ### ⚙️ Finalidade
 
-Esta unit é essencial para configurar parâmetros de conexão do FireDAC com o Firebird, centralizando procedimentos que permitem ao desenvolvedor ajustar opções de conexão de maneira modular e consistente, incluindo características de protocolo, conjunto de caracteres, e outros parâmetros técnicos de conexão de banco de dados Firebird.
+A **unit FBDataBaseConfigurationParameter** é essencial para configurar parâmetros de conexão do **FireDAC** com o **Firebird**, centralizando procedimentos que permitem ao desenvolvedor ajustar a conexão com o banco de forma modular e consistente, incluindo características de protocolo, conjunto de caracteres e outros parâmetros técnicos.
 
-### 🗂️ Unit MySQLDataBaseConfigurationParameter
+---
 
-A **unit MySQLDataBaseConfigurationParameter** fornece procedimentos para configurar parâmetros específicos de uma instância de `TMySQLConfiguration`, utilizada para configurar o FireDAC (`FDConnection`) com o driver MySQL. Essa unit permite definir valores como servidor, porta, biblioteca do fornecedor e opções de pooling de conexão para o banco de dados MySQL.
+### 🗂️ Unit `MySQLDataBaseConfigurationParameter`
 
-#### Funções e Procedimentos
+A **unit MySQLDataBaseConfigurationParameter** oferece procedimentos para configurar parâmetros específicos de uma instância de `TMySQLConfiguration`, utilizada na configuração do FireDAC (`TFDConnection`) com o driver MySQL. Essa unit possibilita a definição de valores como servidor, porta, biblioteca do fornecedor e opções de pooling de conexão para o banco de dados MySQL.
+
+#### 🔧 Funções e Procedimentos
 
 - **DatabaseConfig**
   - **Descrição**: Configura parâmetros específicos em uma instância de `TMySQLConfiguration` com base nos valores fornecidos.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): A configuração de banco de dados MySQL a ser modificada.
-    - `AParameter` (TMySQLConfigurationParameter): O parâmetro de configuração a ser ajustado.
-    - `AValue` (TValue): O valor genérico a ser aplicado ao parâmetro.
-  - **Exemplo de Uso**:
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração do banco de dados MySQL a ser modificada.
+    - `AParameter` (`TMySQLConfigurationParameter`): Parâmetro de configuração a ser ajustado.
+    - `AValue` (`TValue`): Valor genérico a ser aplicado ao parâmetro.
+  - **Exemplo**:
     ```delphi
     DatabaseConfig(MyConfig, TMySQLConfigurationParameter.Database, 'database_name');
     ```
@@ -658,442 +656,343 @@ A **unit MySQLDataBaseConfigurationParameter** fornece procedimentos para config
 - **SetDatabase**
   - **Descrição**: Define o caminho do banco de dados na configuração MySQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Caminho do banco de dados em formato `string`.
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Caminho do banco de dados em formato `string`.
 
-- **SetUserName**
-  - **Descrição**: Define o nome do usuário na configuração MySQL.
+- **SetUserName** / **SetPassword**
+  - **Descrição**: Define o nome de usuário e a senha para a conexão MySQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Nome do usuário.
-
-- **SetPassword**
-  - **Descrição**: Define a senha na configuração MySQL.
-  - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Senha do usuário.
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Nome do usuário ou senha.
 
 - **SetServer**
-  - **Descrição**: Define o endereço do servidor na configuração MySQL.
+  - **Descrição**: Define o endereço do servidor MySQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Endereço do servidor.
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Endereço do servidor.
 
 - **SetVendorLib**
-  - **Descrição**: Define a biblioteca do fornecedor na configuração MySQL.
+  - **Descrição**: Especifica a biblioteca do fornecedor para a conexão MySQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Caminho da biblioteca do fornecedor.
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Caminho da biblioteca do fornecedor.
 
 - **SetPort**
-  - **Descrição**: Define a porta do servidor na configuração MySQL.
+  - **Descrição**: Define a porta do servidor MySQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Número da porta.
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Número da porta.
 
 - **SetPooled**
-  - **Descrição**: Define se o pool de conexões está habilitado.
+  - **Descrição**: Habilita ou desabilita o pool de conexões.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Valor booleano que indica se o pooling de conexão está habilitado.
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Valor booleano que indica o estado do pooling de conexão.
 
-- **SetPoolMaxItems**
-  - **Descrição**: Define o número máximo de conexões no pool.
+- **SetPoolMaxItems** / **SetPoolExpireTimeout** / **SetPoolCleanupTimeout**
+  - **Descrição**: Define o número máximo de conexões, o tempo de expiração e o tempo de limpeza do pool de conexões.
   - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Valor inteiro para o número máximo de conexões no pool.
-
-- **SetPoolExpireTimeout**
-  - **Descrição**: Define o tempo de expiração do pool de conexões.
-  - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Tempo de expiração em milissegundos.
-
-- **SetPoolCleanupTimeout**
-  - **Descrição**: Define o tempo de limpeza do pool de conexões.
-  - **Parâmetros**:
-    - `AConfiguration` (var TMySQLConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Tempo de limpeza em milissegundos.
+    - `AConfiguration` (var `TMySQLConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Número máximo de conexões ou tempo (em milissegundos) de expiração/limpeza.
 
 ### ⚠️ Exceções
-- `RaiseInvalidTypeException`: Lança exceção quando o tipo do valor fornecido não corresponde ao esperado pelo parâmetro de configuração, ajudando na identificação de problemas de tipagem em tempo de execução.
+- **RaiseInvalidTypeException**: Lança uma exceção se o tipo de valor fornecido não corresponder ao esperado pelo parâmetro, facilitando a detecção de problemas de tipo em tempo de execução.
 
 ### ⚙️ Finalidade
 
-Esta unit é essencial para configurar parâmetros de conexão do FireDAC com o MySQL, centralizando procedimentos que permitem ao desenvolvedor ajustar opções de conexão de forma modular e consistente, como detalhes de servidor, pooling de conexão e autenticação.
+A **unit MySQLDataBaseConfigurationParameter** centraliza a configuração do FireDAC para MySQL, simplificando o ajuste modular de opções de conexão como servidor, pooling de conexões e autenticação.
 
-### 🗂️ Unit PGDataBaseConfigurationParameter
+---
 
-A **unit PGDataBaseConfigurationParameter** fornece procedimentos para configurar parâmetros específicos de uma instância de `TPGConfiguration`, utilizada para configurar o FireDAC (`FDConnection`) com o driver PostgreSQL. Essa unit permite definir valores de parâmetros como servidor, porta, banco de dados, nome de usuário, senha, conjunto de caracteres e opções de pool de conexões.
+### 🗂️ Unit `PGDataBaseConfigurationParameter`
 
-#### Funções e Procedimentos
+A **unit PGDataBaseConfigurationParameter** oferece procedimentos para configurar parâmetros específicos de uma instância de `TPGConfiguration`, utilizada na configuração do FireDAC (`TFDConnection`) com o driver PostgreSQL. Esta unit permite definir valores como servidor, porta, banco de dados, nome de usuário, senha, conjunto de caracteres e opções de pooling de conexões para PostgreSQL.
+
+#### 🔧 Funções e Procedimentos
 
 - **DatabaseConfig**
   - **Descrição**: Configura um parâmetro específico em uma instância de `TPGConfiguration` de acordo com o valor fornecido.
   - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): A configuração do banco de dados PostgreSQL a ser modificada.
-    - `AParameter` (TPGConfigurationParameter): O parâmetro de configuração a ser modificado.
-    - `AValue` (TValue): O valor genérico a ser aplicado ao parâmetro.
-  - **Exemplo de Uso**:
+    - `AConfiguration` (var `TPGConfiguration`): Configuração do banco de dados PostgreSQL a ser modificada.
+    - `AParameter` (`TPGConfigurationParameter`): Parâmetro de configuração a ser ajustado.
+    - `AValue` (`TValue`): Valor genérico a ser aplicado ao parâmetro.
+  - **Exemplo**:
     ```delphi
     DatabaseConfig(PGConfig, TPGConfigurationParameter.Server, 'localhost');
     ```
 
-- **SetServer**
-  - **Descrição**: Define o endereço do servidor PostgreSQL na configuração.
+- **SetServer** / **SetPort**
+  - **Descrição**: Define o endereço do servidor e a porta na configuração PostgreSQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Endereço do servidor.
+    - `AConfiguration` (var `TPGConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Endereço do servidor ou número da porta.
 
-- **SetPort**
-  - **Descrição**: Define a porta do servidor PostgreSQL.
+- **SetDatabase** / **SetUserName** / **SetPassword**
+  - **Descrição**: Define o banco de dados, o nome de usuário e a senha para a conexão PostgreSQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Número da porta.
-
-- **SetDatabase**
-  - **Descrição**: Define o banco de dados na configuração PostgreSQL.
-  - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Nome do banco de dados.
-
-- **SetUserName**
-  - **Descrição**: Define o nome de usuário na configuração PostgreSQL.
-  - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Nome de usuário.
-
-- **SetPassword**
-  - **Descrição**: Define a senha de conexão na configuração PostgreSQL.
-  - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Senha do usuário.
+    - `AConfiguration` (var `TPGConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Nome do banco de dados, nome de usuário ou senha.
 
 - **SetCharacterSet**
   - **Descrição**: Define o conjunto de caracteres na configuração PostgreSQL.
   - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Conjunto de caracteres.
+    - `AConfiguration` (var `TPGConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Conjunto de caracteres.
 
 - **SetPooled**
-  - **Descrição**: Define se o pool de conexões está habilitado.
+  - **Descrição**: Habilita ou desabilita o pool de conexões.
   - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Valor booleano para o pooling de conexão.
+    - `AConfiguration` (var `TPGConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Valor booleano para o estado do pool de conexão.
 
-- **SetPoolMaxItems**
-  - **Descrição**: Define o número máximo de conexões no pool.
+- **SetPoolMaxItems** / **SetPoolExpireTimeout** / **SetPoolCleanupTimeout**
+  - **Descrição**: Define o número máximo de conexões, o tempo de expiração e o tempo de limpeza do pool de conexões.
   - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Quantidade máxima de conexões.
-
-- **SetPoolExpireTimeout**
-  - **Descrição**: Define o tempo de expiração do pool de conexões.
-  - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Tempo de expiração em milissegundos.
-
-- **SetPoolCleanupTimeout**
-  - **Descrição**: Define o tempo de limpeza do pool de conexões.
-  - **Parâmetros**:
-    - `AConfiguration` (var TPGConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Tempo de limpeza em milissegundos.
+    - `AConfiguration` (var `TPGConfiguration`): Configuração a ser alterada.
+    - `AValue` (`TValue`): Número máximo de conexões ou tempo (em milissegundos) de expiração/limpeza.
 
 ### ⚠️ Exceções
-- `RaiseInvalidTypeException`: Lança exceção quando o tipo do valor fornecido não corresponde ao esperado pelo parâmetro de configuração, garantindo que a configuração seja aplicada corretamente.
+- **RaiseInvalidTypeException**: Lança uma exceção se o tipo de valor fornecido não corresponder ao esperado pelo parâmetro, garantindo que a configuração seja aplicada corretamente.
 
 ### ⚙️ Finalidade
 
-Esta unit é essencial para centralizar a configuração de conexões com o PostgreSQL, permitindo ajuste modular de opções de conexão como servidor, autenticação e pooling.
+A **unit PGDataBaseConfigurationParameter** centraliza a configuração do FireDAC para PostgreSQL, permitindo o ajuste modular de opções de conexão como servidor, autenticação e pooling de conexões.
 
-### 🗂️ Unit SQLiteDataBaseConfigurationParameter
+---
 
-A **unit SQLiteDataBaseConfigurationParameter** fornece procedimentos para configurar parâmetros específicos de uma instância de `TSQLiteConfiguration`, utilizada para configurar o FireDAC (`FDConnection`) com o driver SQLite. Essa unit permite definir valores de parâmetros como modo de bloqueio, modo de abertura, tipo de criptografia e outras opções de conexão.
+### 🗂️ Unit `SQLiteDataBaseConfigurationParameter`
 
-#### Funções e Procedimentos
+A unidade **`SQLiteDataBaseConfigurationParameter`** oferece procedimentos específicos para configurar uma instância de `TSQLiteConfiguration`, usada para ajustar o `TFDConnection` do FireDAC ao driver SQLite. Com esta unidade, é possível definir parâmetros como o modo de bloqueio, modo de abertura, tipo de criptografia, entre outros, otimizando a conexão com o banco de dados SQLite.
 
-- **DatabaseConfig** (sobrecargas)
-  - **Descrição**: Configura um parâmetro específico em uma instância de `TSQLiteConfiguration` de acordo com o tipo de valor fornecido.
-  
-  - **Sobrecarga 1**
+#### 🔧 Funções e Procedimentos
+
+- **DatabaseConfig** (Sobrecargas)
+  - **Descrição**: Configura um parâmetro específico em uma instância de `TSQLiteConfiguration`, ajustando-o conforme o tipo de valor fornecido.
+
+  - **Sobrecarga 1** – Parâmetro Genérico
     - **Parâmetros**:
-      - `AConfiguration` (var TSQLiteConfiguration): A configuração do banco de dados SQLite a ser modificada.
-      - `AParameter` (TSQLiteConfigurationParameter): O parâmetro de configuração a ser modificado.
-      - `AValue` (TValue): Valor genérico aplicado ao parâmetro.
-    - **Exemplo de Uso**:
+      - `AConfiguration` (var `TSQLiteConfiguration`): A configuração do banco de dados SQLite a ser modificada.
+      - `AParameter` (`TSQLiteConfigurationParameter`): O parâmetro de configuração a ser ajustado.
+      - `AValue` (`TValue`): Valor genérico aplicado ao parâmetro.
+    - **Exemplo**:
       ```delphi
-      DatabaseConfig(SQLiteConfig, TSQLiteConfigurationParameter.Database, 'database_path');
+      DatabaseConfig(SQLiteConfig, TSQLiteConfigurationParameter.Database, 'caminho_do_banco');
       ```
 
-  - **Sobrecarga 2**
+  - **Sobrecarga 2** – Modo de Bloqueio
     - **Parâmetros**:
-      - `AConfiguration` (var TSQLiteConfiguration): A configuração do banco de dados SQLite a ser modificada.
-      - `AParameter` (TSQLiteConfigurationParameter): O parâmetro de configuração para o modo de bloqueio.
-      - `AValue` (TSQLiteLockingModeType): Valor do tipo de modo de bloqueio.
-    - **Exemplo de Uso**:
+      - `AConfiguration` (var `TSQLiteConfiguration`): A configuração do banco de dados SQLite.
+      - `AParameter` (`TSQLiteConfigurationParameter`): Parâmetro que define o modo de bloqueio.
+      - `AValue` (`TSQLiteLockingModeType`): Valor do tipo de bloqueio a ser aplicado.
+    - **Exemplo**:
       ```delphi
       DatabaseConfig(SQLiteConfig, TSQLiteConfigurationParameter.LockingMode, lmNormal);
       ```
 
-  - **Sobrecarga 3**
+  - **Sobrecarga 3** – Modo de Abertura
     - **Parâmetros**:
-      - `AConfiguration` (var TSQLiteConfiguration): A configuração do banco de dados SQLite a ser modificada.
-      - `AParameter` (TSQLiteConfigurationParameter): O parâmetro de configuração para o modo de abertura.
-      - `AValue` (TSQLiteOpenModeType): Valor do tipo de modo de abertura.
-    - **Exemplo de Uso**:
+      - `AConfiguration` (var `TSQLiteConfiguration`): A configuração do banco de dados SQLite.
+      - `AParameter` (`TSQLiteConfigurationParameter`): Parâmetro que define o modo de abertura.
+      - `AValue` (`TSQLiteOpenModeType`): Valor do tipo de abertura a ser aplicado.
+    - **Exemplo**:
       ```delphi
       DatabaseConfig(SQLiteConfig, TSQLiteConfigurationParameter.OpenMode, omReadWrite);
       ```
 
-  - **Sobrecarga 4**
+  - **Sobrecarga 4** – Tipo de Criptografia
     - **Parâmetros**:
-      - `AConfiguration` (var TSQLiteConfiguration): A configuração do banco de dados SQLite a ser modificada.
-      - `AParameter` (TSQLiteConfigurationParameter): O parâmetro de configuração para o tipo de criptografia.
-      - `AValue` (TSQLiteEncryptType): Valor do tipo de criptografia.
-    - **Exemplo de Uso**:
+      - `AConfiguration` (var `TSQLiteConfiguration`): A configuração do banco de dados SQLite.
+      - `AParameter` (`TSQLiteConfigurationParameter`): Parâmetro que define o tipo de criptografia.
+      - `AValue` (`TSQLiteEncryptType`): Tipo de criptografia a ser aplicado.
+    - **Exemplo**:
       ```delphi
       DatabaseConfig(SQLiteConfig, TSQLiteConfigurationParameter.Encrypt, etAES256);
       ```
 
+#### 🔐 Parâmetros Específicos de Conexão
+
 - **SetDatabase**
   - **Descrição**: Define o caminho do banco de dados na configuração SQLite.
-  - **Parâmetros**:
-    - `AConfiguration` (var TSQLiteConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Caminho do banco de dados.
+  - **Exemplo**:
+    ```delphi
+    SetDatabase(SQLiteConfig, 'caminho_do_banco');
+    ```
 
-- **SetUserName**
-  - **Descrição**: Define o nome de usuário na configuração SQLite.
-  - **Parâmetros**:
-    - `AConfiguration` (var TSQLiteConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Nome de usuário.
-
-- **SetPassword**
-  - **Descrição**: Define a senha de conexão na configuração SQLite.
-  - **Parâmetros**:
-    - `AConfiguration` (var TSQLiteConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Senha do usuário.
+- **SetUserName** / **SetPassword**
+  - **Descrição**: Configura o nome de usuário e a senha para autenticação na conexão SQLite.
 
 - **SetPooled**
   - **Descrição**: Define se o pool de conexões está habilitado.
-  - **Parâmetros**:
-    - `AConfiguration` (var TSQLiteConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Valor booleano para o pooling de conexão.
 
-- **SetPoolMaxItems**
-  - **Descrição**: Define o número máximo de conexões no pool.
-  - **Parâmetros**:
-    - `AConfiguration` (var TSQLiteConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Quantidade máxima de conexões.
-
-- **SetPoolExpireTimeout**
-  - **Descrição**: Define o tempo de expiração do pool de conexões.
-  - **Parâmetros**:
-    - `AConfiguration` (var TSQLiteConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Tempo de expiração em milissegundos.
-
-- **SetPoolCleanupTimeout**
-  - **Descrição**: Define o tempo de limpeza do pool de conexões.
-  - **Parâmetros**:
-    - `AConfiguration` (var TSQLiteConfiguration): Configuração a ser alterada.
-    - `AValue` (TValue): Tempo de limpeza em milissegundos.
+- **SetPoolMaxItems** / **SetPoolExpireTimeout** / **SetPoolCleanupTimeout**
+  - **Descrição**: Configura o número máximo de conexões, o tempo de expiração e o tempo de limpeza para o pool de conexões.
 
 ### ⚠️ Exceções
-- `RaiseInvalidTypeException`: Lança exceção quando o tipo do valor fornecido não corresponde ao esperado pelo parâmetro de configuração, garantindo que a configuração seja aplicada corretamente.
+- `RaiseInvalidTypeException`: Lança uma exceção quando o tipo do valor fornecido não corresponde ao esperado pelo parâmetro de configuração, ajudando a garantir a consistência dos dados e facilitando a identificação de erros de tipo.
 
 ### ⚙️ Finalidade
 
-Esta unit é essencial para centralizar a configuração de conexões com o SQLite, permitindo ajuste modular de opções de conexão como caminho do banco de dados, autenticação e pooling.
+A unidade `SQLiteDataBaseConfigurationParameter` centraliza a configuração do FireDAC para SQLite, oferecendo uma interface flexível e modular para definir o caminho do banco de dados, parâmetros de autenticação e opções de pooling, otimizando o gerenciamento de conexões com o SQLite.
 
-### 🗂️ Unit ADSDatabaseConfigurationManager
 
-A **unit ADSDatabaseConfigurationManager** fornece funções e procedimentos para configurar e inicializar uma conexão com o banco de dados **ADS (Advantage Database Server)**, usando **FireDAC (FDConnection)**. Esta unit permite definir parâmetros de conexão, prefixos personalizados, e gerenciar definições de conexão dentro do FireDAC Manager.
+---
 
-#### Funções e Procedimentos
+### 🗂️ Unidade `ADSDatabaseConfigurationManager`
+
+A unidade **`ADSDatabaseConfigurationManager`** oferece funções e procedimentos essenciais para configurar e inicializar conexões com o banco de dados **ADS (Advantage Database Server)** usando o **FireDAC** (`TFDConnection`). Ela permite definir parâmetros de conexão, prefixos personalizados e gerenciar definições de conexão no gerenciador **FireDAC**.
+
+#### 🔧 Funções e Procedimentos
 
 - **Initialize(const AConfiguration: TADSConfiguration; const ADatabase: string; const APrefix: string);**
-  - **Descrição:** Inicializa uma conexão com o banco de dados **ADS** usando as configurações especificadas, um nome personalizado para o banco de dados e um prefixo para o FireDAC Manager.
+  - **Descrição:** Inicializa uma conexão com o banco de dados **ADS** utilizando configurações específicas, um nome personalizado para o banco de dados e um prefixo no gerenciador **FireDAC**.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações de conexão para o banco de dados **ADS**.
-    - `ADatabase`: Nome personalizado do banco de dados.
-    - `APrefix`: Prefixo para a definição da conexão no FireDAC Manager.
+    - `AConfiguration`: Parâmetros de configuração da conexão ADS.
+    - `ADatabase`: Nome customizado do banco de dados.
+    - `APrefix`: Prefixo de identificação para a definição da conexão.
 
 - **Initialize(const AConfiguration: TADSConfiguration; const APrefix: string);**
-  - **Descrição:** Inicializa uma conexão com o banco de dados **ADS** usando as configurações especificadas e um prefixo personalizado.
+  - **Descrição:** Inicializa uma conexão com o banco de dados **ADS** com as configurações e um prefixo personalizado.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações de conexão para o banco de dados **ADS**.
-    - `APrefix`: Prefixo para a definição da conexão no FireDAC Manager.
+    - `AConfiguration`: Parâmetros de configuração da conexão ADS.
+    - `APrefix`: Prefixo para identificação da conexão.
 
 - **Initialize(const AConfiguration: TADSConfiguration);**
-  - **Descrição:** Inicializa uma conexão com o banco de dados **ADS** usando apenas as configurações especificadas.
-  - **Parâmetro:** 
-    - `AConfiguration`: Configurações de conexão para o banco de dados **ADS**.
+  - **Descrição:** Inicializa a conexão com o banco de dados **ADS** com as configurações básicas especificadas.
+  - **Parâmetro:**
+    - `AConfiguration`: Parâmetros de configuração ADS.
 
 - **GetConnectionDef(const APrefix: string): string;**
-  - **Descrição:** Retorna o nome da definição de conexão no FireDAC Manager com um prefixo personalizado.
+  - **Descrição:** Retorna o nome da definição de conexão no gerenciador **FireDAC** com um prefixo específico.
   - **Parâmetro:**
-    - `APrefix`: Prefixo a ser utilizado na definição de conexão.
-  - **Retorno:** Nome da definição de conexão com o prefixo.
+    - `APrefix`: Prefixo para a definição da conexão.
+  - **Retorno:** Nome da definição de conexão personalizada.
 
 - **GetConnectionDef: string;**
-  - **Descrição:** Retorna o nome da definição de conexão padrão no FireDAC Manager.
+  - **Descrição:** Obtém o nome da definição de conexão padrão no gerenciador **FireDAC**.
   - **Retorno:** Nome da definição de conexão padrão.
 
 - **CreateConnectionParameters(const AConfiguration: TADSConfiguration; const ADatabase: string): TStrings;**
-  - **Descrição:** Cria uma lista de parâmetros de conexão para o banco de dados **ADS** com base nas configurações fornecidas.
+  - **Descrição:** Gera uma lista de parâmetros de conexão para o banco de dados **ADS** com base nas configurações fornecidas.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **ADS**.
+    - `AConfiguration`: Configurações do banco **ADS**.
     - `ADatabase`: Nome do banco de dados.
-  - **Retorno:** Lista de parâmetros de conexão.
+  - **Retorno:** Lista com os parâmetros de configuração.
 
 - **EnsureFDManagerInitialized;**
-  - **Descrição:** Garante que o gerenciador do **FireDAC** esteja inicializado.
+  - **Descrição:** Garante a inicialização do gerenciador **FireDAC**.
 
 - **ConfigureFDManager;**
-  - **Descrição:** Configura o gerenciador do **FireDAC** com as opções necessárias para reconexão automática.
+  - **Descrição:** Configura o gerenciador **FireDAC** com opções necessárias para suporte a reconexão.
 
-### 🗂️ Unit ADSDataBaseConnectionManager
+---
 
-A **unit ADSDataBaseConnectionManager** fornece funções para gerenciar conexões com o banco de dados **Advantage Database Server (ADS)** usando **FireDAC**. Permite a criação de conexões reutilizáveis e personalizadas, bem como o gerenciamento de um pool de conexões.
+### 🗂️ Unidade `ADSDataBaseConnectionManager`
 
-#### Funções e Procedimentos
+A unidade **`ADSDataBaseConnectionManager`** possibilita o gerenciamento de conexões reutilizáveis com o banco de dados **Advantage Database Server (ADS)** utilizando **FireDAC**. Ela permite criar conexões personalizadas e gerenciar o pool de conexões para maximizar a eficiência.
+
+#### 🔧 Funções e Procedimentos
 
 - **GetConnection(const AConfiguration: TADSConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **ADS** com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
+  - **Descrição:** Retorna uma conexão configurada com o banco **ADS**, com base nas configurações, no nome do banco e no prefixo especificados.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **ADS**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+    - `AConfiguration`: Parâmetros de configuração do banco **ADS**.
+    - `ADatabase`: Nome do banco.
+    - `APrefix`: Prefixo de identificação da conexão.
+  - **Retorno:** Instância de `TFDConnection` configurada.
 
 - **GetConnection(const AConfiguration: TADSConfiguration; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **ADS** com base nas configurações fornecidas e no prefixo.
+  - **Descrição:** Retorna uma conexão configurada com o banco **ADS** com base nas configurações e no prefixo.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **ADS**.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+    - `AConfiguration`: Parâmetros de configuração do banco **ADS**.
+    - `APrefix`: Prefixo da conexão.
+  - **Retorno:** Instância de `TFDConnection`.
 
 - **GetConnection(const AConfiguration: TADSConfiguration): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **ADS** com base apenas nas configurações fornecidas.
+  - **Descrição:** Retorna uma conexão configurada somente com os parâmetros do banco **ADS**.
   - **Parâmetro:** 
-    - `AConfiguration`: Configurações do banco de dados **ADS**.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+    - `AConfiguration`: Parâmetros de configuração **ADS**.
+  - **Retorno:** Instância de `TFDConnection`.
 
 - **SetupConnection(const AConfiguration: TADSConfiguration; const ADatabase: string; const APrefix: string; var AConnection: TFDConnection);**
-  - **Descrição:** Configura uma conexão com o banco de dados **ADS** com base nas configurações e parâmetros fornecidos.
+  - **Descrição:** Configura uma conexão com o banco **ADS** com base nos parâmetros e no prefixo fornecidos.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **ADS**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-    - `AConnection`: A conexão a ser configurada.
-  - **Exceção:** Lança uma exceção se a DLL especificada em `VendorLib` não for encontrada.
+    - `AConfiguration`: Configurações **ADS**.
+    - `ADatabase`: Nome do banco.
+    - `APrefix`: Prefixo da conexão.
+    - `AConnection`: Instância da conexão a ser configurada.
+  - **Exceção:** Lança uma exceção se a biblioteca (`VendorLib`) especificada não for encontrada.
 
-- **DefaultConnection(const AConfiguration: TADSConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão padrão com o banco de dados **ADS**. Se uma conexão padrão já existir, ela será retornada.
-  - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **ADS**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+---
 
-- **CustomConnection(const AConfiguration: TADSConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão personalizada com o banco de dados **ADS**. Se uma conexão com o prefixo fornecido já existir, ela será retornada.
-  - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **ADS**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+### 🗂️ Unidade `Horse.Connection.ADS`
 
-### 🗂️ Unit Horse.Connection.ADS
+A unidade **`Horse.Connection.ADS`** facilita a integração do framework **Horse** com o banco de dados **Advantage Database Server (ADS)** usando **FireDAC**. Ela fornece métodos para configurar e aplicar parâmetros de conexão.
 
-A **unit Horse.Connection.ADS** fornece integração com o **Horse** para gerenciar conexões com o banco de dados **Advantage Database Server (ADS)** usando **FireDAC**. Inclui funções para configurar a conexão e aplicar parâmetros específicos de configuração.
-
-#### Funções e Procedimentos
+#### 🔧 Funções e Procedimentos
 
 - **ADSConnection: TFDConnection;**
-  - **Descrição:** Retorna uma conexão configurada para o banco de dados **ADS** usando as configurações atuais.
-  - **Retorno:** Uma instância de `TFDConnection` configurada para o banco de dados **ADS**.
+  - **Descrição:** Obtém uma conexão configurada com o banco **ADS** com as configurações atuais.
+  - **Retorno:** Instância de `TFDConnection` para o banco **ADS**.
 
-- **ApplyDatabaseConfiguration(const AParameter: TADSConfigurationParameter; const Value: TValue);**
-  - **Descrição:** Aplica um parâmetro de configuração ao banco de dados **ADS** usando um valor genérico.
-  - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `Value`: O valor do parâmetro como `TValue`.
-
-- **ApplyDatabaseConfiguration(const AParameter: TADSConfigurationParameter; const Value: TADSServerType);**
-  - **Descrição:** Aplica um parâmetro de tipo de servidor ao banco de dados **ADS**.
-  - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `Value`: O valor do parâmetro como `TADSServerType`.
-
-- **ApplyDatabaseConfiguration(const AParameter: TADSConfigurationParameter; const Value: TADSCharacterSet);**
-  - **Descrição:** Aplica um parâmetro de conjunto de caracteres ao banco de dados **ADS**.
-  - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `Value`: O valor do parâmetro como `TADSCharacterSet`.
-
-- **ApplyDatabaseConfiguration(const AParameter: TADSConfigurationParameter; const Value: TADSProtocol);**
-  - **Descrição:** Aplica um parâmetro de protocolo ao banco de dados **ADS**.
-  - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `Value`: O valor do parâmetro como `TADSProtocol`.
-
-- **ApplyDatabaseConfiguration(const AParameter: TADSConfigurationParameter; const Value: TADSTableType);**
-  - **Descrição:** Aplica um parâmetro de tipo de tabela ao banco de dados **ADS**.
-  - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `Value`: O valor do parâmetro como `TADSTableType`.
-
-- **ApplyDatabaseConfiguration(const AParameter: TADSConfigurationParameter; const Value: TADSLocking);**
-  - **Descrição:** Aplica um parâmetro de bloqueio ao banco de dados **ADS**.
-  - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `Value`: O valor do parâmetro como `TADSLocking`.
+- **ApplyDatabaseConfiguration** (várias sobrecargas para diferentes tipos)
+  - **Descrição:** Aplica parâmetros de configuração ao banco de dados **ADS**. Os tipos de configuração incluem `TADSServerType`, `TADSCharacterSet`, `TADSProtocol`, entre outros.
+  - **Parâmetros:** 
+    - `AParameter`: Parâmetro de configuração específico.
+    - `Value`: Valor do parâmetro no tipo esperado.
 
 - **SetConnectionPrefix(const AValue: string);**
-  - **Descrição:** Define o prefixo da conexão para o banco de dados **ADS**.
+  - **Descrição:** Define o prefixo da conexão para o banco **ADS**.
   - **Parâmetro:** 
-    - `AValue`: O valor do prefixo.
+    - `AValue`: Valor do prefixo.
 
 - **SetDatabase(const AValue: string);**
-  - **Descrição:** Define o caminho do banco de dados para o **ADS**.
+  - **Descrição:** Define o caminho do banco de dados para **ADS**.
   - **Parâmetro:** 
-    - `AValue`: O caminho do banco de dados.
+    - `AValue`: Caminho do banco.
 
 - **HorseConnectionADS(Req: THorseRequest; Res: THorseResponse; Next: TProc);**
-  - **Descrição:** Middleware para integração com o **Horse**. Define a conexão com o banco de dados **ADS** para cada requisição HTTP.
+  - **Descrição:** Middleware para integração com o framework **Horse**. Define a conexão com o banco **ADS** para cada requisição.
   - **Parâmetros:**
-    - `Req`: O objeto de requisição do **Horse**.
-    - `Res`: O objeto de resposta do **Horse**.
-    - `Next`: O procedimento a ser executado na sequência.
+    - `Req`: Objeto de requisição do **Horse**.
+    - `Res`: Objeto de resposta do **Horse**.
+    - `Next`: Procedimento a ser executado na sequência.
 
-### 🗂️ Unit FBDatabaseConfigurationManager
+---
 
-A **unit FBDatabaseConfigurationManager** fornece funções para gerenciar configurações de conexão com o banco de dados **Firebird** usando **FireDAC**. Permite a criação de definições de conexão reutilizáveis e personalizadas.
+### ⚠️ Exceções
+- **RaiseInvalidTypeException**: Lança uma exceção ao detectar tipos incompatíveis de parâmetros de configuração, facilitando a identificação e a resolução de erros.
 
-#### Funções e Procedimentos
+
+---
+
+### 🗂️ **Unit `FBDatabaseConfigurationManager`**
+
+A **unit `FBDatabaseConfigurationManager`** oferece funções para gerenciar configurações de conexão com o banco de dados **Firebird** utilizando **FireDAC**. Ela permite criar definições de conexão personalizadas e reutilizáveis, otimizando a gestão de conexões.
+
+#### 🔧 **Funções e Procedimentos**
 
 - **Initialize(const AConfiguration: TFBConfiguration; const ADatabase: string; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **Firebird** com base nas configurações fornecidas, nome do banco de dados e prefixo.
+  - **Descrição:** Inicializa a configuração do **FireDAC** para o banco de dados **Firebird**, com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
   - **Parâmetros:**
     - `AConfiguration`: Configurações de conexão para o banco de dados **Firebird**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
 
 - **Initialize(const AConfiguration: TFBConfiguration; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **Firebird** com base nas configurações fornecidas e no prefixo.
+  - **Descrição:** Inicializa a configuração do **FireDAC** para o banco de dados **Firebird**, com base nas configurações fornecidas e no prefixo.
   - **Parâmetros:**
     - `AConfiguration`: Configurações de conexão para o banco de dados **Firebird**.
-    - `APrefix`: Prefixo para identificar a conexão.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
 
 - **Initialize(const AConfiguration: TFBConfiguration);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **Firebird** usando apenas as configurações fornecidas.
+  - **Descrição:** Inicializa a configuração do **FireDAC** para o banco de dados **Firebird**, usando apenas as configurações fornecidas.
   - **Parâmetro:** 
     - `AConfiguration`: Configurações de conexão para o banco de dados **Firebird**.
 
 - **GetConnectionDef(const APrefix: string): string;**
   - **Descrição:** Retorna o nome da definição de conexão com base no prefixo fornecido.
   - **Parâmetro:**
-    - `APrefix`: Prefixo para identificar a conexão.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
   - **Retorno:** Nome da definição de conexão.
 
 - **GetConnectionDef: string;**
@@ -1101,105 +1000,93 @@ A **unit FBDatabaseConfigurationManager** fornece funções para gerenciar confi
   - **Retorno:** Nome da definição de conexão padrão.
 
 - **CreateConnectionParameters(const AConfiguration: TFBConfiguration; const ADatabase: string): TStrings;**
-  - **Descrição:** Cria uma lista de parâmetros de conexão para o banco de dados **Firebird** com base nas configurações fornecidas.
+  - **Descrição:** Cria uma lista de parâmetros de conexão para o banco de dados **Firebird**, com base nas configurações fornecidas.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **Firebird**.
+    - `AConfiguration`: Configurações de conexão para o banco de dados **Firebird**.
     - `ADatabase`: Nome do banco de dados.
-  - **Retorno:** Lista de strings contendo os parâmetros de conexão.
+  - **Retorno:** Lista de parâmetros de conexão, representada por um conjunto de `TStrings`.
 
 - **EnsureFDManagerInitialized;**
-  - **Descrição:** Garante que o gerenciador do **FireDAC** esteja inicializado.
+  - **Descrição:** Garante que o **FireDAC Manager** esteja devidamente inicializado.
 
 - **ConfigureFDManager;**
-  - **Descrição:** Configura o gerenciador do **FireDAC** com as opções necessárias para reconexão automática.
+  - **Descrição:** Configura o **FireDAC Manager** com as opções necessárias para a reconexão automática.
 
-#### Inicialização e Finalização
+### ⚙️ **Finalidade**
 
-- **initialization**
-  - **Descrição:** Assegura que o `FDManager` esteja ativo para o gerenciamento de conexões ao iniciar a aplicação.
+Esta **unit** é essencial para gerenciar e personalizar conexões com o banco de dados **Firebird**, centralizando definições de conexão e facilitando a reutilização e manutenção das configurações no **FireDAC**.
 
-- **finalization**
-  - **Descrição:** Desativa e libera o `FDManager` ao finalizar a aplicação para evitar vazamentos de memória.
+___
 
-### ⚙️ Finalidade
+### 🗂️ **Unit `FBDatabaseConnectionManager`**
 
-Esta unit é essencial para gerenciar e personalizar conexões com o banco de dados **Firebird**, centralizando definições de conexão e facilitando a reutilização e manutenção das configurações no **FireDAC**.
+A **unit `FBDatabaseConnectionManager`** oferece funções para gerenciar conexões com o banco de dados **Firebird** utilizando **FireDAC**. Ela permite criar conexões reutilizáveis e personalizadas, além de gerenciar um pool de conexões.
 
-### 🗂️ Unit FBDatabaseConnectionManager
-
-A **unit FBDatabaseConnectionManager** fornece funções para gerenciar conexões com o banco de dados **Firebird** usando **FireDAC**. Permite a criação de conexões reutilizáveis e personalizadas, além de gerenciar um pool de conexões.
-
-#### Funções e Procedimentos
+#### 🔧 **Funções e Procedimentos**
 
 - **GetConnection(const AConfiguration: TFBConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **Firebird** com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
+  - **Descrição:** Retorna uma conexão configurada com o banco de dados **Firebird**, com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **Firebird**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **GetConnection(const AConfiguration: TFBConfiguration; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **Firebird** com base nas configurações fornecidas e no prefixo.
+  - **Descrição:** Retorna uma conexão configurada com o banco de dados **Firebird**, com base nas configurações fornecidas e no prefixo.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **Firebird**.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **GetConnection(const AConfiguration: TFBConfiguration): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **Firebird** baseada apenas nas configurações fornecidas.
+  - **Descrição:** Retorna uma conexão configurada com o banco de dados **Firebird**, baseada apenas nas configurações fornecidas.
   - **Parâmetro:** 
     - `AConfiguration`: Configurações do banco de dados **Firebird**.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **DefaultConnection(const AConfiguration: TFBConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão padrão com o banco de dados **Firebird**. Se uma conexão padrão já existir, ela será retornada.
+  - **Descrição:** Retorna uma conexão padrão com o banco de dados **Firebird**. Se uma conexão padrão já existir, ela será reutilizada.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **Firebird**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **CustomConnection(const AConfiguration: TFBConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão personalizada com o banco de dados **Firebird**. Se uma conexão com o prefixo fornecido já existir, ela será retornada.
+  - **Descrição:** Retorna uma conexão personalizada com o banco de dados **Firebird**. Caso uma conexão com o prefixo fornecido já exista, ela será retornada.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **Firebird**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Uma instância configurada de `TFDConnection`.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **SetupConnection(const AConfiguration: TFBConfiguration; const ADatabase: string; const APrefix: string; var AConnection: TFDConnection);**
   - **Descrição:** Configura uma conexão com o banco de dados **Firebird** com base nas configurações e parâmetros fornecidos.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **Firebird**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
+    - `APrefix`: Prefixo utilizado para identificar a conexão.
     - `AConnection`: A conexão a ser configurada.
 
-#### Inicialização e Finalização
+### ⚙️ **Finalidade**
 
-- **initialization**
-  - **Descrição:** Inicializa o pool de conexões `FConnectionPool` ao iniciar a aplicação.
+Esta **unit** é fundamental para gerenciar conexões com o banco de dados **Firebird**, centralizando o controle de conexões padrão e personalizadas. Ela garante a reutilização eficiente através da gestão de um pool de conexões.
 
-- **finalization**
-  - **Descrição:** Libera o `FDConnection` e o pool de conexões `FConnectionPool` ao finalizar a aplicação para evitar vazamentos de memória.
+___
 
-### ⚙️ Finalidade
+### 🗂️ **Unit `Horse.Connection.FB`**
 
-Esta unit é essencial para gerenciar conexões com o banco de dados **Firebird**, centralizando o controle de conexões padrão e personalizadas, garantindo reutilização e eficiência através do gerenciamento de um pool de conexões.
+A **unit `Horse.Connection.FB`** proporciona integração com o framework **Horse**, permitindo o gerenciamento de conexões com o banco de dados **Firebird** usando **FireDAC**. Ela inclui funções para configurar a conexão e aplicar parâmetros específicos.
 
-### 🗂️ Unit Horse.Connection.FB
-
-A **unit Horse.Connection.FB** fornece integração com o **Horse** para gerenciar conexões com o banco de dados **Firebird** usando **FireDAC**. Inclui funções para configurar a conexão e aplicar parâmetros específicos de configuração.
-
-#### Funções e Procedimentos
+#### 🔧 **Funções e Procedimentos**
 
 - **FBConnection: TFDConnection;**
-  - **Descrição:** Retorna uma conexão configurada para o banco de dados **Firebird** usando as configurações atuais.
-  - **Retorno:** Uma instância de `TFDConnection` configurada para o banco de dados **Firebird**.
+  - **Descrição:** Retorna uma conexão configurada para o banco de dados **Firebird** utilizando as configurações atuais.
+  - **Retorno:** Instância de `TFDConnection` configurada para o banco de dados **Firebird**.
 
 - **ApplyDatabaseConfiguration(const AParameter: TFBConfigurationParameter; const Value: TValue);**
-  - **Descrição:** Aplica um parâmetro de configuração ao banco de dados **Firebird** usando um valor genérico.
+  - **Descrição:** Aplica um parâmetro de configuração ao banco de dados **Firebird** utilizando um valor genérico.
   - **Parâmetros:**
     - `AParameter`: O parâmetro de configuração a ser aplicado.
     - `Value`: O valor do parâmetro como `TValue`.
@@ -1207,7 +1094,9 @@ A **unit Horse.Connection.FB** fornece integração com o **Horse** para gerenci
 - **ApplyDatabaseConfiguration(const AParameter: TFBConfigurationParameter; const Value: TFBProtocolType);**
   - **Descrição:** Aplica um parâmetro de tipo de protocolo ao banco de dados **Firebird**.
   - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
+    - `AParameter`: O parâmetro de configuração a ser
+
+ aplicado.
     - `Value`: O valor do parâmetro como `TFBProtocolType`.
 
 - **ApplyDatabaseConfiguration(const AParameter: TFBConfigurationParameter; const Value: TFBOpenModeType);**
@@ -1223,7 +1112,7 @@ A **unit Horse.Connection.FB** fornece integração com o **Horse** para gerenci
     - `Value`: O valor do parâmetro como `TFBCharacterSetType`.
 
 - **SetConnectionPrefix(const AValue: string);**
-  - **Descrição:** Define o prefixo da conexão para o banco de dados **Firebird**.
+  - **Descrição:** Define o prefixo da conexão com o banco de dados **Firebird**.
   - **Parâmetro:** 
     - `AValue`: O valor do prefixo.
 
@@ -1239,130 +1128,113 @@ A **unit Horse.Connection.FB** fornece integração com o **Horse** para gerenci
     - `Res`: O objeto de resposta do **Horse**.
     - `Next`: O procedimento a ser executado na sequência.
 
-### ⚙️ Finalidade
+---
 
-Esta unit facilita a integração do banco de dados **Firebird** com o framework **Horse**, permitindo que cada requisição HTTP utilize uma conexão configurada de maneira otimizada e flexível, com suporte a parâmetros específicos e personalizados.
+### ⚙️ **Finalidade**
 
-### 🗂️ Unit MySQLDatabaseConfigurationManager
+Esta **unit** facilita a integração do banco de dados **Firebird** com o framework **Horse**, permitindo que cada requisição HTTP utilize uma conexão configurada de maneira otimizada e flexível, com suporte a parâmetros específicos e personalizados.
 
-A **unit MySQLDatabaseConfigurationManager** fornece funções para gerenciar configurações de conexão com o banco de dados **MySQL** usando **FireDAC**. Permite criar definições de conexão reutilizáveis e personalizadas.
+---
 
-#### Funções e Procedimentos
+### 🗂️ **Unit MySQLDatabaseConfigurationManager**
+
+A unit `MySQLDatabaseConfigurationManager` oferece métodos para gerenciar configurações de conexão com o banco de dados **MySQL** utilizando **FireDAC**. Essa unit permite definir configurações reutilizáveis e customizadas, facilitando o uso e a manutenção de conexões com o MySQL em diferentes contextos.
+
+#### 🔧 **Principais Funções e Procedimentos**
 
 - **Initialize(const AConfiguration: TMySQLConfiguration; const ADatabase: string; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **MySQL** com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
+  - **Descrição:** Inicializa as configurações do FireDAC para uma conexão com o **MySQL**, utilizando as configurações fornecidas, um nome de banco de dados e um prefixo específico.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações de conexão para o banco de dados **MySQL**.
+    - `AConfiguration`: Configurações de conexão para o MySQL.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão no **FireDAC Manager**.
+    - `APrefix`: Prefixo que identifica a conexão no FireDAC Manager.
 
 - **Initialize(const AConfiguration: TMySQLConfiguration; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **MySQL** com as configurações fornecidas e o prefixo.
+  - **Descrição:** Configura a conexão do FireDAC para o **MySQL** usando as configurações especificadas e um prefixo.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações de conexão para o banco de dados **MySQL**.
-    - `APrefix`: Prefixo para identificar a conexão.
+    - `AConfiguration`: Configurações de conexão para o MySQL.
+    - `APrefix`: Prefixo para a conexão.
 
 - **Initialize(const AConfiguration: TMySQLConfiguration);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **MySQL** apenas com as configurações fornecidas.
+  - **Descrição:** Configura a conexão do FireDAC para o **MySQL** utilizando apenas as configurações fornecidas.
   - **Parâmetro:** 
-    - `AConfiguration`: Configurações de conexão para o banco de dados **MySQL**.
+    - `AConfiguration`: Configurações de conexão para o MySQL.
 
 - **GetConnectionDef(const APrefix: string): string;**
-  - **Descrição:** Retorna o nome da definição de conexão com base no prefixo fornecido.
+  - **Descrição:** Retorna o nome da definição de conexão com base no prefixo informado.
   - **Parâmetro:**
-    - `APrefix`: Prefixo a ser utilizado na definição de conexão.
-  - **Retorno:** Nome da definição de conexão com o prefixo.
-
-- **GetConnectionDef: string;**
-  - **Descrição:** Retorna o nome da definição de conexão padrão.
-  - **Retorno:** Nome da definição de conexão padrão.
+    - `APrefix`: Prefixo usado na definição de conexão.
+  - **Retorno:** Nome da definição de conexão com o prefixo aplicado.
 
 - **CreateConnectionParameters(const AConfiguration: TMySQLConfiguration; const ADatabase: string): TStrings;**
-  - **Descrição:** Cria uma lista de parâmetros de conexão para o banco de dados **MySQL** com base nas configurações fornecidas.
+  - **Descrição:** Gera uma lista de parâmetros de conexão para o **MySQL** com base nas configurações fornecidas.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **MySQL**.
     - `ADatabase`: Nome do banco de dados.
   - **Retorno:** Lista de parâmetros de conexão.
 
-#### Inicialização e Finalização
+#### 🔄 **Controle de Inicialização e Finalização**
 
 - **EnsureFDManagerInitialized**
-  - **Descrição:** Garante que o gerenciador do **FireDAC** esteja inicializado.
+  - **Descrição:** Garante que o FireDAC Manager esteja ativo e inicializado.
 
 - **ConfigureFDManager**
-  - **Descrição:** Configura o gerenciador do **FireDAC** com as opções necessárias.
+  - **Descrição:** Configura o FireDAC Manager com as opções necessárias para a conexão.
 
-### ⚙️ Finalidade
+### ⚙️ **Objetivo Geral**
 
-Esta unit facilita o gerenciamento de conexões com o **MySQL** através do **FireDAC**, permitindo configurações personalizadas e reutilizáveis para diferentes cenários e ambientes.
+Esta unit centraliza e facilita o gerenciamento de conexões com o **MySQL** no FireDAC, permitindo configurar conexões personalizadas e reutilizáveis para diferentes cenários e ambientes, promovendo uma administração eficiente de recursos.
 
-### 🗂️ Unit MySQLDatabaseConnectionManager
+---
 
-A **unit MySQLDatabaseConnectionManager** fornece funções para gerenciar conexões com o banco de dados **MySQL** usando **FireDAC**. Permite a criação de conexões reutilizáveis e personalizadas, além de gerenciar um pool de conexões.
+### 🗂️ **Unit MySQLDatabaseConnectionManager**
 
-#### Funções e Procedimentos
+A unit `MySQLDatabaseConnectionManager` oferece funções para gerenciar conexões com o banco de dados **MySQL** utilizando **FireDAC**. Ela permite a criação de conexões customizadas, gerencia um pool de conexões e promove a reutilização dos recursos de conexão.
+
+#### 🔧 **Funções e Procedimentos**
 
 - **GetConnection(const AConfiguration: TMySQLConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **MySQL** com base nas configurações fornecidas, nome do banco de dados, e prefixo.
+  - **Descrição:** Retorna uma conexão com o **MySQL** com base nas configurações fornecidas, incluindo o nome do banco de dados e o prefixo.
   - **Parâmetros:**
     - `AConfiguration`: Configurações para o banco de dados **MySQL**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
-
-- **GetConnection(const AConfiguration: TMySQLConfiguration; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **MySQL** com base nas configurações e prefixo.
-  - **Parâmetros:**
-    - `AConfiguration`: Configurações para o banco de dados **MySQL**.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
-
-- **GetConnection(const AConfiguration: TMySQLConfiguration): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **MySQL** com base apenas nas configurações fornecidas.
-  - **Parâmetro:**
-    - `AConfiguration`: Configurações para o banco de dados **MySQL**.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `APrefix`: Prefixo que identifica a conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **DefaultConnection(const AConfiguration: TMySQLConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão padrão com o banco de dados **MySQL**; se uma conexão já existir, ela será retornada.
+  - **Descrição:** Retorna uma conexão padrão para o **MySQL**; caso uma conexão já esteja ativa, a mesma será reutilizada.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **MySQL**.
+    - `AConfiguration`: Configurações para o banco de dados **MySQL**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `APrefix`: Prefixo para a conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **CustomConnection(const AConfiguration: TMySQLConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão personalizada com o banco de dados **MySQL**; se já existir uma conexão com o prefixo, ela será retornada.
+  - **Descrição:** Retorna uma conexão personalizada com o **MySQL**; caso uma conexão já exista para o prefixo, será reutilizada.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **MySQL**.
+    - `AConfiguration`: Configurações para o banco de dados **MySQL**.
     - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `APrefix`: Prefixo para a conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
-#### Inicialização e Finalização
+### ⚙️ **Objetivo Geral**
 
-- **SetupConnection**
-  - **Descrição:** Configura uma conexão com base nas configurações e parâmetros fornecidos.
+Esta unit centraliza a criação e o controle de conexões **MySQL** via FireDAC, promovendo a reutilização e a eficiência por meio do gerenciamento de um pool de conexões.
 
-- **FConnectionPool**
-  - **Descrição:** Dicionário que gerencia um pool de conexões para o **MySQL**, permitindo reutilização e gerenciamento eficiente das conexões.
+---
 
-### ⚙️ Finalidade
+### 🗂️ **Unit Horse.Connection.MySQL**
 
-Esta unit facilita o gerenciamento de conexões **MySQL** através do **FireDAC**, permitindo a criação de conexões padronizadas e customizadas para diferentes cenários e ambientes.
+A unit `Horse.Connection.MySQL` fornece uma integração com o framework **Horse** para gerenciar conexões com o banco de dados **MySQL** via **FireDAC**. Esta integração inclui funções para configuração da conexão e ajuste de parâmetros específicos.
 
-### 🗂️ Unit Horse.Connection.MySQL
-
-A **unit Horse.Connection.MySQL** fornece integração com o **Horse** para gerenciar conexões com o banco de dados **MySQL** usando **FireDAC**. Inclui funções para configurar a conexão e aplicar parâmetros específicos de configuração.
-
-#### Funções e Procedimentos
+#### 🔧 **Funções e Procedimentos**
 
 - **MySQLConnection**
-  - **Descrição:** Retorna uma conexão configurada para o banco de dados **MySQL** usando as configurações atuais.
-  - **Retorno:** Uma instância de `TFDConnection` configurada para o banco de dados **MySQL**.
+  - **Descrição:** Retorna uma conexão configurada para o **MySQL** com as definições atuais.
+  - **Retorno:** Instância configurada de `TFDConnection` para o banco de dados **MySQL**.
 
 - **ApplyDatabaseConfiguration(const AParameter: TMySQLConfigurationParameter; const Value: TValue)**
-  - **Descrição:** Aplica um parâmetro de configuração ao banco de dados **MySQL** usando um valor genérico.
+  - **Descrição:** Aplica um parâmetro de configuração ao banco de dados **MySQL** utilizando um valor genérico.
   - **Parâmetros:**
     - `AParameter`: O parâmetro de configuração a ser aplicado.
     - `Value`: O valor do parâmetro como `TValue`.
@@ -1370,56 +1242,54 @@ A **unit Horse.Connection.MySQL** fornece integração com o **Horse** para gere
 - **SetConnectionPrefix(const AValue: string)**
   - **Descrição:** Define o prefixo da conexão para o banco de dados **MySQL**.
   - **Parâmetro:**
-    - `AValue`: O valor do prefixo.
-
-- **SetDatabase(const AValue: string)**
-  - **Descrição:** Define o caminho do banco de dados para o **MySQL**.
-  - **Parâmetro:**
-    - `AValue`: O caminho do banco de dados.
+    - `AValue`: Valor do prefixo para a conexão.
 
 - **HorseConnectionMySQL(Req: THorseRequest; Res: THorseResponse; Next: TProc)**
-  - **Descrição:** Middleware para integração com o **Horse**. Define a conexão com o banco de dados **MySQL** para cada requisição HTTP recebida.
+  - **Descrição:** Middleware para integração com o **Horse**. Define a conexão com o **MySQL** para cada requisição HTTP.
   - **Parâmetros:**
-    - `Req`: O objeto de requisição do **Horse**.
-    - `Res`: O objeto de resposta do **Horse**.
-    - `Next`: O procedimento a ser executado na sequência.
+    - `Req`: Objeto de requisição do **Horse**.
+    - `Res`: Objeto de resposta do **Horse**.
+    - `Next`: Procedimento a ser executado após a configuração da conexão.
 
-### ⚙️ Finalidade
+### ⚙️ **Objetivo Geral**
 
-Esta unit permite a integração com o **Horse**, simplificando o gerenciamento de conexões **MySQL** em aplicações web Delphi.
+A unit promove uma integração eficiente com o framework **Horse**, facilitando o gerenciamento de conexões **MySQL** em aplicações web desenvolvidas em Delphi.
 
-### 🗂️ Unit PGDatabaseConfigurationManager
 
-A **unit PGDatabaseConfigurationManager** fornece funções para gerenciar configurações de conexão com o banco de dados **PostgreSQL** usando **FireDAC**. Permite criar definições de conexão reutilizáveis e personalizadas.
+---
 
-#### Funções e Procedimentos
+### 🗂️ **Unit PGDatabaseConfigurationManager**
+
+A **unit PGDatabaseConfigurationManager** oferece funções especializadas para o gerenciamento de configurações de conexão com o banco de dados **PostgreSQL** utilizando **FireDAC**. Ela possibilita a criação de definições de conexão flexíveis e reutilizáveis, atendendo a diferentes cenários de integração.
+
+#### 🔧 **Funções e Procedimentos**
 
 - **Initialize(const AConfiguration: TPGConfiguration; const ADatabase: string; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **PostgreSQL** com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
+  - **Descrição:** Inicializa a configuração do **FireDAC** para o banco de dados **PostgreSQL** utilizando as configurações fornecidas, o nome do banco de dados e o prefixo.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **PostgreSQL**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para a definição da conexão.
-
+    - `AConfiguration`: Configurações detalhadas do banco de dados **PostgreSQL**.
+    - `ADatabase`: Nome da base de dados.
+    - `APrefix`: Prefixo utilizado na definição da conexão.
+  
 - **Initialize(const AConfiguration: TPGConfiguration; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **PostgreSQL** com as configurações fornecidas e um prefixo.
+  - **Descrição:** Inicializa a configuração do **FireDAC** para o banco de dados **PostgreSQL** com base nas configurações fornecidas e um prefixo.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **PostgreSQL**.
     - `APrefix`: Prefixo para a definição da conexão.
 
 - **Initialize(const AConfiguration: TPGConfiguration);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **PostgreSQL** com base nas configurações fornecidas.
+  - **Descrição:** Inicializa a configuração do **FireDAC** para o banco de dados **PostgreSQL** com as configurações fornecidas, sem a necessidade de prefixo.
   - **Parâmetro:** 
     - `AConfiguration`: Configurações do banco de dados **PostgreSQL**.
 
 - **GetConnectionDef(const APrefix: string): string;**
-  - **Descrição:** Retorna o nome da definição de conexão baseado no prefixo fornecido.
+  - **Descrição:** Retorna o nome da definição de conexão baseada no prefixo especificado.
   - **Parâmetro:**
     - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Nome da definição de conexão com o prefixo.
+  - **Retorno:** Nome da definição de conexão com o prefixo especificado.
 
 - **GetConnectionDef: string;**
-  - **Descrição:** Retorna o nome da definição de conexão padrão.
+  - **Descrição:** Retorna o nome da definição de conexão padrão, sem considerar prefixos.
   - **Retorno:** Nome da definição de conexão padrão.
 
 - **CreateConnectionParameters(const AConfiguration: TPGConfiguration; const ADatabase: string): TStrings;**
@@ -1427,26 +1297,28 @@ A **unit PGDatabaseConfigurationManager** fornece funções para gerenciar confi
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **PostgreSQL**.
     - `ADatabase`: Nome do banco de dados.
-  - **Retorno:** Lista de parâmetros de conexão.
+  - **Retorno:** Lista de parâmetros de conexão configurados.
 
 - **EnsureFDManagerInitialized;**
-  - **Descrição:** Garante que o gerenciador do **FireDAC** esteja inicializado.
+  - **Descrição:** Garante que o gerenciador **FireDAC** esteja devidamente inicializado, pronto para o uso.
 
 - **ConfigureFDManager;**
-  - **Descrição:** Configura o gerenciador do **FireDAC** com as opções necessárias para reconexão automática.
+  - **Descrição:** Configura o gerenciador **FireDAC** com as opções necessárias para garantir reconexão automática em caso de falha.
 
-### ⚙️ Finalidade
+### ⚙️ **Finalidade**
 
-Esta unit centraliza a configuração de conexões com o **PostgreSQL**, permitindo ajustes modulares de opções de conexão como servidor, autenticação e pooling.
+Esta **unit** centraliza a configuração de conexões com o banco de dados **PostgreSQL**, permitindo ajustes modulares de opções de conexão, como servidor, autenticação e pooling. Essa abordagem facilita a manutenção e o gerenciamento de conexões em aplicações de larga escala.
 
-### 🗂️ Unit PGDatabaseConnectionManager
+---
 
-A **unit PGDatabaseConnectionManager** fornece funções para gerenciar conexões com o banco de dados **PostgreSQL** usando **FireDAC**, permitindo a criação de conexões reutilizáveis e customizadas, além de gerenciamento de pool de conexões.
+### 🗂️ **Unit PGDatabaseConnectionManager**
 
-#### Funções e Procedimentos
+A **unit PGDatabaseConnectionManager** fornece funções robustas para gerenciar conexões com o banco de dados **PostgreSQL** através de **FireDAC**. Ela possibilita a criação de conexões reutilizáveis e personalizadas, além de incluir gerenciamento de pool de conexões, o que otimiza o desempenho e a utilização dos recursos do sistema.
+
+#### 🔧 **Funções e Procedimentos**
 
 - **GetConnection(const AConfiguration: TPGConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **PostgreSQL** com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
+  - **Descrição:** Retorna uma instância de conexão **PostgreSQL** baseada nas configurações fornecidas, no nome do banco de dados e no prefixo especificado.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **PostgreSQL**.
     - `ADatabase`: Nome do banco de dados.
@@ -1454,7 +1326,7 @@ A **unit PGDatabaseConnectionManager** fornece funções para gerenciar conexõe
   - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **GetConnection(const AConfiguration: TPGConfiguration; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **PostgreSQL** com base nas configurações e prefixo fornecidos.
+  - **Descrição:** Retorna uma conexão com o banco de dados **PostgreSQL** com base nas configurações e no prefixo fornecidos.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **PostgreSQL**.
     - `APrefix`: Prefixo para identificar a conexão.
@@ -1467,26 +1339,28 @@ A **unit PGDatabaseConnectionManager** fornece funções para gerenciar conexõe
   - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **SetupConnection(const AConfiguration: TPGConfiguration; const ADatabase: string; const APrefix: string; var AConnection: TFDConnection);**
-  - **Descrição:** Configura uma conexão com o banco de dados **PostgreSQL** usando as configurações e parâmetros fornecidos.
+  - **Descrição:** Configura uma conexão **PostgreSQL** com base nas configurações e parâmetros fornecidos. A conexão é configurada diretamente na variável `AConnection`.
   - **Parâmetros:**
     - `AConfiguration`: Configurações do banco de dados **PostgreSQL**.
     - `ADatabase`: Nome do banco de dados.
     - `APrefix`: Prefixo para identificar a conexão.
-    - `AConnection`: Instância de conexão a ser configurada.
+    - `AConnection`: Instância de conexão que será configurada.
 
-### ⚙️ Finalidade
+### ⚙️ **Finalidade**
 
-Esta **unit** permite a criação e o gerenciamento de conexões reutilizáveis e personalizadas para o banco de dados **PostgreSQL** com **FireDAC**, oferecendo controle de **pooling** de conexões e reconexão automática, otimizando o acesso ao banco de dados e simplificando o gerenciamento de configurações.
+Esta **unit** permite a criação e o gerenciamento de conexões reutilizáveis e personalizadas com o banco de dados **PostgreSQL** através de **FireDAC**. Com suporte para pooling de conexões e reconexão automática, ela otimiza o desempenho das operações no banco de dados, proporcionando um gerenciamento mais eficiente dos recursos.
 
-### 🗂️ Unit Horse.Connection.PG
+---
 
-A **unit Horse.Connection.PG** oferece integração entre o framework **Horse** e o banco de dados **PostgreSQL** através do **FireDAC**. Ela inclui funções para configurar conexões, aplicar parâmetros específicos e gerenciar o caminho e prefixo de conexões, permitindo um gerenciamento eficiente de configurações para cada requisição HTTP recebida no Horse.
+### 🗂️ **Unit Horse.Connection.PG**
 
-#### Funções e Procedimentos
+A **unit Horse.Connection.PG** oferece integração entre o framework **Horse** e o banco de dados **PostgreSQL** usando **FireDAC**. Ela facilita o gerenciamento de conexões, aplicação de parâmetros específicos e o controle do caminho e prefixo das conexões, garantindo um gerenciamento eficiente das configurações para cada requisição HTTP recebida pelo framework.
+
+#### 🔧 **Funções e Procedimentos**
 
 - **PGConnection: TFDConnection;**
-  - **Descrição:** Retorna uma conexão configurada para o banco de dados **PostgreSQL** usando as configurações atuais.
-  - **Retorno:** Instância configurada de `TFDConnection` para o **PostgreSQL**.
+  - **Descrição:** Retorna uma conexão configurada para o banco de dados **PostgreSQL** utilizando as configurações atuais.
+  - **Retorno:** Instância configurada de `TFDConnection` para **PostgreSQL**.
 
 - **ApplyDatabaseConfiguration(const AParameter: TPGConfigurationParameter; const Value: TValue);**
   - **Descrição:** Aplica um parâmetro de configuração ao banco de dados **PostgreSQL** usando um valor genérico.
@@ -1497,52 +1371,54 @@ A **unit Horse.Connection.PG** oferece integração entre o framework **Horse** 
 - **SetConnectionPrefix(const AValue: string);**
   - **Descrição:** Define o prefixo da conexão para o banco de dados **PostgreSQL**.
   - **Parâmetro:** 
-    - `AValue`: Valor do prefixo.
+    - `AValue`: Valor do prefixo a ser definido.
 
 - **SetDatabase(const AValue: string);**
-  - **Descrição:** Define o caminho do banco de dados para o **PostgreSQL**.
+  - **Descrição:** Define o caminho do banco de dados **PostgreSQL** para a conexão.
   - **Parâmetro:** 
-    - `AValue`: Caminho do banco de dados.
+    - `AValue`: Caminho do banco de dados a ser configurado.
 
 - **HorseConnectionPG(Req: THorseRequest; Res: THorseResponse; Next: TProc);**
-  - **Descrição:** Middleware de integração com o Horse. Define a conexão com o banco de dados **PostgreSQL** para cada requisição HTTP recebida.
+  - **Descrição:** Middleware de integração com o **Horse**. Define a conexão com o banco de dados **PostgreSQL** para cada requisição HTTP recebida.
   - **Parâmetros:**
-    - `Req`: Objeto de requisição do Horse.
-    - `Res`: Objeto de resposta do Horse.
-    - `Next`: Procedimento a ser executado na sequência.
+    - `Req`: Objeto de requisição do **Horse**.
+    - `Res`: Objeto de resposta do **Horse**.
+    - `Next`: Procedimento a ser executado após a definição da conexão.
 
-### ⚙️ Finalidade
+### ⚙️ **Finalidade**
 
-A **unit Horse.Connection.PG** permite o gerenciamento de conexões **PostgreSQL** em aplicações **Horse**, assegurando que cada requisição HTTP tenha uma conexão configurada conforme os parâmetros especificados. Essa abordagem facilita o uso de **PostgreSQL** em contextos web, proporcionando uma integração simplificada e eficiente com **Horse**.
+A **unit Horse.Connection.PG** facilita o gerenciamento de conexões **PostgreSQL** em aplicações baseadas no framework **Horse**, assegurando que cada requisição HTTP tenha uma conexão configurada conforme os parâmetros especificados. Isso simplifica a integração de **PostgreSQL** em contextos web, promovendo uma integração eficiente e escalável.
+
+---
 
 ### 🗂️ Unit SQLiteDatabaseConfigurationManager
 
-A **unit SQLiteDatabaseConfigurationManager** fornece funções para gerenciar configurações de conexão com o banco de dados **SQLite** usando **FireDAC**. Permite criar definições de conexão reutilizáveis e personalizadas.
+A **unit SQLiteDatabaseConfigurationManager** oferece funções para gerenciar e configurar conexões com o banco de dados **SQLite** usando **FireDAC**, permitindo a criação de definições de conexão personalizadas e reutilizáveis para diversas aplicações.
 
-#### Funções e Procedimentos
+#### 🔧 Funções e Procedimentos
 
 - **Initialize(const AConfiguration: TSQLiteConfiguration; const ADatabase: string; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **SQLite** com base nas configurações fornecidas, no nome do banco de dados e no prefixo.
+  - **Descrição:** Configura e inicializa o **FireDAC** para o banco de dados **SQLite** com base nas configurações fornecidas, nome do banco de dados e prefixo.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações de conexão para o banco de dados **SQLite**.
-    - `ADatabase`: Nome do banco de dados.
+    - `AConfiguration`: Configurações para conexão com o **SQLite**.
+    - `ADatabase`: Nome da base de dados.
     - `APrefix`: Prefixo para identificar a conexão no **FireDAC Manager**.
 
 - **Initialize(const AConfiguration: TSQLiteConfiguration; const APrefix: string);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **SQLite** com as configurações fornecidas e o prefixo.
+  - **Descrição:** Inicializa a configuração de conexão com base nas configurações e prefixo fornecidos.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações de conexão para o banco de dados **SQLite**.
-    - `APrefix`: Prefixo para identificar a conexão.
+    - `AConfiguration`: Configurações para conexão com o **SQLite**.
+    - `APrefix`: Prefixo para identificação da conexão.
 
 - **Initialize(const AConfiguration: TSQLiteConfiguration);**
-  - **Descrição:** Inicializa a configuração do FireDAC para o banco de dados **SQLite** apenas com as configurações fornecidas.
+  - **Descrição:** Inicializa a conexão apenas com as configurações fornecidas, sem prefixo.
   - **Parâmetro:** 
-    - `AConfiguration`: Configurações de conexão para o banco de dados **SQLite**.
+    - `AConfiguration`: Configurações para conexão com o **SQLite**.
 
 - **GetConnectionDef(const APrefix: string): string;**
-  - **Descrição:** Retorna o nome da definição de conexão com base no prefixo fornecido.
+  - **Descrição:** Retorna o nome da definição de conexão com o prefixo especificado.
   - **Parâmetro:**
-    - `APrefix`: Prefixo a ser utilizado na definição de conexão.
+    - `APrefix`: Prefixo utilizado na definição de conexão.
   - **Retorno:** Nome da definição de conexão com o prefixo.
 
 - **GetConnectionDef: string;**
@@ -1550,133 +1426,139 @@ A **unit SQLiteDatabaseConfigurationManager** fornece funções para gerenciar c
   - **Retorno:** Nome da definição de conexão padrão.
 
 - **CreateConnectionParameters(const AConfiguration: TSQLiteConfiguration; const ADatabase: string): TStrings;**
-  - **Descrição:** Cria uma lista de parâmetros de conexão para o banco de dados **SQLite** com base nas configurações fornecidas.
+  - **Descrição:** Gera uma lista de parâmetros de conexão para o **SQLite** com base nas configurações fornecidas.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **SQLite**.
-    - `ADatabase`: Nome do banco de dados.
+    - `AConfiguration`: Configurações da base de dados **SQLite**.
+    - `ADatabase`: Nome da base de dados.
   - **Retorno:** Lista de parâmetros de conexão.
 
-#### Inicialização e Finalização
+#### 🔄 Inicialização e Finalização
 
 - **EnsureFDManagerInitialized**
-  - **Descrição:** Garante que o gerenciador do **FireDAC** esteja inicializado.
+  - **Descrição:** Garante que o gerenciador do **FireDAC** esteja ativo.
 
 - **ConfigureFDManager**
   - **Descrição:** Configura o gerenciador do **FireDAC** com as opções necessárias.
 
 ### ⚙️ Finalidade
 
-Esta unit facilita o gerenciamento de conexões com o **SQLite** através do **FireDAC**, permitindo configurações personalizadas e reutilizáveis para diferentes cenários e ambientes.
+Esta unit simplifica o gerenciamento de conexões **SQLite** por meio do **FireDAC**, oferecendo configurações flexíveis e reutilizáveis para diferentes contextos e ambientes.
+
+---
 
 ### 🗂️ Unit SQLiteDatabaseConnectionManager
 
-A **unit SQLiteDatabaseConnectionManager** fornece funções para gerenciar conexões com o banco de dados **SQLite** usando **FireDAC**. Permite a criação de conexões reutilizáveis e personalizadas, além de gerenciar um pool de conexões e configurar a criptografia do banco de dados.
+A **unit SQLiteDatabaseConnectionManager** fornece ferramentas para gerenciar conexões com o banco de dados **SQLite** utilizando **FireDAC**. Além de suportar conexões customizadas e reutilizáveis, inclui funcionalidades para o gerenciamento de pool e criptografia de banco de dados.
 
-#### Funções e Procedimentos
+#### 🔧 Funções e Procedimentos
 
 - **GetConnection(const AConfiguration: TSQLiteConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **SQLite** com base nas configurações fornecidas, nome do banco de dados e prefixo.
+  - **Descrição:** Retorna uma conexão com base nas configurações, nome da base de dados e prefixo especificados.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações para o banco de dados **SQLite**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `AConfiguration`: Configurações da base de dados **SQLite**.
+    - `ADatabase`: Nome da base de dados.
+    - `APrefix`: Prefixo para identificação da conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **GetConnection(const AConfiguration: TSQLiteConfiguration; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **SQLite** com base nas configurações e prefixo.
+  - **Descrição:** Retorna uma conexão com base nas configurações e prefixo fornecidos.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações para o banco de dados **SQLite**.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `AConfiguration`: Configurações da base de dados **SQLite**.
+    - `APrefix`: Prefixo para identificação da conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **GetConnection(const AConfiguration: TSQLiteConfiguration): TFDConnection;**
-  - **Descrição:** Retorna uma conexão com o banco de dados **SQLite** com base apenas nas configurações fornecidas.
+  - **Descrição:** Retorna uma conexão padrão utilizando apenas as configurações fornecidas.
   - **Parâmetro:** 
-    - `AConfiguration`: Configurações para o banco de dados **SQLite**.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `AConfiguration`: Configurações da base de dados **SQLite**.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **DefaultConnection(const AConfiguration: TSQLiteConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão padrão com o banco de dados **SQLite**; se uma conexão já existir, ela será retornada.
+  - **Descrição:** Retorna uma conexão padrão com a base de dados **SQLite**; se já existir uma conexão padrão, esta será reutilizada.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **SQLite**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `AConfiguration`: Configurações da base de dados **SQLite**.
+    - `ADatabase`: Nome da base de dados.
+    - `APrefix`: Prefixo para identificação da conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
 - **CustomConnection(const AConfiguration: TSQLiteConfiguration; const ADatabase: string; const APrefix: string): TFDConnection;**
-  - **Descrição:** Retorna uma conexão personalizada com o banco de dados **SQLite**; se já existir uma conexão com o prefixo, ela será retornada.
+  - **Descrição:** Retorna uma conexão personalizada com a base de dados **SQLite**; se uma conexão com o prefixo já existir, ela será reutilizada.
   - **Parâmetros:**
-    - `AConfiguration`: Configurações do banco de dados **SQLite**.
-    - `ADatabase`: Nome do banco de dados.
-    - `APrefix`: Prefixo para identificar a conexão.
-  - **Retorno:** Instância de `TFDConnection` configurada.
+    - `AConfiguration`: Configurações da base de dados **SQLite**.
+    - `ADatabase`: Nome da base de dados.
+    - `APrefix`: Prefixo para identificação da conexão.
+  - **Retorno:** Instância configurada de `TFDConnection`.
 
-#### Inicialização e Finalização
+#### 🔄 Inicialização e Finalização
 
 - **SetupConnection**
-  - **Descrição:** Configura uma conexão com o banco de dados **SQLite** com suporte para criptografia, baseada nas configurações e parâmetros fornecidos.
+  - **Descrição:** Configura a conexão com a base de dados **SQLite**, incluindo suporte para criptografia.
 
 - **FConnectionPool**
-  - **Descrição:** Dicionário que gerencia um pool de conexões para o **SQLite**, permitindo reutilização e gerenciamento eficiente das conexões.
+  - **Descrição:** Gerencia um pool de conexões **SQLite**, otimizando a reutilização e eficiência das conexões.
 
 ### ⚙️ Finalidade
 
-Esta unit facilita o gerenciamento de conexões **SQLite** através do **FireDAC**, permitindo a criação de conexões padronizadas e customizadas para diferentes cenários e ambientes, com suporte adicional para criptografia de banco de dados.
+Esta unit melhora o gerenciamento de conexões **SQLite** com suporte a configurações padronizadas e personalizadas, oferecendo recursos avançados, como pool de conexões e criptografia de dados.
+
+---
 
 ### 🗂️ Unit Horse.Connection.SQLite
 
-A **unit Horse.Connection.SQLite** fornece integração com o **Horse** para gerenciar conexões com o banco de dados **SQLite** usando **FireDAC**. Inclui funções para configurar a conexão e aplicar parâmetros específicos de configuração.
+A **unit Horse.Connection.SQLite** permite a integração do banco de dados **SQLite** com o framework **Horse** utilizando **FireDAC**. Fornece métodos para configurar e aplicar parâmetros específicos de conexão, garantindo uma gestão eficiente e personalizada das conexões para cada requisição HTTP.
 
-#### Funções e Procedimentos
+#### 🔧 Funções e Procedimentos
 
 - **SQLiteConnection**
-  - **Descrição:** Retorna uma conexão configurada para o banco de dados **SQLite** usando as configurações atuais.
-  - **Retorno:** Uma instância de `TFDConnection` configurada para o banco de dados **SQLite**.
+  - **Descrição:** Retorna uma conexão configurada para a base de dados **SQLite** usando as configurações atuais.
+  - **Retorno:** Instância de `TFDConnection` configurada para **SQLite**.
 
 - **ApplyDatabaseConfiguration(const AParameter: TSQLiteConfigurationParameter; const AValue: TValue)**
-  - **Descrição:** Aplica um parâmetro de configuração ao banco de dados **SQLite** usando um valor genérico.
+  - **Descrição:** Aplica um parâmetro de configuração específico ao banco de dados **SQLite** usando um valor genérico.
   - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `AValue`: O valor do parâmetro como `TValue`.
+    - `AParameter`: Parâmetro de configuração a ser aplicado.
+    - `AValue`: Valor do parâmetro como `TValue`.
 
 - **ApplyDatabaseConfiguration(const AParameter: TSQLiteConfigurationParameter; const AValue: TSQLiteLockingModeType)**
-  - **Descrição:** Aplica um parâmetro de bloqueio ao banco de dados **SQLite**.
+  - **Descrição:** Aplica um parâmetro de modo de bloqueio ao banco de dados **SQLite**.
   - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `AValue`: O valor do parâmetro como `TSQLiteLockingModeType`.
+    - `AParameter`: Parâmetro de configuração.
+    - `AValue`: Valor do tipo `TSQLiteLockingModeType`.
 
 - **ApplyDatabaseConfiguration(const AParameter: TSQLiteConfigurationParameter; const AValue: TSQLiteOpenModeType)**
   - **Descrição:** Aplica um parâmetro de modo de abertura ao banco de dados **SQLite**.
   - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `AValue`: O valor do parâmetro como `TSQLiteOpenModeType`.
+    - `AParameter`: Parâmetro de configuração.
+    - `AValue`: Valor do tipo `TSQLiteOpenModeType`.
 
 - **ApplyDatabaseConfiguration(const AParameter: TSQLiteConfigurationParameter; const AValue: TSQLiteEncryptType)**
   - **Descrição:** Aplica um parâmetro de criptografia ao banco de dados **SQLite**.
   - **Parâmetros:**
-    - `AParameter`: O parâmetro de configuração a ser aplicado.
-    - `AValue`: O valor do parâmetro como `TSQLiteEncryptType`.
+    - `AParameter`: Parâmetro de configuração.
+    - `AValue`: Valor do tipo `TSQLiteEncryptType`.
 
 - **SetConnectionPrefix(const AValue: string)**
   - **Descrição:** Define o prefixo da conexão para o banco de dados **SQLite**.
   - **Parâmetro:**
-    - `AValue`: O valor do prefixo.
+    - `AValue`: Prefixo da conexão.
 
 - **SetDatabase(const AValue: string)**
-  - **Descrição:** Define o caminho do banco de dados para o **SQLite**.
+  - **Descrição:** Define o caminho do banco de dados **SQLite**.
   - **Parâmetro:**
-    - `AValue`: O caminho do banco de dados.
+    - `AValue`: Caminho da base de dados.
 
 - **HorseConnectionSQLite(Req: THorseRequest; Res: THorseResponse; Next: TProc)**
-  - **Descrição:** Middleware para integração com o **Horse**. Define a conexão com o banco de dados **SQLite** para cada requisição HTTP recebida.
+  - **Descrição:** Middleware para integrar o **Horse** com o banco de dados **SQLite**. Configura a conexão para cada requisição HTTP recebida.
   - **Parâmetros:**
-    - `Req`: O objeto de requisição do **Horse**.
-    - `Res`: O objeto de resposta do **Horse**.
-    - `Next`: O procedimento a ser executado na sequência.
+    - `Req`: Objeto de requisição do **Horse**.
+    - `Res`: Objeto de resposta do **Horse**.
+
+
+    - `Next`: Procedimento a ser executado na sequência.
 
 ### ⚙️ Finalidade
 
-Esta unit permite a integração com o **Horse**, simplificando o gerenciamento de conexões **SQLite** em aplicações web Delphi.
+Esta unit facilita a integração do **SQLite** com o **Horse**, permitindo que cada requisição HTTP seja atendida por uma conexão configurada de forma personalizada e eficiente.
 
 ## Contribuições
 
