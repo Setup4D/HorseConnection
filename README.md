@@ -1,9 +1,6 @@
 # 🌐 HorseConnection
 
-**Click on the language you want to read this README:**
-🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md) |  
-🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md) |  
-🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md)
+**Click on the language you want to read this README:** 🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md) | 🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md) | 🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md)
 
 **HorseConnection** is a middleware developed for the **Horse** framework, aimed at simplifying database connection management in **Delphi** applications. It uses the **Boss** package manager to automatically install and update dependencies, providing quick and optimized integration. By offering specific middleware for each supported database type, **HorseConnection** eliminates the need for repetitive manual configurations, allowing each **Horse** endpoint to connect to the database automatically and efficiently.
 
@@ -16,7 +13,9 @@
 The **HorseConnection** middleware aims to encapsulate all database connection logic, offering a centralized structure that:
 
 🔹 Simplifies the use of database connections in **FireDAC**.
+
 🔹 Reduces code duplication by avoiding repetitive configurations for each request.
+
 🔹 Prevents connection leaks in high-demand applications, ensuring that connections are managed efficiently and are reusable.
 
 ## 🚀 Features
@@ -28,7 +27,9 @@ The **HorseConnection** middleware aims to encapsulate all database connection l
 ## 🧩 Requirements
 
 **🔹 Delphi** version 10.2 or higher.
+
 **🔹 Boss** as a package manager for Delphi. [Learn more about Boss](https://github.com/HashLoad/boss).
+
 **🔹 Horse Framework** to create REST applications in Delphi:
 
   ```sh

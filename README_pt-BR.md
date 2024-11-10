@@ -1,9 +1,6 @@
 # 🌐 HorseConnection
 
-**Clique no idioma que deseja para ler este README:**
-🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md) |
-🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md) |
-🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md)
+**Clique no idioma que deseja para ler este README:** 🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md) | 🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md) | 🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md)
 
 **HorseConnection** é um middleware desenvolvido para o framework **Horse**, com o objetivo de simplificar o gerenciamento de conexões com bancos de dados em aplicações **Delphi**. Ele utiliza o gerenciador de pacotes **Boss** para instalar e atualizar dependências automaticamente, proporcionando uma integração rápida e otimizada. Ao oferecer um middleware específico para cada tipo de banco de dados suportado, o **HorseConnection** elimina a necessidade de configurações manuais repetitivas, permitindo que cada endpoint do **Horse** se conecte ao banco de dados de forma automática e eficiente.
 
@@ -15,8 +12,10 @@ O **HorseConnection** foi criado para atuar como um middleware de integração c
 
 O **HorseConnection** tem como objetivo encapsular toda a lógica de conexão com bancos de dados, proporcionando uma estrutura centralizada que:
 
-🔹 Simplifica o uso de conexões com bancos de dados no **FireDAC**;
-🔹 Reduz a duplicação de código ao evitar configurações repetitivas em cada requisição;
+🔹 Simplifica o uso de conexões com bancos de dados no **FireDAC**;  
+
+🔹 Reduz a duplicação de código ao evitar configurações repetitivas em cada requisição;  
+
 🔹 Previne vazamentos de conexão em aplicações de alta demanda, garantindo que as conexões sejam gerenciadas de forma eficiente e reutilizável.
 
 ## 🚀 Funcionalidades
@@ -28,7 +27,9 @@ O **HorseConnection** tem como objetivo encapsular toda a lógica de conexão co
 ## 🧩 Requisitos
 
 **🔹 Delphi** versão 10.2 ou superior.
+
 **🔹 Boss** como gerenciador de pacotes para Delphi. [Saiba mais sobre o Boss](https://github.com/HashLoad/boss).
+
 **🔹 Horse Framework** para criar aplicações REST em Delphi:
 
   ```sh

@@ -1,9 +1,6 @@
 # 🌐 HorseConnection
 
-**Haga clic en no idioma que desee para leer este README:**
-🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md) |  
-🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md) |  
-🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md)
+**Haga clic en no idioma que desee para leer este README:** 🇺🇸 [Inglês](https://github.com/ricksolucoes/HorseConnection/blob/main/README.md) | 🇧🇷 [Português](https://github.com/ricksolucoes/HorseConnection/blob/main/README_pt-BR.md) | 🇪🇸 [Espanhol](https://github.com/ricksolucoes/HorseConnection/blob/main/README_ES.md)
 
 **HorseConnection** es un middleware desarrollado para el framework **Horse**, con el objetivo de simplificar la gestión de conexiones a bases de datos en aplicaciones **Delphi**. Utiliza el gestor de paquetes **Boss** para instalar y actualizar automáticamente las dependencias, proporcionando una integración rápida y optimizada. Al ofrecer un middleware específico para cada tipo de base de datos compatible, **HorseConnection** elimina la necesidad de configuraciones manuales repetitivas, permitiendo que cada endpoint de **Horse** se conecte automáticamente y de manera eficiente a la base de datos.
 
@@ -16,7 +13,9 @@
 El objetivo de **HorseConnection** es encapsular toda la lógica de conexión a bases de datos, proporcionando una estructura centralizada que:
 
 🔹 Simplifica el uso de conexiones de bases de datos en **FireDAC**.
+
 🔹 Reduce la duplicación de código evitando configuraciones repetitivas en cada solicitud.
+
 🔹 Previene fugas de conexión en aplicaciones de alta demanda, asegurando que las conexiones se gestionen de forma eficiente y reutilizable.
 
 ## 🚀 Funcionalidades
@@ -28,7 +27,9 @@ El objetivo de **HorseConnection** es encapsular toda la lógica de conexión a 
 ## 🧩 Requisitos
 
 **🔹 Delphi** versión 10.2 o superior.
+
 **🔹 Boss** como gestor de paquetes para Delphi. [Más información sobre Boss](https://github.com/HashLoad/boss).
+
 **🔹 Framework Horse** para crear aplicaciones REST en Delphi:
 
   ```sh
