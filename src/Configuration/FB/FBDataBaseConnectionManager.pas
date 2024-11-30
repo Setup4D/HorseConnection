@@ -58,11 +58,8 @@
   {***********************************************************************}
   {$ENDIF}
 {$ENDIF}
-
 unit FBDatabaseConnectionManager;
-
 interface
-
 uses
   EnumsHelpersUtils,
   Data.DB,
@@ -89,7 +86,6 @@ uses
   System.SysUtils,
   System.StrUtils,
   System.Generics.Collections;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados Firebird com base nas configurações
@@ -146,7 +142,6 @@ uses
 {$ENDIF}
 function GetConnection(const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix: string): TFDConnection; overload;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados Firebird com base nas configurações
@@ -194,7 +189,6 @@ function GetConnection(const AConfiguration: TFBConfiguration;
 {$ENDIF}
 function GetConnection(const AConfiguration: TFBConfiguration;
   const APrefix: string): TFDConnection; overload;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados Firebird com base apenas nas configurações
@@ -235,16 +229,13 @@ function GetConnection(const AConfiguration: TFBConfiguration): TFDConnection; o
 
 
 implementation
-
 uses
   FBDataBaseConfigurationManager;
-
 var
   FConnectionPool: TDictionary<string, TFDConnection>;
   FDConnection: TFDConnection;
   FDGUIxWaitCursor: TFDGUIxWaitCursor;
   FDDriver: TFDPhysFBDriverLink;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Configura uma conexão com o banco de dados Firebird com base nas configurações e parâmetros fornecidos.
@@ -276,17 +267,13 @@ procedure SetupConnection(const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix: string; var AConnection: TFDConnection);
 begin
   Initialize(AConfiguration, ADatabase, APrefix);
-
   AConnection.ConnectionDefName := GetConnectionDef(APrefix);
   AConnection.LoginPrompt := False;
-
   FDGUIxWaitCursor := TFDGUIxWaitCursor.Create(AConnection);
   FDGUIxWaitCursor.Provider := 'Console';
-
   FDDriver := TFDPhysFBDriverLink.Create(AConnection);
   AConnection.Connected := True;
 end;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão padrão com o banco de dados Firebird.
@@ -325,10 +312,8 @@ begin
     FDConnection := TFDConnection.Create(nil);
     SetupConnection(AConfiguration, ADatabase, APrefix, FDConnection);
   end;
-
   Result := FDConnection;
 end;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão personalizada com o banco de dados Firebird.
@@ -364,45 +349,35 @@ function CustomConnection  (const AConfiguration: TFBConfiguration;
 begin
   if FConnectionPool.TryGetValue(APrefix, Result) then
     Exit;
-
   Result := TFDConnection.Create(nil);
   SetupConnection(AConfiguration, ADatabase, APrefix, Result);
-
   FConnectionPool.Add(APrefix, Result);
   FConnectionPool.TrimExcess;
 end;
 
-
 function GetConnection(const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix : string): TFDConnection;
-
 begin
   case APrefix.Trim.IsEmpty of
     True  : Result := DefaultConnection(AConfiguration, ADatabase, APrefix);
     False : Result := CustomConnection(AConfiguration, ADatabase, APrefix);
   end;
 end;
-
 function GetConnection(const AConfiguration: TFBConfiguration;
   const APrefix : string): TFDConnection;
 begin
   Result := GetConnection(AConfiguration, EmptyStr, APrefix);
 end;
-
 function GetConnection(const AConfiguration: TFBConfiguration): TFDConnection;
 begin
   Result := GetConnection(AConfiguration, EmptyStr);
 end;
-
 initialization
   FConnectionPool := TDictionary<string, TFDConnection>.Create;
-
 finalization
   if Assigned(FDConnection) then
     FDConnection.DisposeOf;
-
   FConnectionPool.DisposeOf;
-
 end.
 
 

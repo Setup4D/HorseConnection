@@ -59,11 +59,8 @@
   {***********************************************************************}
   {$ENDIF}
 {$ENDIF}
-
 unit SQLiteDatabaseConnectionManager;
-
 interface
-
 uses
   EnumsHelpersUtils,
   Data.DB,
@@ -90,7 +87,6 @@ uses
   System.SysUtils,
   System.StrUtils,
   System.Generics.Collections;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados SQLite com base nas configurações
@@ -147,7 +143,6 @@ uses
 {$ENDIF}
 function GetConnection(const AConfiguration: TSQLiteConfiguration;
   const ADatabase: string; const APrefix: string): TFDConnection; overload;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados SQLite com base nas configurações
@@ -195,7 +190,6 @@ function GetConnection(const AConfiguration: TSQLiteConfiguration;
 {$ENDIF}
 function GetConnection(const AConfiguration: TSQLiteConfiguration;
   const APrefix: string): TFDConnection; overload;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados SQLite com base apenas nas configurações

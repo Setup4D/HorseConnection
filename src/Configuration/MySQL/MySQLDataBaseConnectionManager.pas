@@ -58,11 +58,8 @@
   {***********************************************************************}
   {$ENDIF}
 {$ENDIF}
-
 unit MySQLDatabaseConnectionManager;
-
 interface
-
 uses
   EnumsHelpersUtils,
   Data.DB,
@@ -89,7 +86,6 @@ uses
   System.SysUtils,
   System.StrUtils,
   System.Generics.Collections;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados MySQL com base nas configurações
@@ -146,7 +142,6 @@ uses
 {$ENDIF}
 function GetConnection(const AConfiguration: TMySQLConfiguration;
   const ADatabase: string; const APrefix: string): TFDConnection; overload;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados MySQL com base nas configurações
@@ -194,7 +189,6 @@ function GetConnection(const AConfiguration: TMySQLConfiguration;
 {$ENDIF}
 function GetConnection(const AConfiguration: TMySQLConfiguration;
   const APrefix: string): TFDConnection; overload;
-
 {$IFDEF PORTUGUES}
 /// <summary>
 ///   Retorna uma conexão com o banco de dados MySQL com base apenas nas configurações

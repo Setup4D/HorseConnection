@@ -733,13 +733,11 @@ procedure DatabaseConfig(var AConfiguration: TSQLiteConfiguration;
 begin
   AConfiguration.LockingMode := AValue;
 end;
-
 procedure DatabaseConfig(var AConfiguration: TSQLiteConfiguration;
   AParameter: TSQLiteConfigurationParameter; const AValue: TSQLiteOpenModeType);
 begin
   AConfiguration.OpenMode := AValue;
 end;
-
 procedure DatabaseConfig(var AConfiguration: TSQLiteConfiguration;
   AParameter: TSQLiteConfigurationParameter; const AValue: TSQLiteEncryptType);
 begin
