@@ -59,7 +59,9 @@
   {$ENDIF}
 {$ENDIF}
 unit FBDatabaseConnectionManager;
+
 interface
+
 uses
   EnumsHelpersUtils,
   Data.DB,
@@ -346,11 +348,18 @@ end;
 {$ENDIF}
 function CustomConnection  (const AConfiguration: TFBConfiguration;
   const ADatabase: string; const APrefix : string): TFDConnection;
+var
+  LIsConnectionExists : Boolean;
 begin
-  if FConnectionPool.TryGetValue(APrefix, Result) then
-    Exit;
-  Result := TFDConnection.Create(nil);
+  LIsConnectionExists := FConnectionPool.TryGetValue(APrefix, Result);
+  if not LIsConnectionExists then
+    Result := TFDConnection.Create(nil);
+
   SetupConnection(AConfiguration, ADatabase, APrefix, Result);
+
+  if LIsConnectionExists then
+    Exit;
+
   FConnectionPool.Add(APrefix, Result);
   FConnectionPool.TrimExcess;
 end;

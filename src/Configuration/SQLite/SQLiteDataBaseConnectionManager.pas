@@ -228,7 +228,6 @@ function GetConnection(const AConfiguration: TSQLiteConfiguration;
 {$ENDIF}
 function GetConnection(const AConfiguration: TSQLiteConfiguration): TFDConnection; overload;
 
-
 implementation
 
 uses
@@ -385,12 +384,17 @@ end;
 {$ENDIF}
 function CustomConnection(const AConfiguration: TSQLiteConfiguration;
   const ADatabase: string; const APrefix: string): TFDConnection;
+var
+  LIsConnectionExists : Boolean;
 begin
-  if FConnectionPool.TryGetValue(APrefix, Result) then
-    Exit;
+  LIsConnectionExists := FConnectionPool.TryGetValue(APrefix, Result);
+  if not LIsConnectionExists then
+    Result := TFDConnection.Create(nil);
 
-  Result := TFDConnection.Create(nil);
   SetupConnection(AConfiguration, ADatabase, APrefix, Result);
+
+  if LIsConnectionExists then
+    Exit;
 
   FConnectionPool.Add(APrefix, Result);
   FConnectionPool.TrimExcess;
